@@ -80,19 +80,21 @@ const bloques = {
           T({ es: 'La sala está orando ahora mismo', en: 'The room is praying right now' }, lang)
         )}</p>`
       : ''
-    /* La imagen va detras del texto, no al lado: el titular tiene que caer
-       sobre la noche. El degradado encima no es decoracion, es lo que
-       mantiene el contraste del texto por encima de 7:1. */
-    const fondo = s.image
-      ? `<img class="hero__fondo" src="${esc(s.image.src)}" alt="${esc(T(s.image.alt, lang))}"
-           width="${s.image.w}" height="${s.image.h}" fetchpriority="high" decoding="async" />`
+    /* La imagen no va detras del titular. Velar una fotografia para poder
+       escribir encima cuesta el peso de la imagen y no deja ver ninguna de
+       las dos cosas; puesta debajo, a sangre, se ve entera y el texto se lee
+       sobre papel limpio. */
+    const banda = s.image
+      ? `<figure class="banda">
+           <img src="${esc(s.image.src)}" alt="${esc(T(s.image.alt, lang))}"
+             width="${s.image.w}" height="${s.image.h}" fetchpriority="high" decoding="async" />
+         </figure>`
       : ''
     const versiculo = s.verse
       ? `<p class="hero__versiculo"><span>${esc(T(s.verse.text, lang))}</span>
          <cite>${esc(s.verse.ref)}</cite></p>`
       : ''
-    return `<section class="hero${clase}${s.image ? ' hero--imagen' : ''}" aria-labelledby="titulo-principal">
-      ${fondo}
+    return `<section class="hero${clase}" aria-labelledby="titulo-principal">
       <div class="hero__cuerpo">
         ${s.eyebrow ? `<p class="hero__eyebrow">${esc(T(s.eyebrow, lang))}</p>` : ''}
         <h1 class="hero__titulo" id="titulo-principal">${esc(T(s.title, lang))}</h1>
@@ -102,7 +104,8 @@ const bloques = {
         ${s.note ? `<p class="hero__nota">${esc(T(s.note, lang))}</p>` : ''}
         ${versiculo}
       </div>
-    </section>`
+    </section>
+    ${banda}`
   },
 
   /* La Escritura no es un adorno al pie de una seccion: se presenta como lo

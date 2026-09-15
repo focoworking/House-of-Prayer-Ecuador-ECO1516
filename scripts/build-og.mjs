@@ -115,9 +115,9 @@ const texto = (cadena, x, y, escala, color, espaciado = escala * 2) => {
 /* Composición                                                       */
 /* ---------------------------------------------------------------- */
 
-/* El mismo cielo que el sitio: la tarjeta que se pega en WhatsApp tiene que
+/* El mismo papel que el sitio: la tarjeta que se pega en WhatsApp tiene que
    parecerse a la página que abre. */
-fondo(marca.papel, marca.moradoOscuro)
+fondo(marca.papel, marca.papelAlto)
 
 /* El emblema, a la izquierda: manos abiertas, techo y llama. Los dedos
    arrancan por fuera del techo para que las dos formas se lean separadas. */
@@ -125,14 +125,14 @@ const cx = 215
 const cy = 300
 for (const [i, alto] of [96, 128, 138, 118].entries()) {
   const x = 78 + i * 28
-  linea(x, cy + 66, x, cy + 66 - alto, 15, marca.moradoClaro)
-  linea(2 * cx - x, cy + 66, 2 * cx - x, cy + 66 - alto, 15, marca.moradoClaro)
+  linea(x, cy + 66, x, cy + 66 - alto, 15, marca.morado)
+  linea(2 * cx - x, cy + 66, 2 * cx - x, cy + 66 - alto, 15, marca.morado)
 }
-linea(78, cy + 60, 120, cy + 126, 15, marca.moradoClaro)
-linea(2 * cx - 78, cy + 60, 2 * cx - 120, cy + 126, 15, marca.moradoClaro)
-linea(cx - 74, cy - 6, cx, cy - 86, 19, marca.moradoClaro)
-linea(cx, cy - 86, cx + 74, cy - 6, 19, marca.moradoClaro)
-linea(cx - 130, cy + 158, cx + 130, cy + 158, 7, marca.moradoClaro)
+linea(78, cy + 60, 120, cy + 126, 15, marca.morado)
+linea(2 * cx - 78, cy + 60, 2 * cx - 120, cy + 126, 15, marca.morado)
+linea(cx - 74, cy - 6, cx, cy - 86, 19, marca.morado)
+linea(cx, cy - 86, cx + 74, cy - 6, 19, marca.morado)
+linea(cx - 130, cy + 158, cx + 130, cy + 158, 7, marca.morado)
 llama(cx, cy + 32, 42, marca.celeste)
 
 /* El texto, a la derecha, dentro de un ancho fijo: si una linea creciera,
@@ -140,12 +140,12 @@ llama(cx, cy + 32, 42, marca.celeste)
 const X = 430
 const ANCHO_TEXTO = ANCHO - X - 70
 
-const l1 = textoAjustado('ECUADOR', X, 190, ANCHO_TEXTO, 10, '#FFFFFF')
-const l2 = textoAjustado('CASA DE ORACION', X, 190 + l1.alto + 26, ANCHO_TEXTO, 10, '#FFFFFF')
+const l1 = textoAjustado('ECUADOR', X, 190, ANCHO_TEXTO, 10, marca.tinta)
+const l2 = textoAjustado('CASA DE ORACION', X, 190 + l1.alto + 26, ANCHO_TEXTO, 10, marca.tinta)
 const reglaY = 190 + l1.alto + 26 + l2.alto + 30
 linea(X, reglaY, X + l2.ancho, reglaY, 4, marca.celeste)
-textoAjustado('ORACION 24/7 · QUITO · DESDE 2011', X, reglaY + 32, ANCHO_TEXTO, 5, marca.celesteClaro)
-textoAjustado('ECO1516.ORG', X, reglaY + 100, ANCHO_TEXTO, 5, '#FFFFFF')
+textoAjustado('ORACION 24/7 · QUITO · DESDE 2011', X, reglaY + 32, ANCHO_TEXTO, 5, marca.morado)
+textoAjustado('ECO1516.ORG', X, reglaY + 100, ANCHO_TEXTO, 5, marca.tinta)
 
 const destino = resolve(process.cwd(), 'public/og/eco1516.png')
 await mkdir(dirname(destino), { recursive: true })

@@ -36,12 +36,12 @@ export const inicio = {
         'We are watchmen set on the walls of Ecuador: prayer with worship 24 hours a day in Quito. If you need someone to cry out with you right now, write or call. An intercessor answers within thirty minutes, at any hour, at no cost.'
       ),
       image: {
-        src: '/img/vigilia.png',
+        src: '/img/amanecer.png',
         w: 2000,
         h: 1125,
         alt: t(
-          'Noche andina: la cordillera en silueta bajo un cielo estrellado y una columna de luz que sube desde el valle.',
-          'Andean night: the cordillera in silhouette under a starry sky, with a column of light rising from the valley.'
+          'Amanecer sobre la cordillera andina: cuatro cadenas de montañas en lavanda, cada vez más claras hacia el fondo, bajo un cielo que se enciende.',
+          'Dawn over the Andean cordillera: four ranges in lavender, each paler towards the horizon, under a sky beginning to glow.'
         ),
       },
       actions: [
@@ -128,12 +128,12 @@ export const inicio = {
         t('Informe de uso de fondos publicado cada semestre', 'Use-of-funds report published every six months'),
       ],
       image: {
-        src: '/img/clamor.png',
-        w: 1600,
-        h: 1200,
+        src: '/img/incienso.png',
+        w: 1500,
+        h: 1125,
         alt: t(
-          'Dos columnas de humo de incienso que suben en la oscuridad, una morada y otra celeste.',
-          'Two columns of incense smoke rising in the dark, one violet and one cyan.'
+          'Dos columnas de humo de incienso que suben sobre fondo claro, una lavanda y otra celeste.',
+          'Two columns of incense smoke rising against a pale ground, one lavender and one cyan.'
         ),
       },
       action: { label: t('Conoce la casa', 'Get to know the house'), href: { es: '/nosotros', en: '/en/about' } },
@@ -414,11 +414,11 @@ export const oracion = {
     {
       type: 'figure',
       src: '/img/altar.png',
-      w: 1400,
-      h: 1400,
+      w: 1200,
+      h: 1200,
       alt: t(
-        'Una llama celeste encendida en la oscuridad, rodeada de anillos de luz concéntricos.',
-        'A cyan flame burning in the dark, surrounded by concentric rings of light.'
+        'Una llama celeste encendida sobre fondo claro, rodeada de anillos concéntricos finos.',
+        'A cyan flame burning against a pale ground, surrounded by fine concentric rings.'
       ),
       caption: t(
         'La llama del logotipo: el fuego que, según Levítico 6:13, arde continuamente sobre el altar y nunca se apaga.',

@@ -251,15 +251,15 @@ export const misiones = {
     {
       type: 'figure',
       src: '/img/ciudad.png',
-      w: 1600,
-      h: 1200,
+      w: 1500,
+      h: 1125,
       alt: t(
-        'Quito de noche vista desde arriba: torres en silueta con ventanas encendidas bajo un cielo violeta.',
-        'Quito at night seen from above: towers in silhouette with lit windows under a violet sky.'
+        'Quito al amanecer vista desde el cerro: torres en lavanda recortadas sobre un cielo claro.',
+        'Quito at dawn seen from the hillside: towers in lavender against a pale sky.'
       ),
       caption: t(
-        'Cada ventana encendida es una casa por la que se ora por nombre en la vigilia de las 16:00.',
-        'Every lit window is a household prayed for by name in the 4pm watch.'
+        'Cada ventana de esta ciudad es una casa por la que se ora por nombre en la vigilia de las 16:00.',
+        'Every window in this city is a household prayed for by name in the 4pm watch.'
       ),
     },
     {

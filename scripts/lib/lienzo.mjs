@@ -116,6 +116,29 @@ export const crear = (ancho, alto) => {
     }
   }
 
+  /** Tiñe un disco hacia un color en vez de sumarle luz. Sobre papel blanco
+   *  sumar luz no hace nada: lo que dibuja es teñir. */
+  const tinte = (cx, cy, radio, color, alfa = 1, caida = 2.2) => {
+    const c = hex(color)
+    for (let y = Math.floor(cy - radio); y <= Math.ceil(cy + radio); y++) {
+      for (let x = Math.floor(cx - radio); x <= Math.ceil(cx + radio); x++) {
+        const d = Math.hypot(x - cx, y - cy) / radio
+        if (d >= 1) continue
+        pixel(x, y, c, alfa * (1 - d) ** caida)
+      }
+    }
+  }
+
+  /** Lo contrario de la viñeta: aclara los bordes hacia el papel para que la
+   *  imagen se funda con la página en vez de recortarse contra ella. */
+  const halo = (fuerza = 0.5, papel = '#FFFFFF') => {
+    const p = hex(papel)
+    cada((x, y, u, v) => {
+      const d = Math.hypot(u - 0.5, v - 0.5) / Math.SQRT1_2
+      pixel(x, y, p, Math.min(1, fuerza * d ** 2.2))
+    })
+  }
+
   const grano = (cantidad, semilla = 7) => {
     const r = azar(semilla)
     for (let i = 0; i < datos.length; i += 3) {
@@ -138,7 +161,7 @@ export const crear = (ancho, alto) => {
     })
   }
 
-  return { ancho, alto, datos, pixel, luz, cada, disco, grano, vinieta }
+  return { ancho, alto, datos, pixel, luz, cada, disco, tinte, grano, vinieta, halo }
 }
 
 /* ------------------------------------------------------------------ */

@@ -1,4 +1,8 @@
-/* Cada tipo de sección que sabe dibujar scripts/render.mjs. */
+/* Cada tipo de sección que sabe dibujar scripts/render.mjs.
+ *
+ * Regla de color para todo lo de abajo: el celeste solo aparece donde hay
+ * algo que pulsar o algo que cuenta las horas. Todo lo demás se resuelve
+ * con tinta, con morado y con espacio en blanco. */
 
 .hero,
 .seccion {
@@ -15,7 +19,7 @@
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--celeste-claro);
+  color: var(--morado);
   margin-bottom: 1.4rem;
 }
 .hero__titulo {
@@ -51,7 +55,7 @@
   font-size: 0.7rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--morado-claro);
+  color: var(--morado);
 }
 
 .hero__vivo {
@@ -60,11 +64,11 @@
   gap: 0.6rem;
   margin-top: 1.75rem;
   padding: 0.42rem 1rem 0.42rem 0.75rem;
-  border: 1px solid var(--linea);
+  border: 1px solid color-mix(in srgb, var(--celeste) 40%, transparent);
   border-radius: 999px;
   font-size: 0.84rem;
   color: var(--tinta);
-  background: color-mix(in srgb, var(--celeste) 10%, transparent);
+  background: var(--celeste-claro);
 }
 .punto {
   width: 0.5rem; height: 0.5rem;
@@ -78,40 +82,29 @@
   100% { box-shadow: 0 0 0 0 transparent; }
 }
 
-/* Hero con imagen: la noche detrás del titular. El degradado no es un
-   efecto, es lo que sostiene el contraste del texto encima. */
-.hero--imagen {
-  position: relative;
-  max-width: none;
-  padding-block: clamp(5rem, 14vw, 10rem);
-  isolation: isolate;
-  overflow: hidden;
-}
-.hero__fondo {
-  position: absolute;
-  inset: 0;
+/* La franja: la imagen a sangre bajo el titular. Es panorámica a propósito
+   —una banda ancha y baja se lee como paisaje y no empuja el contenido
+   fuera de la primera pantalla— y en móvil se hace más alta, porque un
+   panorama de 1440 de ancho recortado a 400 no es nada. */
+.banda {
+  margin: 0;
   width: 100%;
-  height: 100%;
+  overflow: hidden;
+  border-block: 1px solid var(--linea-suave);
+}
+.banda img {
+  display: block;
+  width: 100%;
+  height: clamp(15rem, 34vw, 26rem);
   object-fit: cover;
-  object-position: 62% 60%;
-  z-index: -2;
+  object-position: 50% 72%;
 }
-.hero--imagen::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    linear-gradient(100deg, var(--papel) 8%, color-mix(in srgb, var(--papel) 72%, transparent) 48%, transparent 78%),
-    linear-gradient(to top, var(--papel) 2%, transparent 42%);
-}
-.hero--imagen .hero__cuerpo { max-width: var(--ancho); margin-inline: auto; }
 
 /* Variante de urgencia: no grita en rojo. Sube el contraste y pone el
    botón primero; alguien en crisis necesita encontrarlo, no que le griten. */
 .hero--urgent {
   max-width: none;
-  background: radial-gradient(120% 140% at 15% 0%, var(--morado-oscuro) 0%, var(--papel) 62%);
+  background: linear-gradient(180deg, var(--celeste-claro) 0%, var(--papel) 88%);
   border-bottom: 1px solid var(--linea-suave);
 }
 .hero--urgent .hero__cuerpo { max-width: var(--ancho); margin-inline: auto; }
@@ -163,7 +156,7 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
-.escritura strong { color: var(--celeste-claro); font-weight: 600; }
+.escritura strong { color: var(--morado); font-weight: 600; }
 .escritura span { color: var(--tinta-suave); }
 
 /* --- Figura ----------------------------------------------------------- */
@@ -189,7 +182,7 @@
   font-weight: 300;
   font-variation-settings: 'opsz' 144;
   font-size: clamp(2.4rem, 5vw, 3.6rem);
-  color: var(--celeste-claro);
+  color: var(--morado);
   line-height: 1;
 }
 .dato__label { margin: 0.65rem 0 0; font-size: 0.86rem; color: var(--tinta-suave); }
@@ -203,18 +196,20 @@
   margin: 0;
   padding: 0;
 }
+/* La tarjeta no lleva sombra ni relleno: se separa con una línea fina y con
+   el aire de alrededor, que es lo que hace que una rejilla se lea limpia. */
 .tarjeta {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  padding: 1.8rem;
-  background: var(--papel-alto);
+  padding: 1.9rem;
+  background: var(--papel);
   border: 1px solid var(--linea-suave);
   border-radius: var(--radio);
 }
 .tarjeta__titulo { font-size: 1.22rem; font-weight: 400; }
 .tarjeta p { color: var(--tinta-suave); }
-.tarjeta__cta { margin-top: auto; font-weight: 600; }
+.tarjeta__cta { margin-top: auto; font-weight: 600; color: var(--morado); }
 .tarjeta__cta a { text-decoration: none; }
 .tarjeta__cta a:hover { text-decoration: underline; }
 
@@ -241,14 +236,14 @@
   margin: 0;
   padding: 0;
 }
-.paso { padding-top: 1.3rem; border-top: 2px solid var(--celeste); }
+.paso { padding-top: 1.3rem; border-top: 2px solid var(--morado); }
 .paso__n {
   display: grid;
   place-items: center;
   width: 1.9rem; height: 1.9rem;
   border-radius: 50%;
   border: 1px solid var(--linea);
-  color: var(--celeste-claro);
+  color: var(--morado);
   font-weight: 600;
   font-size: 0.85rem;
   margin-bottom: 0.85rem;
@@ -275,9 +270,9 @@
   content: '';
   position: absolute;
   left: 0; top: 0.64em;
-  width: 0.5rem; height: 0.5rem;
+  width: 0.45rem; height: 0.45rem;
   border-radius: 50%;
-  background: var(--celeste);
+  background: var(--morado-claro);
 }
 
 /* --- Lista marcada ------------------------------------------------------ */
@@ -289,7 +284,7 @@
   left: 0;
   color: var(--morado-claro);
 }
-.seccion--lista .lista-marcada li::before { content: '✓'; color: var(--celeste); }
+.seccion--lista .lista-marcada li::before { content: '✓'; color: var(--morado); }
 
 /* --- Historia ----------------------------------------------------------- */
 .historia { list-style: none; margin: 0; padding: 0; }
@@ -305,7 +300,7 @@
   font-family: var(--display);
   font-size: 1.45rem;
   font-weight: 300;
-  color: var(--celeste-claro);
+  color: var(--morado);
   margin: 0;
 }
 .hito__titulo { font-size: 1.18rem; font-weight: 400; margin-bottom: 0.45rem; }
@@ -321,7 +316,7 @@
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--morado-claro);
+  color: var(--tinta-suave);
 }
 .turnos tbody th {
   font-family: var(--display);
@@ -336,23 +331,23 @@
 /* --- Eventos -------------------------------------------------------------- */
 .eventos { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
 .evento {
-  padding: 1.8rem;
+  padding: 1.9rem;
   border: 1px solid var(--linea-suave);
-  border-left: 2px solid var(--celeste);
+  border-left: 2px solid var(--morado);
   border-radius: var(--radio);
-  background: var(--papel-alto);
+  background: var(--papel);
 }
 .evento__fecha {
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--celeste-claro);
+  color: var(--morado);
   margin-bottom: 0.6rem;
 }
 .evento__titulo { font-size: 1.35rem; font-weight: 400; margin-bottom: 0.6rem; }
 .evento p { color: var(--tinta-suave); }
-.evento__meta { margin: 0.7rem 0 0; font-size: 0.85rem; color: var(--morado-claro); }
+.evento__meta { margin: 0.7rem 0 0; font-size: 0.85rem; color: var(--tinta-suave); }
 
 /* --- Preguntas ------------------------------------------------------------ */
 .preguntas { display: grid; gap: 2rem; max-width: 60ch; }
@@ -372,7 +367,7 @@
   color: var(--tinta);
 }
 .enlaces li:last-child a { border-bottom: 1px solid var(--linea-suave); }
-.enlaces a:hover { color: var(--celeste-claro); }
+.enlaces a:hover { color: var(--morado); }
 .enlaces small { color: var(--tinta-suave); }
 
 /* --- Cita ------------------------------------------------------------------ */
@@ -389,7 +384,7 @@
   font-size: 0.72rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--celeste-claro);
+  color: var(--morado);
 }
 
 /* --- Prosa ----------------------------------------------------------------- */
@@ -407,7 +402,7 @@
   padding: 0.8rem 0.95rem;
   border: 1px solid var(--linea);
   border-radius: var(--radio);
-  background: var(--papel-alto);
+  background: var(--papel);
   color: var(--tinta);
 }
 .campo input::placeholder, .campo textarea::placeholder { color: var(--tinta-suave); }
@@ -420,6 +415,7 @@
   background: var(--papel-alto);
   border-block: 1px solid var(--linea-suave);
 }
+.seccion--emergencia .seccion__titulo { color: var(--morado-oscuro); }
 .seccion--emergencia > * { max-width: var(--ancho); margin-inline: auto; }
 .lineas {
   list-style: none;
@@ -430,7 +426,7 @@
   gap: 1rem;
 }
 .linea {
-  padding: 1.5rem;
+  padding: 1.6rem;
   background: var(--papel);
   border: 1px solid var(--linea-suave);
   border-radius: var(--radio);
@@ -442,8 +438,8 @@
   font-size: 2rem;
   margin: 0.25rem 0;
 }
-.linea__numero a { text-decoration: none; color: var(--celeste-claro); }
-.linea__horario { font-size: 0.82rem; color: var(--morado-claro); margin-bottom: 0.45rem; }
+.linea__numero a { text-decoration: none; color: var(--morado-oscuro); }
+.linea__horario { font-size: 0.82rem; color: var(--morado); margin-bottom: 0.45rem; }
 .linea__nota { font-size: 0.86rem; color: var(--tinta-suave); margin: 0; }
 
 /* --- Ficha de contacto --------------------------------------------------------- */
@@ -454,7 +450,7 @@
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--morado-claro);
+  color: var(--morado);
   margin-bottom: 0.8rem;
 }
 .ficha address, .ficha p { color: var(--tinta-suave); }
@@ -463,13 +459,13 @@
 
 /* --- CTA ------------------------------------------------------------------------ */
 .seccion--cta { max-width: none; }
+/* El cierre es el único bloque con fondo de color de toda la página: si
+   hubiera tres, dejaría de leerse como el final. */
 .cta {
   max-width: var(--ancho);
   margin-inline: auto;
   padding: clamp(3rem, 7vw, 5rem) clamp(1.5rem, 5vw, 4rem);
-  background:
-    radial-gradient(90% 130% at 80% 0%, color-mix(in srgb, var(--celeste) 22%, transparent) 0%, transparent 60%),
-    linear-gradient(160deg, var(--morado-oscuro), var(--papel-alto));
+  background: var(--papel-alto);
   border: 1px solid var(--linea-suave);
   border-radius: calc(var(--radio) * 2);
   text-align: center;
@@ -479,7 +475,7 @@
 .cta .acciones { justify-content: center; }
 
 /* --- Estado: bloque que se ora ahora (lo marca src/js) --------------------------- */
-.turnos__ahora { background: color-mix(in srgb, var(--celeste) 12%, transparent); }
+.turnos__ahora { background: var(--celeste-claro); }
 .turnos__ahora th, .turnos__ahora td { color: var(--tinta); }
 .ahora {
   display: inline-block;
@@ -487,7 +483,7 @@
   padding: 0.12rem 0.55rem;
   border-radius: 999px;
   background: var(--celeste);
-  color: #041b23;
+  color: #fff;
   font-family: var(--texto);
   font-size: 0.6rem;
   font-weight: 600;

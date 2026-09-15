@@ -89,21 +89,22 @@ celeste— y vive en `content/site.js`:
 
 | Token | Valor | Uso |
 | --- | --- | --- |
-| `--papel` | `#0D0817` | El fondo: violeta casi negro |
-| `--papel-alto` | `#171026` | Tarjetas, pie, bloques levantados |
-| `--tinta` / `--tinta-suave` | `#F4EFFA` / `#B9AECC` | Texto y texto secundario |
-| `--morado` / `--morado-oscuro` | `#7B57A6` / `#4A2F6B` | Estructura y fondos densos |
-| `--morado-claro` | `#A98BCB` | Etiquetas y apoyo |
-| `--celeste` | `#2DB6DC` | La llama: **solo** lo que enciende una acción |
+| `--papel` | `#FFFFFF` | El fondo, y el material principal de la página |
+| `--papel-alto` | `#F7F4FB` | Pie, bloque de emergencia y cierre |
+| `--tinta` / `--tinta-suave` | `#241633` / `#5C4E70` | Texto y texto secundario |
+| `--morado` / `--morado-oscuro` | `#7B57A6` / `#4A2F6B` | Estructura: etiquetas, cifras, enlaces |
+| `--morado-claro` | `#A98BCB` | Viñetas y apoyo |
+| `--celeste` | `#1B9EC4` | La llama: **solo** lo que enciende una acción |
 
-**El sitio es de noche a propósito** y no tiene modo claro. La casa se
-sostiene de madrugada y la vigilia es el registro visual de la marca, no una
-preferencia del visitante. Eso obliga a cuidar el contraste en serio: el
-texto corrido va a 14:1 sobre el fondo y ningún gris baja de 4.5:1.
+**El sitio es claro porque lo que anuncia es luz.** El blanco no es un fondo
+neutro por descarte: es el material principal, y la mayor parte de cada página
+es papel vacío a propósito. La tinta da 13:1 sobre ese fondo y ningún gris baja
+de 4.5:1.
 
-El celeste nunca se usa para texto corrido: es el color de la acción urgente
-(la pestaña de ayuda, la barra fija, el botón de llamar). Si aparece en todas
-partes deja de significar nada.
+El celeste solo aparece donde hay algo que pulsar o algo que cuenta las horas
+—la pestaña de ayuda, la barra fija, el botón de llamar, la vigilia en curso—.
+Todo lo demás se resuelve con tinta, con morado y con espacio en blanco. Si el
+celeste aparece en todas partes deja de significar nada.
 
 **Tipografía.** Fraunces para los titulares —tiene el peso de una Biblia
 impresa sin parecer antigua— y Archivo para el texto. Se cargan de Google
@@ -113,22 +114,23 @@ su pila de reserva declarada.
 ## Las imágenes
 
 `scripts/build-imagenes.mjs` dibuja las cuatro piezas del sitio con el
-rasterizador de `scripts/lib/lienzo.mjs`: la vigilia andina del inicio, el
-incienso, Quito de noche y la llama del altar. Son originales, no hay banco de
+rasterizador de `scripts/lib/lienzo.mjs`: el amanecer sobre la cordillera, el
+incienso, Quito al alba y la llama del altar. Son originales, no hay banco de
 imágenes detrás, no hay licencia que renovar y ninguna persona real aparece en
 una foto que no autorizó.
 
+El registro es el amanecer, no la noche: el proyecto anuncia luz y las imágenes
+dicen lo mismo que el texto. Todas se resuelven en la mitad clara de la escala
+y se funden con el papel por los bordes, así que la página no se parte en
+bloques de color.
+
 Cada pieza es determinista —misma semilla, mismo archivo— y se guarda como PNG
-de paleta con difusión de error: un degradado oscuro con grano en color
-verdadero pesa tres megas y se lleva por delante el Largest Contentful Paint;
-en 128 colores bien difundidos no se ve la banda y el archivo baja a un tercio.
+de paleta con difusión de error: en 128 colores bien difundidos no se ve la
+banda y el archivo baja a un quinto de lo que pesa en color verdadero.
 
 Las imágenes están en `.gitignore` como cualquier otra salida de build.
-Regenerarlas tarda unos cincuenta segundos, así que `npm run build` no las
-toca: se corre `npm run img` a mano cuando se cambia el arte.
-
-El logotipo vectorial está en `public/marca/eco1516-logo.svg` y una versión
-inline, que hereda `currentColor`, en `scripts/build-pages.mjs`.
+Regenerarlas tarda unos treinta segundos, así que `npm run build` no las toca:
+se corre `npm run img` a mano cuando se cambia el arte.
 
 ## Pendientes antes de publicar
 

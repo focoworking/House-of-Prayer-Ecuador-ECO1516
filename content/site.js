@@ -118,15 +118,15 @@ export const marca = {
   morado: '#7B57A6',
   moradoOscuro: '#4A2F6B',
   moradoClaro: '#A98BCB',
-  celeste: '#2DB6DC',
-  celesteClaro: '#7FD6ED',
-  /* El sitio es de noche a proposito: la sala se sostiene de madrugada y la
-     vigilia es el registro visual de la casa. Por eso `papel` es un violeta
-     casi negro y `tinta` es la luz encima, no al reves. */
-  papel: '#0D0817',
-  papelAlto: '#171026',
-  tinta: '#F4EFFA',
-  tintaSuave: '#B9AECC',
+  celeste: '#1B9EC4',
+  celesteClaro: '#E4F4FA',
+  /* El sitio es claro porque lo que anuncia es luz, no noche. El papel es
+     blanco con una gota de violeta —no gris, no crema— y la tinta es el
+     morado profundo del logotipo, que da 13:1 sobre ese fondo. */
+  papel: '#FFFFFF',
+  papelAlto: '#F7F4FB',
+  tinta: '#241633',
+  tintaSuave: '#5C4E70',
 }
 
 /* Las dos familias del sitio. Fraunces pone la voz —tiene el peso de una

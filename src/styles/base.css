@@ -1,23 +1,22 @@
 /* Fundamentos: retícula, tipografía y los tokens que no son de color.
  *
- * El sitio se compromete con un solo mundo visual: la noche. No hay modo
- * claro porque la casa se sostiene de madrugada y la vigilia es el registro
- * de la marca, no una preferencia del visitante. Eso obliga a cuidar el
- * contraste en serio: el texto corrido va a 14:1 sobre el fondo y ningún
- * gris baja de 4.5:1.
+ * El sitio es claro porque lo que anuncia es luz. El blanco no es un fondo
+ * neutro por descarte: es el material principal, y la mayor parte de cada
+ * página es papel vacío a propósito. El color entra en dos sitios y en
+ * ninguno más: el morado sostiene la estructura y el celeste enciende una
+ * acción.
  */
 
 :root {
-  --ancho: 70rem;
-  --ancho-texto: 42rem;
+  --ancho: 68rem;
+  --ancho-texto: 38rem;
   --gutter: clamp(1.25rem, 5vw, 4.5rem);
   --aire: clamp(4rem, 10vw, 8.5rem);
   --radio: 0.5rem;
 
-  --linea: color-mix(in srgb, var(--morado-claro) 22%, transparent);
-  --linea-suave: color-mix(in srgb, var(--morado-claro) 12%, transparent);
-  --velo: color-mix(in srgb, var(--morado) 12%, var(--papel));
-  --resplandor: 0 0 0 1px var(--linea-suave), 0 24px 60px -32px #000;
+  --linea: color-mix(in srgb, var(--morado) 28%, transparent);
+  --linea-suave: color-mix(in srgb, var(--morado) 14%, transparent);
+  --velo: color-mix(in srgb, var(--morado) 5%, var(--papel));
 }
 
 *,
@@ -63,11 +62,11 @@ h1, h2, h3 {
 p { margin: 0 0 1em; }
 p:last-child { margin-bottom: 0; }
 
-a { color: var(--celeste-claro); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
-a:hover { color: #fff; }
+a { color: var(--morado); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+a:hover { color: var(--morado-oscuro); }
 
 :focus-visible {
-  outline: 2px solid var(--celeste-claro);
+  outline: 2px solid var(--celeste);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -93,8 +92,8 @@ time, .dato__valor, .turnos th { font-variant-numeric: tabular-nums; }
   top: -4rem;
   z-index: 60;
   padding: 0.7rem 1rem;
-  background: var(--celeste);
-  color: #041b23;
+  background: var(--morado-oscuro);
+  color: #fff;
   border-radius: var(--radio);
   font-weight: 600;
   text-decoration: none;

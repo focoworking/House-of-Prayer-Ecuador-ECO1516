@@ -7,9 +7,9 @@
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  padding: 0.8rem var(--gutter);
-  background: color-mix(in srgb, var(--papel) 82%, transparent);
-  backdrop-filter: saturate(150%) blur(14px);
+  padding: 0.85rem var(--gutter);
+  background: color-mix(in srgb, var(--papel) 88%, transparent);
+  backdrop-filter: saturate(140%) blur(12px);
   border-bottom: 1px solid var(--linea-suave);
 }
 
@@ -17,7 +17,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
-  color: var(--morado-claro);
+  color: var(--morado);
   text-decoration: none;
   margin-right: auto;
 }
@@ -53,24 +53,23 @@
   border-bottom: 1px solid transparent;
   transition: color 0.15s ease, border-color 0.15s ease;
 }
-.nav a:hover { color: var(--tinta); border-color: var(--morado-claro); }
-.nav a[aria-current='page'] { color: var(--tinta); border-color: var(--celeste); }
+.nav a:hover { color: var(--tinta); border-color: var(--linea); }
+.nav a[aria-current='page'] { color: var(--tinta); border-color: var(--morado); }
 
 /* La única pestaña que se enciende es la de ayuda: en un sitio cuya promesa
    es responder a cualquier hora, esa es la acción que no puede perderse. */
 .nav__destacado {
   background: var(--celeste);
-  color: #041b23 !important;
+  color: #fff !important;
   border-radius: 999px;
   padding: 0.38rem 0.95rem !important;
   border-bottom: 0 !important;
   font-weight: 600;
-  box-shadow: 0 0 24px -6px var(--celeste);
 }
-.nav__destacado:hover { background: var(--celeste-claro); border-color: transparent; }
+.nav__destacado:hover { background: #147f9e; border-color: transparent; }
 
 .idioma {
-  border: 1px solid var(--linea);
+  border: 1px solid var(--linea-suave);
   border-radius: 999px;
   padding: 0.28rem 0.65rem;
   font-size: 0.74rem;
@@ -78,7 +77,7 @@
   text-decoration: none;
   color: var(--tinta-suave);
 }
-.idioma:hover { color: var(--tinta); border-color: var(--morado-claro); }
+.idioma:hover { color: var(--tinta); border-color: var(--linea); }
 
 .boton {
   display: inline-flex;
@@ -89,32 +88,16 @@
   border: 1px solid var(--celeste);
   border-radius: 999px;
   background: var(--celeste);
-  color: #041b23;
+  color: #fff;
   font: inherit;
   font-weight: 600;
-  letter-spacing: 0.005em;
   text-decoration: none;
   cursor: pointer;
-  transition: transform 0.12s ease, background 0.12s ease, box-shadow 0.12s ease;
+  transition: transform 0.12s ease, background 0.12s ease;
 }
-.boton:hover {
-  background: var(--celeste-claro);
-  border-color: var(--celeste-claro);
-  color: #041b23;
-  transform: translateY(-1px);
-  box-shadow: 0 0 32px -8px var(--celeste);
-}
-.boton--fantasma {
-  background: transparent;
-  color: var(--tinta);
-  border-color: color-mix(in srgb, var(--tinta) 38%, transparent);
-}
-.boton--fantasma:hover {
-  background: color-mix(in srgb, var(--tinta) 10%, transparent);
-  border-color: var(--tinta);
-  color: var(--tinta);
-  box-shadow: none;
-}
+.boton:hover { background: #147f9e; border-color: #147f9e; color: #fff; transform: translateY(-1px); }
+.boton--fantasma { background: transparent; color: var(--tinta); border-color: var(--linea); }
+.boton--fantasma:hover { background: var(--velo); border-color: var(--morado); color: var(--tinta); }
 
 .acciones { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 2rem 0 0; }
 
@@ -127,9 +110,9 @@
   gap: 0.5rem;
   padding: 0.6rem var(--gutter);
   padding-bottom: calc(0.6rem + env(safe-area-inset-bottom, 0px));
-  background: color-mix(in srgb, var(--papel-alto) 92%, transparent);
-  backdrop-filter: blur(14px);
-  border-top: 1px solid var(--linea);
+  background: color-mix(in srgb, var(--papel) 92%, transparent);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--linea-suave);
 }
 .barra-accion a {
   flex: 1;
@@ -145,19 +128,15 @@
   /* En dos líneas el botón deja de parecer un botón. */
   white-space: nowrap;
 }
-.barra-accion__principal {
-  background: var(--celeste);
-  color: #041b23;
-  box-shadow: 0 0 30px -10px var(--celeste);
-}
-.barra-accion__principal:hover { background: var(--celeste-claro); color: #041b23; }
+.barra-accion__principal { background: var(--celeste); color: #fff; }
+.barra-accion__principal:hover { background: #147f9e; color: #fff; }
 .barra-accion__secundario {
-  background: transparent;
+  background: var(--papel);
   color: var(--tinta);
   border: 1px solid var(--linea);
   flex: 0 1 auto;
 }
-.barra-accion__secundario:hover { background: color-mix(in srgb, var(--tinta) 10%, transparent); color: var(--tinta); }
+.barra-accion__secundario:hover { background: var(--velo); color: var(--tinta); }
 
 .pie {
   display: grid;
@@ -175,11 +154,11 @@
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--morado-claro);
+  color: var(--morado);
   margin-bottom: 1rem;
 }
-.pie a { color: var(--tinta); text-decoration-color: var(--linea); }
-.pie a:hover { color: var(--celeste-claro); }
+.pie a { color: var(--tinta); }
+.pie a:hover { color: var(--morado); }
 .pie address { font-style: normal; }
 .pie__nombre { font-family: var(--display); font-size: 1.3rem; color: var(--tinta); margin: 0.9rem 0 0.25rem; }
 .pie__lema { color: var(--tinta-suave); }
@@ -192,7 +171,7 @@
   padding-top: 2.25rem;
   border-top: 1px solid var(--linea-suave);
   font-size: 0.8rem;
-  color: color-mix(in srgb, var(--tinta-suave) 80%, transparent);
+  color: var(--tinta-suave);
 }
 
 .redes { display: flex; gap: 0.55rem; list-style: none; margin: 1.1rem 0 0; padding: 0; }
@@ -201,7 +180,7 @@
   place-items: center;
   width: 2.3rem;
   height: 2.3rem;
-  border: 1px solid var(--linea);
+  border: 1px solid var(--linea-suave);
   border-radius: 50%;
   color: var(--tinta);
 }
