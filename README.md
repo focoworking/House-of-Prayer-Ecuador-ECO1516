@@ -14,6 +14,7 @@ npm run dev      # genera OG, páginas y levanta el servidor
 npm run build    # build de producción en dist/
 npm run preview  # sirve dist/ en el puerto 4173
 npm run check    # revisión de SEO/AEO sobre el HTML generado
+npm run build:preview  # copia navegable en preview/, con rutas relativas
 ```
 
 Requiere Node 20 o superior.
@@ -61,6 +62,11 @@ Cada bloque declara su `type` y `scripts/render.mjs` sabe dibujarlo:
 | `ai.txt` | Permisos de uso con atribución |
 | `og/eco1516.png` | Imagen para compartir, 1200×630, generada sin dependencias |
 | `src/styles/marca.css` | La paleta del logotipo, escrita desde `content/site.js` |
+
+`npm run build:preview` deja en `preview/` una copia del sitio con los enlaces
+internos reescritos a rutas relativas. Sirve para revisarlo fuera de la raíz de
+un dominio —una carpeta compartida, un artifact— donde `/ayuda` apuntaría fuera
+del sitio. El build de producción no se toca.
 
 `npm run check` revisa las 24 páginas: largo de títulos y descripciones, un
 solo `h1`, los cuatro `hreflang`, canonical, JSON-LD válido con organización y

@@ -15,6 +15,7 @@
     "prebuild": "npm run og && npm run pages",
     "build": "vite build",
     "preview": "vite preview --port 4173",
+    "build:preview": "npm run build && node scripts/build-preview.mjs",
     "check": "node scripts/check-seo.mjs"
   },
   "devDependencies": {
