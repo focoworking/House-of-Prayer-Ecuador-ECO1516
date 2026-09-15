@@ -3,16 +3,16 @@
  *
  * Por qué a mano: una imagen de Open Graph es lo que se ve cuando el enlace
  * se pega en WhatsApp, y en Ecuador el enlace se pega en WhatsApp. No merece
- * arrastrar un navegador headless al build, así que aquí hay un rasterizador
- * mínimo y un codificador PNG en unas cien líneas.
+ * arrastrar un navegador headless al build. El lienzo y el PNG salen de
+ * scripts/lib/lienzo.mjs, el mismo que dibuja el arte del sitio.
  *
  * La tipografía es un mapa de bits de 5x7 escalado: no compite con una fuente
  * real, pero es nítida, pesa cero y no depende de la red.
  */
-import { deflateSync } from 'node:zlib'
 import { mkdir, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 
+import { crear, png, linea as trazo, hex } from './lib/lienzo.mjs'
 import { marca, site } from '../content/site.js'
 
 const ANCHO = 1200
@@ -22,55 +22,21 @@ const ALTO = 630
 /* Lienzo                                                            */
 /* ---------------------------------------------------------------- */
 
-const lienzo = new Uint8Array(ANCHO * ALTO * 3)
-
-const hex = (c) => [1, 3, 5].map((i) => parseInt(c.slice(i, i + 2), 16))
-
-const pixel = (x, y, [r, g, b], alfa = 1) => {
-  if (x < 0 || y < 0 || x >= ANCHO || y >= ALTO) return
-  const i = (y * ANCHO + x) * 3
-  lienzo[i] = lienzo[i] * (1 - alfa) + r * alfa
-  lienzo[i + 1] = lienzo[i + 1] * (1 - alfa) + g * alfa
-  lienzo[i + 2] = lienzo[i + 2] * (1 - alfa) + b * alfa
-}
+const L = crear(ANCHO, ALTO)
+const pixel = (x, y, color, alfa = 1) => L.pixel(x, y, color, alfa)
+const linea = (x1, y1, x2, y2, grosor, color) => trazo(L, x1, y1, x2, y2, grosor, color)
 
 /** Degradado en diagonal, el mismo que usa el hero de urgencia. */
 const fondo = (desde, hasta) => {
   const a = hex(desde)
   const b = hex(hasta)
-  for (let y = 0; y < ALTO; y++) {
-    for (let x = 0; x < ANCHO; x++) {
-      const t = Math.min(1, (x / ANCHO) * 0.45 + (y / ALTO) * 0.75)
-      pixel(x, y, [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t])
-    }
-  }
+  L.cada((x, y, u, v) => {
+    const t = Math.min(1, u * 0.45 + v * 0.75)
+    pixel(x, y, [0, 1, 2].map((i) => a[i] + (b[i] - a[i]) * t))
+  })
 }
 
-/** Segmento con grosor y bordes suaves: la distancia punto-segmento decide
- *  la opacidad, que es antialiasing de pobre y se ve perfectamente bien. */
-const linea = (x1, y1, x2, y2, grosor, color) => {
-  const c = hex(color)
-  const dx = x2 - x1
-  const dy = y2 - y1
-  const largo2 = dx * dx + dy * dy || 1
-  const r = grosor / 2
-  const minX = Math.floor(Math.min(x1, x2) - r - 1)
-  const maxX = Math.ceil(Math.max(x1, x2) + r + 1)
-  const minY = Math.floor(Math.min(y1, y2) - r - 1)
-  const maxY = Math.ceil(Math.max(y1, y2) + r + 1)
-  for (let y = minY; y <= maxY; y++) {
-    for (let x = minX; x <= maxX; x++) {
-      const t = Math.max(0, Math.min(1, ((x - x1) * dx + (y - y1) * dy) / largo2))
-      const d = Math.hypot(x - (x1 + t * dx), y - (y1 + t * dy))
-      const alfa = Math.max(0, Math.min(1, r - d + 0.5))
-      if (alfa > 0) pixel(x, y, c, alfa)
-    }
-  }
-}
-
-/** La llama: disco abajo y punta arriba. El radio se estrecha hacia arriba
- *  con una potencia mayor que uno, que es lo que hace la punta en vez de un
- *  huevo; un poco de asimetría en la base le quita rigidez. */
+/** La llama: disco abajo y punta arriba. */
 const llama = (cx, cy, r, color) => {
   const c = hex(color)
   const alto = r * 2.6
@@ -146,55 +112,12 @@ const texto = (cadena, x, y, escala, color, espaciado = escala * 2) => {
 }
 
 /* ---------------------------------------------------------------- */
-/* PNG                                                               */
-/* ---------------------------------------------------------------- */
-
-const TABLA_CRC = Array.from({ length: 256 }, (_, n) => {
-  let c = n
-  for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1
-  return c >>> 0
-})
-
-const crc32 = (buf) => {
-  let c = 0xffffffff
-  for (const byte of buf) c = TABLA_CRC[(c ^ byte) & 0xff] ^ (c >>> 8)
-  return (c ^ 0xffffffff) >>> 0
-}
-
-const chunk = (tipo, datos) => {
-  const largo = Buffer.alloc(4)
-  largo.writeUInt32BE(datos.length)
-  const cuerpo = Buffer.concat([Buffer.from(tipo, 'ascii'), datos])
-  const crc = Buffer.alloc(4)
-  crc.writeUInt32BE(crc32(cuerpo))
-  return Buffer.concat([largo, cuerpo, crc])
-}
-
-const png = () => {
-  const filas = Buffer.alloc((ANCHO * 3 + 1) * ALTO)
-  for (let y = 0; y < ALTO; y++) {
-    const destino = y * (ANCHO * 3 + 1)
-    filas[destino] = 0 // filtro: ninguno
-    Buffer.from(lienzo.buffer, y * ANCHO * 3, ANCHO * 3).copy(filas, destino + 1)
-  }
-  const ihdr = Buffer.alloc(13)
-  ihdr.writeUInt32BE(ANCHO, 0)
-  ihdr.writeUInt32BE(ALTO, 4)
-  ihdr[8] = 8 // bits por canal
-  ihdr[9] = 2 // color: RGB
-  return Buffer.concat([
-    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
-    chunk('IHDR', ihdr),
-    chunk('IDAT', deflateSync(filas, { level: 9 })),
-    chunk('IEND', Buffer.alloc(0)),
-  ])
-}
-
-/* ---------------------------------------------------------------- */
 /* Composición                                                       */
 /* ---------------------------------------------------------------- */
 
-fondo(marca.moradoOscuro, marca.morado)
+/* El mismo cielo que el sitio: la tarjeta que se pega en WhatsApp tiene que
+   parecerse a la página que abre. */
+fondo(marca.papel, marca.moradoOscuro)
 
 /* El emblema, a la izquierda: manos abiertas, techo y llama. Los dedos
    arrancan por fuera del techo para que las dos formas se lean separadas. */
@@ -226,5 +149,5 @@ textoAjustado('ECO1516.ORG', X, reglaY + 100, ANCHO_TEXTO, 5, '#FFFFFF')
 
 const destino = resolve(process.cwd(), 'public/og/eco1516.png')
 await mkdir(dirname(destino), { recursive: true })
-await writeFile(destino, png())
+await writeFile(destino, png(L))
 console.log(`public/og/eco1516.png (${ANCHO}x${ALTO}) — ${site.name}`)

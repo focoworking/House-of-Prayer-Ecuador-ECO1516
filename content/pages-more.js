@@ -20,18 +20,25 @@ export const nosotros = {
     {
       type: 'hero',
       eyebrow: t('Desde 2011', 'Since 2011'),
-      title: t('Un proyecto joven con quince años encima', 'A young project with fifteen years behind it'),
+      title: t('Una casa joven con quince años de altar', 'A young house with fifteen years of altar'),
       lead: t(
-        'No llegamos de afuera ni copiamos un modelo. Empezamos con doce personas, aprendimos a sostener turnos y crecimos despacio hasta cubrir el día entero. Esto es lo que hay y lo que no hay.',
-        'We did not arrive from outside or copy a model. We started with twelve people, learned to hold watches and grew slowly until the whole day was covered. Here is what exists and what does not.'
+        'No llegamos de afuera ni copiamos un modelo. Empezamos con doce personas, aprendimos a sostener vigilias y el Señor fue añadiendo hasta cubrir el día entero. Esto es lo que hay y lo que no hay.',
+        'We did not arrive from outside or copy a model. We began with twelve people, learned to hold watches, and the Lord kept adding until the whole day was covered. Here is what exists and what does not.'
       ),
+      verse: {
+        text: t(
+          '«Después de esto volveré y reedificaré el tabernáculo de David, que está caído; y repararé sus ruinas, y lo volveré a levantar.»',
+          '“After this I will return, and will build again the tabernacle of David, which is fallen down; and I will build again the ruins thereof, and I will set it up.”'
+        ),
+        ref: 'Hechos 15:16',
+      },
     },
     {
       type: 'lead',
       title: t('Qué somos', 'What we are'),
       text: t(
-        'Somos una casa de oración: un lugar donde se ora con música en vivo sin interrupción, y desde donde salen equipos a ayudar en la ciudad. No somos una denominación y no pedimos que nadie deje su iglesia. Trabajamos con iglesias de tradiciones distintas y sostenemos una sola cosa en común: la sala encendida.',
-        'We are a house of prayer: a place where prayer goes on with live music without interruption, and from which teams go out to help across the city. We are not a denomination and we do not ask anyone to leave their church. We work with churches from different traditions and hold one thing in common: keeping the room lit.'
+        'Somos una casa de oración: un lugar donde se adora y se intercede sin interrupción, y desde donde salen equipos a servir a la ciudad. Nuestro llamado es establecer la oración como cultura de la Iglesia ecuatoriana y como el medio del gobierno de Dios en Ecuador. No somos una denominación y no pedimos que nadie deje su iglesia: trabajamos con hermanos de tradiciones distintas y sostenemos una sola cosa en común, el altar encendido.',
+        'We are a house of prayer: a place where worship and intercession go on without interruption, and from which teams go out to serve the city. Our call is to establish prayer as the culture of the Ecuadorian Church and as the means of God’s government in Ecuador. We are not a denomination and we do not ask anyone to leave their church: we work with believers from different traditions and hold one thing in common, the altar lit.'
       ),
     },
     {
@@ -39,10 +46,10 @@ export const nosotros = {
       title: t('Lo que sostenemos', 'What we hold to'),
       items: [
         {
-          title: t('La oración es el trabajo, no la preparación del trabajo', 'Prayer is the work, not the warm-up'),
+          title: t('La oración es la obra, no la antesala de la obra', 'Prayer is the work, not the warm-up'),
           text: t(
-            'Los doce bloques diarios no son antesala de otra cosa. Todo lo demás —escuela, misiones, congregación— sale de ahí.',
-            'The twelve daily watches are not a preamble to something else. Everything else — school, outreach, congregation — comes out of them.'
+            'Las doce vigilias diarias no preparan otra cosa: son la cosa. Todo lo demás —escuela, misiones, congregación— nace del altar y vuelve a él.',
+            'The twelve daily watches do not prepare for something else: they are the thing. Everything else — school, outreach, congregation — is born at the altar and returns to it.'
           ),
         },
         {
@@ -62,11 +69,19 @@ export const nosotros = {
         {
           title: t('Nadie sirve solo', 'Nobody serves alone'),
           text: t(
-            'Todo turno tiene dos personas como mínimo y todo equipo de misión sale acompañado. También en la línea telefónica.',
-            'Every watch has at least two people and every outreach team goes out accompanied. The phone line too.'
+            'Toda vigilia tiene dos personas como mínimo y todo equipo sale de dos en dos, como fueron enviados los setenta. También en la línea telefónica.',
+            'Every watch has at least two people and every team goes out two by two, as the seventy were sent. The phone line too.'
           ),
         },
       ],
+    },
+    {
+      type: 'scripture',
+      text: t(
+        'Si se humillare mi pueblo, sobre el cual mi nombre es invocado, y oraren, y buscaren mi rostro, y se convirtieren de sus malos caminos; entonces yo oiré desde los cielos, y perdonaré sus pecados, y sanaré su tierra.',
+        'If my people, which are called by my name, shall humble themselves, and pray, and seek my face, and turn from their wicked ways; then will I hear from heaven, and will forgive their sin, and will heal their land.'
+      ),
+      ref: '2 Crónicas 7:14',
     },
     { type: 'timeline', title: t('Quince años, fechados', 'Fifteen years, dated'), items: historia },
     {
@@ -74,7 +89,7 @@ export const nosotros = {
       title: t('Lo que no hacemos', 'What we do not do'),
       items: [
         t('No cobramos por oración, por acompañamiento ni por entrar a la sala.', 'We do not charge for prayer, accompaniment or entry to the room.'),
-        t('No prometemos sanidad, milagros ni resultados a cambio de una ofrenda.', 'We do not promise healing, miracles or results in exchange for an offering.'),
+        t('No vendemos sanidad, milagros ni profecía: creemos que Dios sana, y no cobramos por ello ni lo condicionamos a una ofrenda.', 'We do not sell healing, miracles or prophecy: we believe God heals, and we neither charge for it nor make it conditional on an offering.'),
         t('No publicamos peticiones de oración ni nombres sin permiso explícito.', 'We do not publish prayer requests or names without explicit permission.'),
         t('No reemplazamos atención médica, psicológica ni servicios de emergencia.', 'We do not replace medical care, psychological care or emergency services.'),
       ],
@@ -108,9 +123,16 @@ export const formacion = {
       eyebrow: t('Escuela', 'School'),
       title: t('Seis meses que cambian el ritmo de una vida', 'Six months that change the rhythm of a life'),
       lead: t(
-        'El internado combina turnos reales en la sala, clases de estudio bíblico, formación musical y salidas semanales de misión urbana. No es un retiro: se sirve desde el primer día.',
-        'The internship combines real watches in the room, Bible study classes, musical training and weekly urban outreach. It is not a retreat: you serve from day one.'
+        'El internado combina vigilias reales en la sala, estudio bíblico, formación musical y salidas semanales de misión urbana. No es un retiro: se sirve desde el primer día y se aprende a orar orando.',
+        'The internship combines real watches in the room, Bible study, musical training and weekly urban outreach. It is not a retreat: you serve from day one and you learn to pray by praying.'
       ),
+      verse: {
+        text: t(
+          '«Y después de esto derramaré mi Espíritu sobre toda carne, y profetizarán vuestros hijos y vuestras hijas.»',
+          '“And it shall come to pass afterward, that I will pour out my spirit upon all flesh; and your sons and your daughters shall prophesy.”'
+        ),
+        ref: 'Joel 2:28',
+      },
       actions: [
         { label: t('Postular', 'Apply'), href: { es: '/contacto', en: '/en/contact' }, kind: 'primary' },
         { label: t('Ver fechas', 'See dates'), href: { es: '/eventos', en: '/en/events' }, kind: 'ghost' },
@@ -199,11 +221,18 @@ export const misiones = {
     {
       type: 'hero',
       eyebrow: t('Misiones', 'Outreach'),
-      title: t('Lo que se ora en la sala se camina en la calle', 'What is prayed in the room is walked in the street'),
+      title: t('Lo que se clama en el altar se camina en la calle', 'What is cried out at the altar is walked in the street'),
       lead: t(
-        'Cada semana salen equipos de la sala a entregar alimentos, acompañar familias y orar con quien lo pida, en barrios de Quito y una vez al mes en otras provincias.',
-        'Every week teams go out from the room to deliver food, walk with families and pray with whoever asks, in Quito neighbourhoods and once a month in other provinces.'
+        'Cada semana salen equipos de la sala a entregar alimentos, acompañar familias y orar con quien lo pida, en barrios de Quito y una vez al mes en otras provincias. La intercesión que no toca la puerta del vecino se quedó a mitad de camino.',
+        'Every week teams go out from the room to deliver food, walk with families and pray with whoever asks, in Quito neighbourhoods and once a month in other provinces. Intercession that never knocks on a neighbour’s door stopped halfway.'
       ),
+      verse: {
+        text: t(
+          '«Porque la tierra será llena del conocimiento de la gloria de Jehová, como las aguas cubren el mar.»',
+          '“For the earth shall be filled with the knowledge of the glory of the LORD, as the waters cover the sea.”'
+        ),
+        ref: 'Habacuc 2:14',
+      },
       actions: [
         { label: t('Sumarme a un equipo', 'Join a team'), href: { es: '/contacto', en: '/en/contact' }, kind: 'primary' },
         { label: t('Sostener una salida', 'Fund a trip'), href: { es: '/dar', en: '/en/give' }, kind: 'ghost' },
@@ -218,6 +247,20 @@ export const misiones = {
         { title: t('Hospitales y casas de acogida', 'Hospitals and shelters'), text: t('Visitas coordinadas con capellanía y con las instituciones, nunca por sorpresa.', 'Visits coordinated with chaplaincy and the institutions, never unannounced.') },
         { title: t('Salidas a provincias', 'Trips to the provinces'), text: t('Una salida al mes con una iglesia local que recibe y coordina: el equipo apoya, no dirige.', 'One trip a month with a host local church that coordinates: the team supports, it does not take over.') },
       ],
+    },
+    {
+      type: 'figure',
+      src: '/img/ciudad.png',
+      w: 1600,
+      h: 1200,
+      alt: t(
+        'Quito de noche vista desde arriba: torres en silueta con ventanas encendidas bajo un cielo violeta.',
+        'Quito at night seen from above: towers in silhouette with lit windows under a violet sky.'
+      ),
+      caption: t(
+        'Cada ventana encendida es una casa por la que se ora por nombre en la vigilia de las 16:00.',
+        'Every lit window is a household prayed for by name in the 4pm watch.'
+      ),
     },
     {
       type: 'stats',
@@ -287,10 +330,10 @@ export const dar = {
     {
       type: 'hero',
       eyebrow: t('Dar', 'Give'),
-      title: t('Lo que das mantiene la sala encendida', 'What you give keeps the room lit'),
+      title: t('Lo que siembras mantiene el altar encendido', 'What you sow keeps the altar lit'),
       lead: t(
-        'No hay publicidad, no hay patrocinadores y no se cobra por nada de lo que hacemos. La casa se sostiene con donaciones de personas, la mayoría pequeñas y mensuales.',
-        'There is no advertising, no sponsors and nothing we do is charged for. The house is sustained by people’s giving, mostly small and monthly.'
+        'No hay publicidad, no hay patrocinadores y no se cobra por nada de lo que hacemos. La casa se sostiene con la siembra de personas, la mayoría pequeña y mensual. Nadie compra un lugar delante de Dios: lo que das sostiene a los que velan, no tu acceso a Él.',
+        'There is no advertising, no sponsors and nothing we do is charged for. The house is sustained by people’s giving, mostly small and monthly. Nobody buys a place before God: what you give sustains those who keep watch, not your access to Him.'
       ),
       actions: [{ label: t('Donar ahora', 'Give now'), href: { es: '/contacto', en: '/en/contact' }, kind: 'primary' }],
     },
@@ -408,6 +451,14 @@ export const paginaPreguntas = {
       ),
     },
     { type: 'faq', title: t('Todas las preguntas', 'All questions'), items: preguntas, schema: true },
+    {
+      type: 'scripture',
+      text: t(
+        'Levántate, resplandece; porque ha venido tu luz, y la gloria de Jehová ha nacido sobre ti.',
+        'Arise, shine; for thy light is come, and the glory of the LORD is risen upon thee.'
+      ),
+      ref: 'Isaías 60:1',
+    },
     { type: 'emergency' },
   ],
 }

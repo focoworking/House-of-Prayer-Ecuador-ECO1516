@@ -14,6 +14,7 @@ npm run dev      # genera OG, páginas y levanta el servidor
 npm run build    # build de producción en dist/
 npm run preview  # sirve dist/ en el puerto 4173
 npm run check    # revisión de SEO/AEO sobre el HTML generado
+npm run img      # regenera el arte del sitio (tarda ~50 s, rara vez hace falta)
 npm run build:preview  # copia navegable en preview/, con rutas relativas
 ```
 
@@ -46,9 +47,17 @@ entradas del build de Vite, el sitemap y `llms.txt` se derivan solas.
 ### Tipos de sección
 
 Cada bloque declara su `type` y `scripts/render.mjs` sabe dibujarlo:
-`hero`, `lead`, `statement`, `quote`, `stats`, `cards`, `rows`, `steps`,
-`split`, `checklist`, `timeline`, `schedule`, `events`, `faq`, `links`,
-`prose`, `form`, `emergency`, `contact`, `cta`.
+`hero`, `lead`, `statement`, `scripture`, `quote`, `figure`, `stats`,
+`cards`, `rows`, `steps`, `split`, `checklist`, `timeline`, `schedule`,
+`events`, `faq`, `links`, `prose`, `form`, `emergency`, `contact`, `cta`.
+
+### La Escritura
+
+Toda cita bíblica del sitio es **Reina-Valera 1960**, textual y con su
+referencia visible. El tipo `scripture` la presenta como pasaje y el campo
+`verse` de un `hero` la pone al pie del titular. No se parafrasea, no se
+mezcla con otra versión y no se cita de memoria: si una referencia no se
+puede comprobar, no entra.
 
 ## Qué genera el build
 
@@ -80,15 +89,43 @@ celeste— y vive en `content/site.js`:
 
 | Token | Valor | Uso |
 | --- | --- | --- |
-| `--morado` | `#7B57A6` | Estructura: titulares, bordes, botón principal |
-| `--morado-oscuro` | `#4A2F6B` | Fondos densos, pie, `theme-color` |
-| `--morado-claro` | `#A98BCB` | Apoyo sobre fondo oscuro |
-| `--celeste` | `#2DB6DC` | La llama: **solo** acciones que encienden algo |
-| `--tinta` / `--papel` | `#241633` / `#FBFAFD` | Texto y fondo |
+| `--papel` | `#0D0817` | El fondo: violeta casi negro |
+| `--papel-alto` | `#171026` | Tarjetas, pie, bloques levantados |
+| `--tinta` / `--tinta-suave` | `#F4EFFA` / `#B9AECC` | Texto y texto secundario |
+| `--morado` / `--morado-oscuro` | `#7B57A6` / `#4A2F6B` | Estructura y fondos densos |
+| `--morado-claro` | `#A98BCB` | Etiquetas y apoyo |
+| `--celeste` | `#2DB6DC` | La llama: **solo** lo que enciende una acción |
+
+**El sitio es de noche a propósito** y no tiene modo claro. La casa se
+sostiene de madrugada y la vigilia es el registro visual de la marca, no una
+preferencia del visitante. Eso obliga a cuidar el contraste en serio: el
+texto corrido va a 14:1 sobre el fondo y ningún gris baja de 4.5:1.
 
 El celeste nunca se usa para texto corrido: es el color de la acción urgente
 (la pestaña de ayuda, la barra fija, el botón de llamar). Si aparece en todas
 partes deja de significar nada.
+
+**Tipografía.** Fraunces para los titulares —tiene el peso de una Biblia
+impresa sin parecer antigua— y Archivo para el texto. Se cargan de Google
+Fonts, el único host externo del sitio, con `preconnect` a los dos dominios y
+su pila de reserva declarada.
+
+## Las imágenes
+
+`scripts/build-imagenes.mjs` dibuja las cuatro piezas del sitio con el
+rasterizador de `scripts/lib/lienzo.mjs`: la vigilia andina del inicio, el
+incienso, Quito de noche y la llama del altar. Son originales, no hay banco de
+imágenes detrás, no hay licencia que renovar y ninguna persona real aparece en
+una foto que no autorizó.
+
+Cada pieza es determinista —misma semilla, mismo archivo— y se guarda como PNG
+de paleta con difusión de error: un degradado oscuro con grano en color
+verdadero pesa tres megas y se lleva por delante el Largest Contentful Paint;
+en 128 colores bien difundidos no se ve la banda y el archivo baja a un tercio.
+
+Las imágenes están en `.gitignore` como cualquier otra salida de build.
+Regenerarlas tarda unos cincuenta segundos, así que `npm run build` no las
+toca: se corre `npm run img` a mano cuando se cambia el arte.
 
 El logotipo vectorial está en `public/marca/eco1516-logo.svg` y una versión
 inline, que hereda `currentColor`, en `scripts/build-pages.mjs`.

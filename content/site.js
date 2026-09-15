@@ -120,8 +120,24 @@ export const marca = {
   moradoClaro: '#A98BCB',
   celeste: '#2DB6DC',
   celesteClaro: '#7FD6ED',
-  tinta: '#241633',
-  papel: '#FBFAFD',
+  /* El sitio es de noche a proposito: la sala se sostiene de madrugada y la
+     vigilia es el registro visual de la casa. Por eso `papel` es un violeta
+     casi negro y `tinta` es la luz encima, no al reves. */
+  papel: '#0D0817',
+  papelAlto: '#171026',
+  tinta: '#F4EFFA',
+  tintaSuave: '#B9AECC',
+}
+
+/* Las dos familias del sitio. Fraunces pone la voz —tiene el peso de una
+   Biblia impresa sin parecer antigua— y Archivo sostiene el texto a
+   cualquier tamano. Se cargan de Google Fonts, que es el unico host de
+   fuentes que conviene aqui, con su pila de reserva declarada. */
+export const fuentes = {
+  display: "'Fraunces', 'Iowan Old Style', Georgia, serif",
+  texto: "'Archivo', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
+  enlace:
+    'https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&display=swap',
 }
 
 export const emergencia = [

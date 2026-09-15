@@ -80,13 +80,48 @@ const bloques = {
           T({ es: 'La sala está orando ahora mismo', en: 'The room is praying right now' }, lang)
         )}</p>`
       : ''
-    return `<section class="hero${clase}" aria-labelledby="titulo-principal">
-      ${s.eyebrow ? `<p class="hero__eyebrow">${esc(T(s.eyebrow, lang))}</p>` : ''}
-      <h1 class="hero__titulo" id="titulo-principal">${esc(T(s.title, lang))}</h1>
-      ${s.lead ? `<p class="hero__lead">${esc(T(s.lead, lang))}</p>` : ''}
-      ${actions(s.actions, lang)}
-      ${vivo}
-      ${s.note ? `<p class="hero__nota">${esc(T(s.note, lang))}</p>` : ''}
+    /* La imagen va detras del texto, no al lado: el titular tiene que caer
+       sobre la noche. El degradado encima no es decoracion, es lo que
+       mantiene el contraste del texto por encima de 7:1. */
+    const fondo = s.image
+      ? `<img class="hero__fondo" src="${esc(s.image.src)}" alt="${esc(T(s.image.alt, lang))}"
+           width="${s.image.w}" height="${s.image.h}" fetchpriority="high" decoding="async" />`
+      : ''
+    const versiculo = s.verse
+      ? `<p class="hero__versiculo"><span>${esc(T(s.verse.text, lang))}</span>
+         <cite>${esc(s.verse.ref)}</cite></p>`
+      : ''
+    return `<section class="hero${clase}${s.image ? ' hero--imagen' : ''}" aria-labelledby="titulo-principal">
+      ${fondo}
+      <div class="hero__cuerpo">
+        ${s.eyebrow ? `<p class="hero__eyebrow">${esc(T(s.eyebrow, lang))}</p>` : ''}
+        <h1 class="hero__titulo" id="titulo-principal">${esc(T(s.title, lang))}</h1>
+        ${s.lead ? `<p class="hero__lead">${esc(T(s.lead, lang))}</p>` : ''}
+        ${actions(s.actions, lang)}
+        ${vivo}
+        ${s.note ? `<p class="hero__nota">${esc(T(s.note, lang))}</p>` : ''}
+        ${versiculo}
+      </div>
+    </section>`
+  },
+
+  /* La Escritura no es un adorno al pie de una seccion: se presenta como lo
+     que es, con su referencia y la version citada, en Reina-Valera 1960. */
+  scripture(s, lang) {
+    return `<section class="seccion seccion--escritura">
+      <figure class="escritura">
+        <blockquote cite="${esc(s.url ?? '')}"><p>${esc(T(s.text, lang))}</p></blockquote>
+        <figcaption><strong>${esc(s.ref)}</strong> <span>Reina-Valera 1960</span></figcaption>
+      </figure>
+    </section>`
+  },
+
+  figure(s, lang) {
+    return `<section class="seccion seccion--figura">
+      <figure class="figura">
+        <img src="${esc(s.src)}" alt="${esc(T(s.alt, lang))}" width="${s.w}" height="${s.h}" loading="lazy" decoding="async" />
+        ${s.caption ? `<figcaption>${esc(T(s.caption, lang))}</figcaption>` : ''}
+      </figure>
     </section>`
   },
 
@@ -154,11 +189,15 @@ const bloques = {
     const items = s.items?.length
       ? `<ul class="marcas">${s.items.map((i) => `<li>${esc(T(i, lang))}</li>`).join('')}</ul>`
       : ''
+    const imagen = s.image
+      ? `<img class="split__imagen" src="${esc(s.image.src)}" alt="${esc(T(s.image.alt, lang))}"
+           width="${s.image.w}" height="${s.image.h}" loading="lazy" decoding="async" />`
+      : ''
     return wrap(
       'split',
       s.title,
-      `<div class="split">
-        <div>${head(s.title, null, lang)}</div>
+      `<div class="split${s.image ? ' split--con-imagen' : ''}">
+        <div>${head(s.title, null, lang)}${imagen}</div>
         <div><p>${esc(T(s.text, lang))}</p>${items}${s.action ? actions([{ ...s.action, kind: 'ghost' }], lang) : ''}</div>
       </div>`,
       lang

@@ -8,7 +8,7 @@
 import { mkdir, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 
-import { site, ui, nav, footerNav, marca, LANGUAGES } from '../content/site.js'
+import { site, ui, nav, footerNav, marca, fuentes, LANGUAGES } from '../content/site.js'
 import { pages, pathOf, fileOf } from '../content/pages.js'
 import { renderSections, T, esc } from './render.mjs'
 import { metaTags, jsonLd, sitemap, robots, llms, llmsFull, aiTxt } from './seo.mjs'
@@ -128,6 +128,14 @@ const pie = (page, lang) => {
 /* Plantilla                                                           */
 /* ------------------------------------------------------------------ */
 
+/* Si la pagina abre con imagen, el navegador tiene que empezar a bajarla
+   antes de leer el CSS: es el elemento mas grande de la pantalla y de el
+   depende el Largest Contentful Paint. */
+const precargaHero = (page) => {
+  const hero = page.sections.find((s) => s.type === 'hero' && s.image)
+  return hero ? `<link rel="preload" as="image" href="${hero.image.src}" fetchpriority="high" />` : ''
+}
+
 const documento = (page, lang) => `<!doctype html>
 <html lang="${lang === 'es' ? 'es-EC' : 'en'}">
   <head>
@@ -136,7 +144,15 @@ const documento = (page, lang) => `<!doctype html>
     <meta name="theme-color" content="${marca.moradoOscuro}" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- Las fuentes llegan de Google Fonts, el unico host externo del sitio.
+         El preconnect ahorra el viaje de DNS y TLS del segundo dominio, que
+         es el que sirve los .woff2 y el que retrasa la primera letra. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="${fuentes.enlace}" />
     ${metaTags(page, lang)}
+    ${precargaHero(page)}
     <script type="application/ld+json">${JSON.stringify(jsonLd(page, lang))}</script>
     <link rel="stylesheet" href="/src/styles/main.css" />
   </head>
@@ -192,7 +208,11 @@ const marcaCss = () => `/* Generado por scripts/build-pages.mjs desde content/si
   --celeste: ${marca.celeste};
   --celeste-claro: ${marca.celesteClaro};
   --tinta: ${marca.tinta};
+  --tinta-suave: ${marca.tintaSuave};
   --papel: ${marca.papel};
+  --papel-alto: ${marca.papelAlto};
+  --display: ${fuentes.display};
+  --texto: ${fuentes.texto};
 }
 `
 
