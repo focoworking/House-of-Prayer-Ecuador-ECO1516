@@ -1,0 +1,23 @@
+{
+  "name": "casa-de-oracion-ecuador",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Casa de Oracion Ecuador (ECO1516) — oracion 24/7, ayuda inmediata, formacion y misiones.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "pages": "node scripts/build-pages.mjs",
+    "og": "node scripts/build-og.mjs",
+    "predev": "npm run og && npm run pages",
+    "dev": "vite",
+    "prebuild": "npm run og && npm run pages",
+    "build": "vite build",
+    "preview": "vite preview --port 4173",
+    "check": "node scripts/check-seo.mjs"
+  },
+  "devDependencies": {
+    "vite": "^5.4.11"
+  }
+}

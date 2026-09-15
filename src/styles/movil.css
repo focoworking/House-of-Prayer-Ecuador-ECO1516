@@ -1,0 +1,62 @@
+/* Ajustes por ancho. El sitio se diseña para el pulgar primero: la barra de
+   acción vive abajo y la navegación se simplifica antes que desaparecer. */
+
+@media (max-width: 62rem) {
+  .split { grid-template-columns: 1fr; }
+  .pie { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 48rem) {
+  .cabecera { gap: 0.75rem; flex-wrap: wrap; }
+  .marca__texto small { display: none; }
+  .nav { order: 3; width: 100%; }
+  .nav ul {
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.35rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav ul::-webkit-scrollbar { display: none; }
+  .nav li { flex: none; }
+  .hito { grid-template-columns: 1fr; gap: 0.35rem; }
+  .fila { grid-template-columns: 1fr; gap: 0.35rem; }
+  .fila__n { font-size: 0.85rem; letter-spacing: 0.1em; }
+  .pie { grid-template-columns: 1fr; }
+  .acciones .boton { flex: 1 1 100%; }
+}
+
+@media (min-width: 48.0625rem) {
+  /* En escritorio la barra deja de ser una franja fija y se convierte en una
+     pastilla flotante: sigue presente, deja de competir con el contenido. */
+  .barra-accion {
+    left: auto;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    border-radius: 999px;
+    padding: 0.4rem;
+    box-shadow: var(--sombra), 0 18px 40px -20px var(--morado-oscuro);
+  }
+  body { padding-bottom: 0; }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --papel: #16101f;
+    --tinta: #f3eef8;
+    --linea: color-mix(in srgb, var(--morado-claro) 28%, transparent);
+    --suave: #1e1729;
+  }
+  body { background: var(--papel); }
+  h1, h2, h3 { color: #fff; }
+  a { color: var(--morado-claro); }
+  a:hover { color: var(--celeste-claro); }
+  .tarjeta, .evento, .linea, .campo input, .campo textarea { background: #1e1729; }
+  .cabecera { background: color-mix(in srgb, var(--papel) 86%, transparent); }
+  .idioma { color: var(--morado-claro); }
+  .nav a { color: var(--tinta); }
+  .nav a[aria-current='page'] { color: #fff; }
+  .dato__valor, .hito__ano, .turnos tbody th { color: var(--morado-claro); }
+  .boton--fantasma { color: var(--morado-claro); }
+  .seccion--emergencia { background: #1b1426; }
+}

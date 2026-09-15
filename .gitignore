@@ -1,0 +1,18 @@
+node_modules/
+dist/
+preview/
+.DS_Store
+*.log
+.env
+.env.*
+
+# Salida del generador: las paginas se escriben desde content/, no a mano.
+/*.html
+/en/
+public/sitemap.xml
+public/robots.txt
+public/llms.txt
+public/llms-full.txt
+public/ai.txt
+public/og/eco1516.png
+src/styles/marca.css

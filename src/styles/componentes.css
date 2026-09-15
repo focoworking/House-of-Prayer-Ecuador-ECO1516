@@ -1,0 +1,183 @@
+/* Cabecera, navegación, botones, barra de acción y pie. */
+
+.cabecera {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.75rem var(--gutter);
+  padding-top: calc(0.75rem + env(safe-area-inset-top, 0px));
+  background: color-mix(in srgb, var(--papel) 88%, transparent);
+  backdrop-filter: saturate(140%) blur(10px);
+  border-bottom: 1px solid var(--linea);
+}
+
+.marca {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--morado);
+  text-decoration: none;
+  margin-right: auto;
+}
+.logo { width: 2.4rem; height: 2.65rem; flex: none; }
+.marca__texto { display: grid; line-height: 1.05; }
+.marca__texto strong {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  letter-spacing: 0.12em;
+  color: var(--morado-oscuro);
+}
+.marca__texto small {
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--tinta) 62%, transparent);
+}
+
+.nav ul {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.92rem;
+}
+.nav a {
+  text-decoration: none;
+  color: var(--tinta);
+  padding: 0.35rem 0;
+  border-bottom: 2px solid transparent;
+}
+.nav a:hover { border-color: var(--morado-claro); }
+.nav a[aria-current='page'] { border-color: var(--morado); color: var(--morado-oscuro); }
+
+/* La única pestaña que se colorea es la de ayuda: en un sitio cuya promesa
+   es responder a cualquier hora, esa es la acción que no puede perderse. */
+.nav__destacado {
+  background: var(--celeste);
+  color: #06323f !important;
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem !important;
+  border-bottom: 0 !important;
+  font-weight: 600;
+}
+.nav__destacado:hover { background: var(--celeste-claro); }
+
+.idioma {
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  color: var(--morado);
+}
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.5rem;
+  border: 1px solid var(--morado);
+  border-radius: 999px;
+  background: var(--morado);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+.boton:hover { background: var(--morado-oscuro); border-color: var(--morado-oscuro); color: #fff; transform: translateY(-1px); }
+.boton--fantasma { background: transparent; color: var(--morado-oscuro); }
+.boton--fantasma:hover { background: color-mix(in srgb, var(--morado) 10%, transparent); color: var(--morado-oscuro); }
+
+.acciones { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.75rem 0 0; }
+
+/* Barra de acción: fija abajo en móvil, discreta arriba en escritorio. */
+.barra-accion {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 50;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.6rem var(--gutter);
+  padding-bottom: calc(0.6rem + env(safe-area-inset-bottom, 0px));
+  background: var(--morado-oscuro);
+  box-shadow: 0 -8px 24px -18px #000;
+}
+.barra-accion a {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.8rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.92rem;
+  /* En dos líneas el botón deja de parecer un botón: antes que partirse,
+     que se encoja la letra. */
+  white-space: nowrap;
+}
+.barra-accion__principal { background: var(--celeste); color: #06323f; }
+.barra-accion__principal:hover { background: var(--celeste-claro); color: #06323f; }
+.barra-accion__secundario {
+  background: transparent;
+  color: #fff;
+  border: 1px solid color-mix(in srgb, #fff 45%, transparent);
+  flex: 0 1 auto;
+}
+.barra-accion__secundario:hover { background: color-mix(in srgb, #fff 12%, transparent); color: #fff; }
+
+.pie {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr);
+  gap: 2.5rem var(--gutter);
+  padding: var(--aire) var(--gutter) 3rem;
+  background: var(--morado-oscuro);
+  color: color-mix(in srgb, #fff 86%, transparent);
+}
+.pie .logo { width: 3rem; height: 3.3rem; color: var(--morado-claro); }
+.pie h2 {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--morado-claro);
+  margin-bottom: 0.9rem;
+}
+.pie a { color: #fff; }
+.pie address { font-style: normal; }
+.pie__nombre { font-family: var(--serif); font-size: 1.25rem; color: #fff; margin: 0.8rem 0 0.2rem; }
+.pie__lema { color: var(--morado-claro); }
+.pie__enlaces { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+.pie__enlaces a { text-decoration: none; }
+.pie__enlaces a:hover { text-decoration: underline; }
+.pie__legal {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding-top: 2rem;
+  border-top: 1px solid color-mix(in srgb, #fff 16%, transparent);
+  font-size: 0.82rem;
+  color: color-mix(in srgb, #fff 62%, transparent);
+}
+
+.redes { display: flex; gap: 0.6rem; list-style: none; margin: 1rem 0 0; padding: 0; }
+.redes a {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid color-mix(in srgb, #fff 28%, transparent);
+  border-radius: 50%;
+  color: #fff;
+}
+.redes a:hover { background: var(--morado); border-color: var(--morado); }
+.redes svg { width: 1.1rem; height: 1.1rem; }

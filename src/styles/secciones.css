@@ -1,0 +1,364 @@
+/* Cada tipo de sección que sabe dibujar scripts/render.mjs. */
+
+.hero,
+.seccion {
+  max-width: var(--ancho);
+  margin-inline: auto;
+  padding: var(--aire) var(--gutter);
+}
+.seccion + .seccion { padding-top: 0; }
+
+/* --- Hero ---------------------------------------------------------- */
+.hero { padding-top: clamp(2.5rem, 7vw, 5rem); }
+.hero__eyebrow {
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--morado);
+  margin-bottom: 1.1rem;
+}
+.hero__titulo { font-size: clamp(2.25rem, 6.2vw, 4.1rem); }
+.hero__lead {
+  font-size: clamp(1.1rem, 1rem + 0.5vw, 1.35rem);
+  max-width: 46ch;
+  margin-top: 1.5rem;
+  color: color-mix(in srgb, var(--tinta) 82%, transparent);
+}
+.hero__nota {
+  margin-top: 1.25rem;
+  font-size: 0.88rem;
+  color: color-mix(in srgb, var(--tinta) 60%, transparent);
+}
+.hero__vivo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1.5rem;
+  padding: 0.4rem 0.9rem 0.4rem 0.7rem;
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: var(--morado-oscuro);
+  background: var(--suave);
+}
+.punto {
+  width: 0.55rem; height: 0.55rem;
+  border-radius: 50%;
+  background: var(--celeste);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--celeste) 70%, transparent);
+  animation: latido 2.4s ease-out infinite;
+}
+@keyframes latido {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--celeste) 60%, transparent); }
+  70% { box-shadow: 0 0 0 0.7rem transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+/* La variante de urgencia no grita: cambia el fondo y sube el contraste del
+   botón. Alguien en crisis no necesita rojo, necesita encontrar el botón. */
+.hero--urgent {
+  max-width: none;
+  background: linear-gradient(170deg, var(--morado-oscuro), var(--morado));
+  color: #fff;
+}
+.hero--urgent > * { max-width: var(--ancho); margin-inline: auto; }
+/* El ancho de línea manda sobre el ancho del bloque: un párrafo de 120
+   caracteres no se lee, y esta es justo la página que hay que leer rápido. */
+.hero--urgent .hero__lead { max-width: min(var(--ancho), 52ch); }
+.hero--urgent .hero__titulo,
+.hero--urgent .hero__eyebrow { color: #fff; }
+.hero--urgent .hero__lead { color: color-mix(in srgb, #fff 88%, transparent); }
+.hero--urgent .hero__nota { color: color-mix(in srgb, #fff 70%, transparent); }
+.hero--urgent .boton { background: var(--celeste); border-color: var(--celeste); color: #06323f; }
+.hero--urgent .boton:hover { background: var(--celeste-claro); border-color: var(--celeste-claro); color: #06323f; }
+.hero--urgent .boton--fantasma { background: transparent; color: #fff; border-color: color-mix(in srgb, #fff 55%, transparent); }
+.hero--urgent .boton--fantasma:hover { background: color-mix(in srgb, #fff 14%, transparent); color: #fff; }
+
+/* --- Encabezados de sección ---------------------------------------- */
+.seccion__titulo { font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem); }
+.seccion__lead {
+  margin-top: 0.9rem;
+  max-width: 54ch;
+  color: color-mix(in srgb, var(--tinta) 75%, transparent);
+}
+.seccion__titulo + *:not(.seccion__lead),
+.seccion__lead + * { margin-top: 2.25rem; }
+.nota { font-size: 0.88rem; color: color-mix(in srgb, var(--tinta) 62%, transparent); margin-top: 1.25rem; }
+.texto-grande { font-size: clamp(1.15rem, 1rem + 0.7vw, 1.5rem); max-width: 60ch; font-family: var(--serif); }
+
+/* --- Datos ---------------------------------------------------------- */
+.datos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 1.5rem;
+  margin: 0;
+  padding: 1.75rem 0;
+  border-block: 1px solid var(--linea);
+}
+.dato__valor { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.2rem); color: var(--morado); line-height: 1; }
+.dato__label { margin: 0.5rem 0 0; font-size: 0.88rem; color: color-mix(in srgb, var(--tinta) 68%, transparent); }
+
+/* --- Tarjetas ------------------------------------------------------- */
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.6rem;
+  background: #fff;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+.tarjeta__titulo { font-size: 1.2rem; }
+.tarjeta__cta { margin-top: auto; font-weight: 600; }
+
+/* --- Filas numeradas ------------------------------------------------ */
+.filas { list-style: none; margin: 0; padding: 0; display: grid; }
+.fila {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: 1rem;
+  padding: 1.6rem 0;
+  border-top: 1px solid var(--linea);
+}
+.fila:last-child { border-bottom: 1px solid var(--linea); }
+.fila__n { font-family: var(--serif); color: var(--morado-claro); font-size: 1.1rem; }
+.fila__titulo { font-size: 1.15rem; margin-bottom: 0.4rem; }
+
+/* --- Pasos ---------------------------------------------------------- */
+.pasos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: paso;
+}
+.paso { padding-top: 1.25rem; border-top: 3px solid var(--celeste); }
+.paso__n {
+  display: grid;
+  place-items: center;
+  width: 2rem; height: 2rem;
+  border-radius: 50%;
+  background: var(--morado);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+.paso__titulo { font-size: 1.1rem; margin-bottom: 0.4rem; }
+
+/* --- Split ---------------------------------------------------------- */
+.split { display: grid; grid-template-columns: 1fr 1.2fr; gap: 2rem var(--gutter); align-items: start; }
+.marcas { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; gap: 0.6rem; }
+.marcas li { padding-left: 1.6rem; position: relative; }
+.marcas li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0.62em;
+  width: 0.6rem; height: 0.6rem;
+  border-radius: 50%;
+  background: var(--celeste);
+}
+
+/* --- Lista marcada --------------------------------------------------- */
+.lista-marcada { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; max-width: 60ch; }
+.lista-marcada li { padding-left: 2rem; position: relative; }
+.lista-marcada li::before {
+  content: '✕';
+  position: absolute;
+  left: 0;
+  color: var(--morado-claro);
+  font-weight: 700;
+}
+.seccion--lista .lista-marcada li::before { content: '✓'; color: var(--celeste); }
+
+/* --- Historia -------------------------------------------------------- */
+.historia { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.hito {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  gap: 1rem var(--gutter);
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--linea);
+  position: relative;
+}
+.hito:last-child { border-bottom: 1px solid var(--linea); }
+.hito__ano {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--morado);
+  margin: 0;
+}
+.hito__titulo { font-size: 1.15rem; margin-bottom: 0.4rem; }
+.hito__texto { margin: 0; color: color-mix(in srgb, var(--tinta) 78%, transparent); }
+
+/* --- Turnos ---------------------------------------------------------- */
+.tabla-scroll { overflow-x: auto; }
+.turnos { width: 100%; border-collapse: collapse; font-size: 0.95rem; min-width: 30rem; }
+.turnos th, .turnos td { text-align: left; padding: 0.75rem 1rem; border-bottom: 1px solid var(--linea); }
+.turnos thead th {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--tinta) 60%, transparent);
+}
+.turnos tbody th { font-family: var(--serif); font-size: 1.1rem; color: var(--morado); font-weight: 600; width: 6rem; }
+.turnos tbody tr:hover { background: var(--suave); }
+
+/* --- Eventos --------------------------------------------------------- */
+.eventos { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+.evento {
+  padding: 1.6rem;
+  border: 1px solid var(--linea);
+  border-left: 4px solid var(--celeste);
+  border-radius: var(--radio);
+  background: #fff;
+}
+.evento__fecha {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--morado);
+  margin-bottom: 0.5rem;
+}
+.evento__titulo { font-size: 1.3rem; margin-bottom: 0.6rem; }
+.evento__meta { margin: 0.6rem 0 0; font-size: 0.88rem; color: color-mix(in srgb, var(--tinta) 62%, transparent); }
+
+/* --- Preguntas ------------------------------------------------------- */
+.preguntas { display: grid; gap: 1.75rem; max-width: 62ch; }
+.pregunta__q { font-size: 1.15rem; margin-bottom: 0.5rem; }
+.pregunta__a { margin: 0; color: color-mix(in srgb, var(--tinta) 82%, transparent); }
+
+/* --- Enlaces --------------------------------------------------------- */
+.enlaces { list-style: none; margin: 0; padding: 0; display: grid; }
+.enlaces a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--linea);
+  text-decoration: none;
+  color: var(--tinta);
+}
+.enlaces li:last-child a { border-bottom: 1px solid var(--linea); }
+.enlaces a:hover { color: var(--morado); }
+.enlaces small { color: color-mix(in srgb, var(--tinta) 55%, transparent); }
+
+/* --- Cita ------------------------------------------------------------ */
+.cita { margin: 0; text-align: center; max-width: 42ch; margin-inline: auto; }
+.cita blockquote { margin: 0; font-family: var(--serif); font-size: clamp(1.4rem, 1.1rem + 1.4vw, 2.1rem); color: var(--morado-oscuro); line-height: 1.25; }
+.cita figcaption { margin-top: 1rem; font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--morado); }
+
+/* --- Prosa ----------------------------------------------------------- */
+.prosa { max-width: 62ch; }
+.prosa__titulo { font-size: 1.35rem; margin: 2.5rem 0 0.75rem; }
+.prosa__titulo:first-child { margin-top: 0; }
+
+/* --- Formulario ------------------------------------------------------ */
+.formulario { display: grid; gap: 1.1rem; max-width: 34rem; }
+.campo { display: grid; gap: 0.4rem; margin: 0; }
+.campo label { font-size: 0.9rem; font-weight: 600; color: var(--morado-oscuro); }
+.campo input, .campo textarea {
+  font: inherit;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  background: #fff;
+  color: inherit;
+}
+.campo textarea { resize: vertical; }
+.campo--envio { margin-top: 0.5rem; }
+
+/* --- Emergencia ------------------------------------------------------ */
+.seccion--emergencia {
+  max-width: none;
+  background: var(--suave);
+  border-block: 1px solid var(--linea);
+}
+.seccion--emergencia > * { max-width: var(--ancho); margin-inline: auto; }
+.lineas {
+  list-style: none;
+  margin: 2rem auto 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+}
+.linea { padding: 1.4rem; background: #fff; border: 1px solid var(--linea); border-radius: var(--radio); }
+.linea__nombre { font-weight: 600; margin-bottom: 0.3rem; }
+.linea__numero { font-family: var(--serif); font-size: 1.9rem; margin: 0.2rem 0; }
+.linea__numero a { text-decoration: none; }
+.linea__horario { font-size: 0.85rem; color: var(--morado); margin-bottom: 0.4rem; }
+.linea__nota { font-size: 0.88rem; color: color-mix(in srgb, var(--tinta) 65%, transparent); margin: 0; }
+
+/* --- Ficha de contacto ----------------------------------------------- */
+.ficha { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1.5rem; }
+.ficha h3 {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--morado);
+  margin-bottom: 0.7rem;
+}
+.ficha address { font-style: normal; }
+.ficha__destacado { font-family: var(--serif); font-size: 1.6rem; }
+.ficha__destacado a { text-decoration: none; }
+
+/* --- CTA -------------------------------------------------------------- */
+.seccion--cta { max-width: none; }
+.cta {
+  max-width: var(--ancho);
+  margin-inline: auto;
+  padding: clamp(2.5rem, 6vw, 4rem);
+  background: linear-gradient(150deg, var(--morado-oscuro), var(--morado));
+  color: #fff;
+  border-radius: calc(var(--radio) * 2);
+  text-align: center;
+}
+.cta__titulo { color: #fff; font-size: clamp(1.7rem, 1.2rem + 2vw, 2.6rem); margin-bottom: 1rem; }
+.cta p { max-width: 46ch; margin-inline: auto; color: color-mix(in srgb, #fff 85%, transparent); }
+.cta .acciones { justify-content: center; }
+.cta .boton { background: var(--celeste); border-color: var(--celeste); color: #06323f; }
+.cta .boton:hover { background: var(--celeste-claro); border-color: var(--celeste-claro); color: #06323f; }
+.cta .boton--fantasma { background: transparent; color: #fff; border-color: color-mix(in srgb, #fff 55%, transparent); }
+.cta .boton--fantasma:hover { background: color-mix(in srgb, #fff 14%, transparent); color: #fff; }
+
+/* --- Estado: bloque que se ora ahora (lo marca src/js) ---------------- */
+.turnos__ahora { background: color-mix(in srgb, var(--celeste) 14%, transparent); }
+.turnos__ahora th { color: var(--morado-oscuro); }
+.ahora {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: var(--celeste);
+  color: #06323f;
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+/* --- Revelado (solo si el visitante no pidió menos movimiento) -------- */
+.con-revelado .seccion,
+.con-revelado .hero {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.con-revelado .seccion.visible,
+.con-revelado .hero.visible { opacity: 1; transform: none; }
