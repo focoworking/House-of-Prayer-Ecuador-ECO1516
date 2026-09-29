@@ -197,6 +197,28 @@ sitio, `hernanrobalino.com`, se declara como `sameAs` en los datos
 estructurados: eso le dice a un buscador que ECO y ese sitio son la misma
 obra, no dos ministerios sueltos con nombres parecidos.
 
+## La campaña
+
+`content/campana.js` gobierna la captación, y hace cumplir por diseño dos
+decisiones que están razonadas en [`CASO.md`](./CASO.md):
+
+- **La meta pública es la fase uno, $85.000, no los $200.000 del proyecto.**
+  Una cifra que se puede cumplir genera el impulso de la siguiente; una
+  enorme se estanca en público y mata la campaña.
+- **El contador no se publica en cero.** `campana.recaudado` empieza en `null`
+  y, mientras lo esté, la sección `meta` muestra el objetivo pero **ninguna
+  barra**. Un contador en cero dice «esto no arranca». Se llena cuando la fase
+  silenciosa haya comprometido entre la mitad y dos tercios, y se actualiza
+  cada mes.
+
+Los niveles de siembra van en el mismo archivo. El metro cuadrado a $1.000 no
+es un invento de campaña: sale de los propios números del proyecto —200 m² por
+$1.000 el metro— y por eso se cuenta solo.
+
+Las cifras del país (`contexto`) **siempre llevan su fuente enlazada** y nunca
+van acompañadas de fotos de víctimas. Sin fuente esto es propaganda, y una
+cifra que no resiste una pregunta cuesta más que todo lo que recaudó.
+
 ## El enlace de dar
 
 `site.giveUrl` en `content/site.js` es la **única URL del sitio que mueve

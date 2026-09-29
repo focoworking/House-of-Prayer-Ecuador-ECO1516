@@ -10,6 +10,7 @@
  *     por `esc`.
  */
 import { site, ui, emergencia } from '../content/site.js'
+import { campana, niveles as nivelesCampana, contexto } from '../content/campana.js'
 import { eventos as eventosData } from '../content/datos.js'
 import { pathOf, pages } from '../content/pages.js'
 
@@ -141,6 +142,79 @@ const bloques = {
       <blockquote><p>${esc(T(s.text, lang))}</p></blockquote>
       <figcaption>${esc(T(s.author, lang))}</figcaption>
     </figure></section>`
+  },
+
+  /* La meta de la campaña. Dibuja la barra solo si hay una cifra comprometida
+     que publicar: un contador en cero dice «esto no arranca» y hunde
+     precisamente lo que venía a levantar. */
+  meta(s, lang) {
+    const dolares = (n) => `$${n.toLocaleString('es-EC')}`
+    const hay = typeof campana.recaudado === 'number' && campana.recaudado > 0
+    const porcentaje = hay ? Math.min(100, Math.round((campana.recaudado / campana.meta) * 100)) : 0
+
+    const barra = hay
+      ? `<div class="meta__barra">
+           <div class="meta__relleno" style="width:${porcentaje}%"></div>
+         </div>
+         <p class="meta__cifras">
+           <strong>${esc(dolares(campana.recaudado))}</strong>
+           ${esc(T({ es: 'de', en: 'of' }, lang))} ${esc(dolares(campana.meta))}
+           <span>· ${porcentaje}%</span>
+         </p>
+         ${campana.actualizado ? `<p class="nota">${esc(T(ui.updated, lang))}: ${esc(campana.actualizado)}</p>` : ''}`
+      : `<p class="meta__cifras"><strong>${esc(dolares(campana.meta))}</strong>
+           ${esc(T({ es: 'para la primera fase', en: 'for the first phase' }, lang))}</p>`
+
+    return wrap(
+      'meta',
+      s.title,
+      `${head(s.title, s.lead, lang)}<div class="meta">${barra}</div>${
+        s.action ? actions([{ ...s.action, kind: 'primary', external: true }], lang) : ''
+      }`,
+      lang
+    )
+  },
+
+  /* La escalera de siembra. Cada nivel dice qué compra en concreto, porque
+     «$25» no significa nada y «un saco de cemento» sí. */
+  niveles(s, lang) {
+    const items = nivelesCampana
+      .map(
+        (n) => `<li class="nivel${n.destacado ? ' nivel--destacado' : ''}">
+          <p class="nivel__monto">$${n.monto.toLocaleString('es-EC')}</p>
+          <h3 class="nivel__nombre">${esc(T(n.nombre, lang))}</h3>
+          <p class="nivel__texto">${esc(T(n.texto, lang))}</p>
+          <p class="nivel__cta"><a href="${esc(site.giveUrl)}" target="_blank" rel="noopener">${esc(
+            T({ es: 'Sembrar', en: 'Give' }, lang)
+          )}</a></p>
+        </li>`
+      )
+      .join('')
+    return wrap(
+      'niveles',
+      s.title,
+      `${head(s.title, s.lead, lang)}<ul class="niveles">${items}</ul>
+       ${s.note ? `<p class="nota">${esc(T(s.note, lang))}</p>` : ''}`,
+      lang
+    )
+  },
+
+  /* Las cifras del país. Cada una con su fuente enlazada: sin fuente esto es
+     propaganda, y una cifra que no resiste una pregunta cuesta más que todo
+     lo que recaudó. */
+  contexto(s, lang) {
+    const items = contexto
+      .map(
+        (c) => `<li class="cifra">
+          <p class="cifra__valor">${esc(c.valor)}</p>
+          <p class="cifra__label">${esc(T(c.label, lang))}</p>
+          <p class="cifra__fuente"><a href="${esc(c.fuente)}" target="_blank" rel="noopener">${esc(
+            T({ es: 'Fuente', en: 'Source' }, lang)
+          )}</a></p>
+        </li>`
+      )
+      .join('')
+    return wrap('contexto', s.title, `${head(s.title, s.lead, lang)}<ul class="cifras">${items}</ul>`, lang)
   },
 
   stats(s, lang) {

@@ -501,3 +501,79 @@
 }
 .con-revelado .seccion.visible,
 .con-revelado .hero.visible { opacity: 1; transform: none; }
+
+/* --- Meta de la campaña ------------------------------------------------- */
+.meta { max-width: 36rem; }
+.meta__barra {
+  height: 0.65rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--morado) 14%, transparent);
+  overflow: hidden;
+}
+.meta__relleno { height: 100%; background: var(--celeste); border-radius: 999px; }
+.meta__cifras {
+  margin: 1rem 0 0;
+  font-family: var(--display);
+  font-size: clamp(1.4rem, 1.1rem + 1.2vw, 2rem);
+  font-weight: 300;
+  color: var(--tinta);
+}
+.meta__cifras strong { font-weight: 400; color: var(--morado-oscuro); }
+.meta__cifras span { color: var(--tinta-suave); }
+
+/* --- Niveles de siembra -------------------------------------------------- */
+.niveles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nivel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.6rem;
+  border: 1px solid var(--linea-suave);
+  border-radius: var(--radio);
+  background: var(--papel);
+}
+/* Un solo nivel se destaca —el metro cuadrado—, porque una escalera donde
+   todos los peldaños gritan no guía a nadie. */
+.nivel--destacado { border-color: var(--celeste); background: var(--celeste-claro); }
+.nivel__monto {
+  font-family: var(--display);
+  font-size: 1.9rem;
+  font-weight: 300;
+  color: var(--morado-oscuro);
+  margin: 0;
+}
+.nivel__nombre { font-size: 1.02rem; font-weight: 400; margin: 0; }
+.nivel__texto { font-size: 0.9rem; color: var(--tinta-suave); margin: 0; }
+.nivel__cta { margin: auto 0 0; padding-top: 0.6rem; font-weight: 600; }
+.nivel__cta a { text-decoration: none; color: var(--morado); }
+.nivel__cta a:hover { text-decoration: underline; }
+
+/* --- Cifras del país ------------------------------------------------------ */
+.cifras {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 2rem 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 2.25rem 0 0;
+  border-top: 1px solid var(--linea-suave);
+}
+.cifra__valor {
+  font-family: var(--display);
+  font-size: clamp(2.6rem, 5vw, 3.8rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--morado-oscuro);
+  margin: 0;
+}
+.cifra__label { margin: 0.7rem 0 0; color: var(--tinta-suave); }
+.cifra__fuente { margin: 0.6rem 0 0; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.cifra__fuente a { color: var(--tinta-suave); }
+.cifra__fuente a:hover { color: var(--morado); }

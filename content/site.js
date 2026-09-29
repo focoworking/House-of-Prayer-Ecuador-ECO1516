@@ -256,6 +256,7 @@ export const nav = [
 ]
 
 export const footerNav = [
+  { slug: 'desde-el-exterior', label: t('Dar desde el exterior', 'Giving from abroad') },
   { slug: 'montes', label: t('Desde los montes', 'From the mountains') },
   { slug: 'formacion', label: t('Formación', 'Training') },
   { slug: 'recursos', label: t('Recursos', 'Resources') },

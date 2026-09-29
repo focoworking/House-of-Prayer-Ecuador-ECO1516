@@ -70,9 +70,31 @@ export const inicio = {
       ],
     },
     {
+      type: 'contexto',
+      title: t('Por qué, y por qué ahora', 'Why, and why now'),
+      lead: t(
+        'Estas cifras son públicas y llevan su fuente. No las acompañamos de fotos: la dignidad de quien sufre no es material de campaña.',
+        'These figures are public and carry their source. We do not pair them with photographs: the dignity of those who suffer is not campaign material.'
+      ),
+    },
+    {
       type: 'lead',
       title: t('Qué es ECO', 'What ECO is'),
       text: queEs,
+    },
+    {
+      type: 'split',
+      title: t('Lo que falta', 'What is missing'),
+      text: t(
+        'No pedimos para empezar algo: pedimos para que no se detenga. Desde 2012 la oración se sostiene en salones prestados y agendas ajenas. El cuarto de oración son 200 metros cuadrados al norte de Quito, a mil dólares el metro. Doscientos metros, doscientas familias, y el altar tiene casa.',
+        'We are not asking to start something: we are asking so it does not stop. Since 2012 the prayer has been held in borrowed halls and other people’s schedules. The prayer room is 200 square metres in northern Quito, at a thousand dollars each. Two hundred metres, two hundred families, and the altar has a home.'
+      ),
+      items: [
+        t('Primera fase abierta: $85.000 para cimientos y paredes', 'First phase open: $85,000 for foundations and walls'),
+        t('Un metro cuadrado, $1.000, con tu nombre en el registro de fundadores', 'One square metre, $1,000, with your name in the founders’ register'),
+        t('Cada fase se construye cuando está cubierta', 'Each phase is built once it is covered'),
+      ],
+      action: { label: t('Ver cómo sembrar', 'See how to give'), href: { es: '/dar', en: '/en/give' } },
     },
     {
       type: 'scripture',
@@ -203,6 +225,7 @@ export const inicio = {
       actions: [
         { label: t('Escribir por WhatsApp', 'Message on WhatsApp'), href: wa('Hola, quiero orar con ECO.'), kind: 'primary', external: true },
         { label: t('Sembrar en el cuarto de oración', 'Give towards the prayer room'), href: site.giveUrl, kind: 'ghost', external: true },
+        { label: t('Vivo fuera de Ecuador', 'I live outside Ecuador'), href: { es: '/desde-el-exterior', en: '/en/from-abroad' }, kind: 'ghost' },
       ],
     },
   ],
