@@ -202,7 +202,7 @@ export const inicio = {
       ),
       actions: [
         { label: t('Escribir por WhatsApp', 'Message on WhatsApp'), href: wa('Hola, quiero orar con ECO.'), kind: 'primary', external: true },
-        { label: t('Ver el proyecto', 'See the project'), href: { es: '/proyecto', en: '/en/prayer-room-project' }, kind: 'ghost' },
+        { label: t('Sembrar en el cuarto de oración', 'Give towards the prayer room'), href: site.giveUrl, kind: 'ghost', external: true },
       ],
     },
   ],

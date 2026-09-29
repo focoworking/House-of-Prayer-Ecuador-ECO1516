@@ -44,9 +44,11 @@ export const site = {
     '«Mi casa, casa de oración será llamada» (Mt. 21:13)',
     '“My house shall be called a house of prayer” (Mt. 21:13)'
   ),
-  // TODO ECO1516: confirmar el año de inicio del movimiento. El documento de
-  // la casa no lo dice y esta fecha viene del encargo inicial.
-  founded: 2011,
+  /* ECO comenzó en octubre de 2012 en Quito. Lo confirman el sitio de sus
+     fundadores, hernanrobalino.com, y las fichas de ministerios que los
+     reciben como invitados. */
+  founded: 2012,
+  foundedMonth: t('octubre de 2012', 'October 2012'),
   origin: 'https://www.eco1516.org',
 
   /* ------------------------------------------------------------------ *
@@ -110,7 +112,29 @@ export const site = {
   ],
 
   streamUrl: 'https://www.youtube.com/@eco1516/live',
-  giveUrl: '/dar',
+
+  /* El enlace de recaudación del Banco Pichincha. Vive aquí y en un solo
+     sitio a propósito: es la única URL del sitio que mueve dinero, y el día
+     que cambie basta con tocar esta línea para que cambien todos los botones
+     de dar, en las dos lenguas. */
+  giveUrl: 'https://envios.pichincha.com/l/CL1AkW6w',
+
+  /* El sitio de los pastores fundadores. Es la otra mitad de la misma
+     entidad en la web, así que se declara como `sameAs` en los datos
+     estructurados: le dice a un buscador que no son dos organizaciones. */
+  founderSite: 'https://www.hernanrobalino.com',
+
+  /* Los pastores fundadores. El movimiento nació de su congregación y su
+     nombre es lo que la gente busca; omitirlo deja al sitio sin la persona
+     que lo respalda, que en una casa de oración es la señal de confianza que
+     más pesa. */
+  fundadores: {
+    nombres: 'Hernán y Janeth Robalino',
+    rol: t('Pastores fundadores', 'Founding pastors'),
+    congregacion: 'El Sendero de la Vida Cristiana',
+    ciudad: 'Quito',
+    sitio: 'https://www.hernanrobalino.com',
+  },
 
   social: [
     { label: 'YouTube', icon: 'youtube', url: 'https://www.youtube.com/@eco1516' },

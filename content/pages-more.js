@@ -39,6 +39,20 @@ export const nosotros = {
     },
     { type: 'lead', title: t('Qué es ECO', 'What ECO is'), text: queEs },
     {
+      type: 'split',
+      title: t('Cómo empezó', 'How it began'),
+      text: t(
+        `ECO nació en ${site.foundedMonth.es} en Quito. Hernán y Janeth Robalino, pastores fundadores de la congregación El Sendero de la Vida Cristiana, recibieron del Señor la carga por el llamado sacerdotal de la Iglesia y por la oración unida del pueblo de Dios como su medio de gobierno. De ahí salió el movimiento, y de ahí sale su forma: no una obra propia, sino congregaciones distintas sosteniendo un mismo altar.`,
+        `ECO began in ${site.foundedMonth.en} in Quito. Hernán and Janeth Robalino, founding pastors of the congregation El Sendero de la Vida Cristiana, received from the Lord a burden for the priestly calling of the Church and for the united prayer of God’s people as His means of government. The movement came out of that, and so did its shape: not a work of its own, but different congregations holding one altar.`
+      ),
+      items: [
+        t('Pastores fundadores: Hernán y Janeth Robalino', 'Founding pastors: Hernán and Janeth Robalino'),
+        t('Congregación de origen: El Sendero de la Vida Cristiana, Quito', 'Home congregation: El Sendero de la Vida Cristiana, Quito'),
+        t('Desde octubre de 2012, creciendo con más pastores cada año', 'Since October 2012, growing with more pastors each year'),
+      ],
+      action: { label: t('Sitio de los pastores', 'The pastors’ site'), href: site.founderSite, external: true },
+    },
+    {
       type: 'rows',
       title: t('Los cuatro objetivos', 'The four aims'),
       items: objetivos.map((texto, i) => ({
@@ -116,7 +130,7 @@ export const proyectoPagina = {
       title: t('El lugar de reposo de Dios', 'The resting place of God'),
       lead: proyecto.descripcion,
       actions: [
-        { label: t('Sembrar en el proyecto', 'Give towards the project'), href: { es: '/dar', en: '/en/give' }, kind: 'primary' },
+        { label: t('Sembrar en el proyecto', 'Give towards the project'), href: site.giveUrl, kind: 'primary', external: true },
         { label: t('Hablar con el equipo', 'Talk to the team'), href: { es: '/contacto', en: '/en/contact' }, kind: 'ghost' },
       ],
       verse: {
@@ -171,7 +185,8 @@ export const proyectoPagina = {
       title: t('Te invitamos a ser parte de este proyecto', 'We invite you to be part of this project'),
       text: t('Agradecemos tus donaciones y tus oraciones.', 'We are grateful for your giving and your prayers.'),
       actions: [
-        { label: t('Quiero sembrar', 'I want to give'), href: { es: '/dar', en: '/en/give' }, kind: 'primary' },
+        { label: t('Dar ahora', 'Give now'), href: site.giveUrl, kind: 'primary', external: true },
+        { label: t('Ver a dónde va', 'See where it goes'), href: { es: '/dar', en: '/en/give' }, kind: 'ghost' },
       ],
     },
   ],
@@ -308,7 +323,7 @@ export const justicia = {
       ),
       actions: [
         { label: t('Escribir', 'Write'), href: { es: '/contacto', en: '/en/contact' }, kind: 'primary' },
-        { label: t('Dar', 'Give'), href: { es: '/dar', en: '/en/give' }, kind: 'ghost' },
+        { label: t('Dar', 'Give'), href: site.giveUrl, kind: 'ghost', external: true },
       ],
     },
   ],
@@ -401,7 +416,10 @@ export const dar = {
         'Nada de lo que hacemos se cobra: ni la oración, ni los entrenamientos, ni la ayuda de los programas de justicia. El movimiento se sostiene con la siembra de personas e iglesias. Nadie compra un lugar delante de Dios: lo que das sostiene a los que sirven, no tu acceso a Él.',
         'Nothing we do is charged for: not prayer, not the training, not the help given through the justice programmes. The movement is sustained by the giving of people and churches. Nobody buys a place before God: what you give sustains those who serve, not your access to Him.'
       ),
-      actions: [{ label: t('Cómo dar', 'How to give'), href: { es: '/contacto', en: '/en/contact' }, kind: 'primary' }],
+      actions: [
+        { label: t('Dar ahora', 'Give now'), href: site.giveUrl, kind: 'primary', external: true },
+        { label: t('Hablar con el equipo', 'Talk to the team'), href: { es: '/contacto', en: '/en/contact' }, kind: 'ghost' },
+      ],
     },
     {
       type: 'rows',
@@ -446,6 +464,18 @@ export const dar = {
         t('No vendemos, cedemos ni intercambiamos datos de donantes.', 'We do not sell, share or trade donor data.'),
         t('Puedes cancelar un aporte periódico con un mensaje, sin preguntas.', 'You can cancel a recurring gift with one message, no questions asked.'),
         t('Las cifras del proyecto son aproximadas y se revisan: si cambian, se publican aquí.', 'The project figures are approximate and reviewed: if they change, they are published here.'),
+      ],
+    },
+    {
+      type: 'cta',
+      title: t('Dar ahora', 'Give now'),
+      text: t(
+        'El enlace abre la plataforma de recaudación del Banco Pichincha. Puedes dar una vez o repetirlo cuando quieras; no queda ninguna suscripción activa.',
+        'The link opens Banco Pichincha’s collection platform. You can give once or come back whenever you want; no subscription is left running.'
+      ),
+      actions: [
+        { label: t('Dar por Banco Pichincha', 'Give via Banco Pichincha'), href: site.giveUrl, kind: 'primary', external: true },
+        { label: t('Prefiero coordinarlo con alguien', 'I would rather arrange it with someone'), href: { es: '/contacto', en: '/en/contact' }, kind: 'ghost' },
       ],
     },
     { type: 'faq', title: t('Sobre dar', 'About giving'), items: [preguntas[6]], schema: true },
@@ -496,6 +526,12 @@ export const recursos = {
         { label: t('Preguntas frecuentes', 'Frequently asked questions'), note: t('Respuestas cortas', 'Short answers'), href: { es: '/preguntas', en: '/en/faq' } },
         { label: t('El proyecto del cuarto de oración', 'The prayer room project'), note: t('Fases y costos', 'Phases and costs'), href: { es: '/proyecto', en: '/en/prayer-room-project' } },
         { label: t('Canal de YouTube', 'YouTube channel'), note: t('Transmisiones y enseñanzas', 'Streams and teaching'), href: site.streamUrl, external: true },
+        {
+          label: t('hernanrobalino.com', 'hernanrobalino.com'),
+          note: t('El sitio de los pastores fundadores', 'The founding pastors’ site'),
+          href: site.founderSite,
+          external: true,
+        },
       ],
     },
   ],

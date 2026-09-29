@@ -173,8 +173,6 @@ posición y hay que sustituirlos por los reales:
   no esté confirmado, el sitio **no promete atención 24 horas**: dice que
   respondemos, no que contestamos al instante.
 - Usuarios reales de YouTube, Instagram, Facebook y Spotify.
-- El año de inicio del movimiento (`founded`): el documento de la casa no lo
-  dice y la fecha actual viene del encargo inicial.
 - El calendario real de la semana de oración y las próximas convocatorias.
   `content/datos.js` tiene `bloques` y `eventos` vacíos a propósito, y las
   secciones `schedule` y `events` del renderizador los dibujan en cuanto se
@@ -190,6 +188,23 @@ el sitio, sus datos estructurados y `llms.txt` lo dicen así.
 El NAP —nombre, dirección, teléfono— tiene que quedar **idéntico** aquí, en
 Google Business Profile, en Apple Business Connect, en Bing Places y en cada
 directorio. Se edita en `content/site.js` y en ningún otro sitio.
+
+## Quién lo respalda
+
+ECO nació en **octubre de 2012** en Quito, de Hernán y Janeth Robalino,
+pastores fundadores de la congregación El Sendero de la Vida Cristiana. Su
+sitio, `hernanrobalino.com`, se declara como `sameAs` en los datos
+estructurados: eso le dice a un buscador que ECO y ese sitio son la misma
+obra, no dos ministerios sueltos con nombres parecidos.
+
+## El enlace de dar
+
+`site.giveUrl` en `content/site.js` es la **única URL del sitio que mueve
+dinero** —la plataforma de recaudación del Banco Pichincha— y todos los
+botones de dar salen de esa línea, en los dos idiomas. También es el `target`
+de la `DonateAction` en los datos estructurados, porque una acción de donar
+debe apuntar a donde efectivamente se puede dar, no a la página que lo
+explica. El día que cambie la cuenta, se toca esa línea y nada más.
 
 La estrategia de visibilidad (SEO, AEO, GEO, LLM y automatización) está en
 [`ESTRATEGIA.md`](./ESTRATEGIA.md).

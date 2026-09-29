@@ -43,8 +43,15 @@ export const organizacion = (lang) => ({
   url: url(lang === 'es' ? '/' : '/en/'),
   logo: { '@type': 'ImageObject', url: url('/marca/eco1516-isotipo.svg'), caption: site.name },
   image: url('/og/eco1516.png'),
-  foundingDate: String(site.founded),
+  foundingDate: '2012-10',
   foundingLocation: { '@type': 'Place', name: 'Quito, Ecuador' },
+  /* Los fundadores, como personas con su propio sitio. Es lo que permite que
+     un buscador entienda que ECO y hernanrobalino.com son la misma obra y no
+     dos ministerios sueltos con nombres parecidos. */
+  founder: [
+    { '@type': 'Person', name: 'Hernán Robalino', url: site.founderSite },
+    { '@type': 'Person', name: 'Janeth Robalino', url: site.founderSite },
+  ],
   /* Solo se declara lo que existe. Mientras el cuarto de oración esté en
      construcción no hay calle que publicar, y una dirección a medias en el
      marcado es peor que ninguna: manda a alguien a un sitio que no está. */
@@ -83,7 +90,7 @@ export const organizacion = (lang) => ({
   /* GEO: el area servida, enumerada lugar por lugar. */
   areaServed: site.areaServedPlaces.map((name) => ({ '@type': 'Place', name })),
   knowsLanguage: ['es-EC', 'en'],
-  sameAs: site.social.map((s) => s.url),
+  sameAs: [site.founderSite, ...site.social.map((s) => s.url)],
   /* Lo que la casa ofrece, en terminos de catalogo: es lo que permite que un
      asistente responda "¿donde puedo pedir oracion gratis en Quito?". */
   makesOffer: [
@@ -108,7 +115,9 @@ export const organizacion = (lang) => ({
     {
       '@type': 'DonateAction',
       name: T({ es: 'Dar a Ecuador Casa de Oración', en: 'Give to Ecuador Casa de Oración' }, lang),
-      target: url(lang === 'es' ? '/dar' : '/en/give'),
+      /* El destino es la plataforma de recaudación, no la página que la
+         explica: una DonateAction debe llevar a donde se puede dar. */
+      target: site.giveUrl,
       recipient: { '@id': ID.org },
     },
     {
@@ -366,7 +375,10 @@ export const llms = (lang = 'es') => {
 - Proyecto en curso: construcción del Cuarto de Oración al norte de Quito, 200 m² en dos plantas, costo aproximado 200.000 USD, en tres fases (obra gris 85.000, terminados 90.000, amoblamiento 25.000).
 - Programas de Actos de Justicia: Vivienda Solidaria, Restauración Familiar y Misiones Integrales.
 - Oración profética desde los montes: la Iglesia sube a las alturas a proclamar el mensaje del Reino a las naciones.
+- Fundadores: Hernán y Janeth Robalino, pastores fundadores de la congregación El Sendero de la Vida Cristiana, en Quito. Su sitio: ${site.founderSite}
+- Inicio: octubre de 2012, en Quito.
 - Formación: entrenamientos presenciales y en línea, y conferencias en diferentes países.
+- Donaciones: ${site.giveUrl} (plataforma de recaudación del Banco Pichincha).
 - Contacto: WhatsApp +${site.whatsapp}, teléfono ${site.phoneDisplay} (${site.phone}), correo ${site.email}.
 - Costo: la oración, los entrenamientos y la ayuda de los programas de justicia son gratuitos y no se condicionan a una ofrenda.
 - Ámbito: ${T(site.areaServed, 'es')}.
