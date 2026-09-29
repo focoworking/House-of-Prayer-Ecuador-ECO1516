@@ -9,11 +9,18 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
-  # Forzar HTTPS y el dominio con www, que es el canónico del sitio.
-  RewriteCond %{HTTPS} !=on
-  RewriteRule ^(.*)$ https://www.eco1516.org/$1 [R=301,L]
-  RewriteCond %{HTTP_HOST} !^www\. [NC]
-  RewriteRule ^(.*)$ https://www.eco1516.org/$1 [R=301,L]
+  # OJO: el forzado de HTTPS y de www está desactivado a propósito hasta que
+  # el certificado SSL esté emitido. Si se activa antes, cada visita —y cada
+  # comprobación automática del hosting— recibe una redirección a una URL
+  # https que todavía no responde, y el sitio parece caído cuando en realidad
+  # está bien subido.
+  #
+  # Cuando el SSL esté activo en hPanel, quitar el # de estas cuatro líneas:
+  #
+  # RewriteCond %{HTTPS} !=on
+  # RewriteRule ^(.*)$ https://www.eco1516.org/$1 [R=301,L]
+  # RewriteCond %{HTTP_HOST} !^www\. [NC]
+  # RewriteRule ^(.*)$ https://www.eco1516.org/$1 [R=301,L]
 
   # /ayuda -> ayuda.html, si ese archivo existe.
   RewriteCond %{REQUEST_FILENAME} !-d
