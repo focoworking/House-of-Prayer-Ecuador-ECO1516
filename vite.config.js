@@ -15,6 +15,10 @@ const input = Object.fromEntries(
   )
 )
 
+/* La pagina de error no esta en el modelo de contenido —no va al sitemap ni
+   a la navegacion— pero si tiene que salir en dist/. */
+input['404'] = resolve(process.cwd(), '404.html')
+
 export default defineConfig({
   appType: 'mpa',
   build: {

@@ -8,7 +8,7 @@
 import { mkdir, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 
-import { site, ui, nav, footerNav, marca, fuentes, LANGUAGES } from '../content/site.js'
+import { site, ui, nav, footerNav, marca, fuentes, t, LANGUAGES } from '../content/site.js'
 import { pages, pathOf, fileOf } from '../content/pages.js'
 import { renderSections, T, esc } from './render.mjs'
 import { metaTags, jsonLd, sitemap, robots, llms, llmsFull, aiTxt } from './seo.mjs'
@@ -216,6 +216,33 @@ const marcaCss = () => `/* Generado por scripts/build-pages.mjs desde content/si
 
 /* ------------------------------------------------------------------ */
 
+/**
+ * La página de error. No entra en `pages` porque no debe salir en el sitemap,
+ * ni en la navegación, ni en llms.txt: es la que ve alguien que se equivocó de
+ * dirección, y lo único que tiene que hacer es devolverlo al sitio. Reutiliza
+ * la plantilla completa para que no parezca de otro sitio web.
+ */
+const paginaError = {
+  slug: { es: '404', en: '404' },
+  title: t('Página no encontrada', 'Page not found'),
+  description: t('La dirección que buscas no existe en este sitio.', 'The address you are looking for does not exist on this site.'),
+  sections: [
+    {
+      type: 'hero',
+      eyebrow: t('Error 404', 'Error 404'),
+      title: t('Esta página no existe.', 'This page does not exist.'),
+      lead: t(
+        'Puede que la dirección esté mal escrita o que la página haya cambiado de sitio. Si buscabas pedir oración, la puerta está aquí al lado.',
+        'The address may be mistyped, or the page may have moved. If you came to ask for prayer, that door is right here.'
+      ),
+      actions: [
+        { label: t('Pide oración', 'Ask for prayer'), href: { es: '/ayuda', en: '/en/help' }, kind: 'primary' },
+        { label: t('Ir al inicio', 'Go to the home page'), href: { es: '/', en: '/en/' }, kind: 'ghost' },
+      ],
+    },
+  ],
+}
+
 const main = async () => {
   const escritos = []
 
@@ -224,6 +251,10 @@ const main = async () => {
       escritos.push(await escribir(fileOf(page, lang), documento(page, lang)))
     }
   }
+
+  /* El 404 se sirve desde la raíz para cualquier ruta fallida, así que va en
+     español, que es el idioma por defecto del sitio. */
+  escritos.push(await escribir('404.html', documento(paginaError, 'es')))
 
   escritos.push(await escribir('src/styles/marca.css', marcaCss()))
   escritos.push(await escribir('public/sitemap.xml', sitemap()))
