@@ -21,7 +21,8 @@
   text-decoration: none;
   margin-right: auto;
 }
-.logo { width: 2.3rem; height: 2.55rem; flex: none; }
+/* El isotipo es cuadrado: alto y ancho van iguales o se deforma. */
+.logo { width: 2.6rem; height: 2.6rem; flex: none; }
 .marca__texto { display: grid; line-height: 1.05; }
 .marca__texto strong {
   font-family: var(--display);
@@ -147,7 +148,7 @@
   background: var(--papel-alto);
   color: var(--tinta-suave);
 }
-.pie .logo { width: 3rem; height: 3.3rem; color: var(--morado); }
+.pie .logo { width: 3.4rem; height: 3.4rem; color: var(--morado); }
 .pie h2 {
   font-family: var(--texto);
   font-size: 0.68rem;

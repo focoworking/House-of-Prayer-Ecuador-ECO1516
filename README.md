@@ -71,6 +71,7 @@ puede comprobar, no entra.
 | `ai.txt` | Permisos de uso con atribución |
 | `og/eco1516.png` | Imagen para compartir, 1200×630, generada sin dependencias |
 | `src/styles/marca.css` | La paleta del logotipo, escrita desde `content/site.js` |
+| `marca/eco1516-isotipo.svg` | El isotipo vectorial, calculado desde sus cinco dedos |
 
 `npm run build:preview` deja en `preview/` una copia del sitio con los enlaces
 internos reescritos a rutas relativas. Sirve para revisarlo fuera de la raíz de
@@ -110,6 +111,29 @@ celeste aparece en todas partes deja de significar nada.
 impresa sin parecer antigua— y Archivo para el texto. Se cargan de Google
 Fonts, el único host externo del sitio, con `preconnect` a los dos dominios y
 su pila de reserva declarada.
+
+## El logotipo
+
+El original de la organización —manos abiertas que sostienen el techo de una
+casa, con la llama en el centro— está en
+`public/marca/eco1516-logo-original.png` y es la referencia de la que sale
+todo lo demás.
+
+`scripts/lib/isotipo.mjs` lo redibuja como vector. Está **calculado, no
+escrito a mano**: una mano abierta es un contorno de cinco puntas y cuatro
+valles, y acertarlo a ojo en coordenadas SVG cuesta muchas más iteraciones que
+declarar los cinco dedos —ángulo, largo y grosor— y dejar que el trazo salga
+de ahí. Abrir más la mano es cambiar un número. La mano derecha se calcula y
+la izquierda es su espejo, como en el original.
+
+Salen dos versiones de la misma fuente:
+
+- **Completa** (`npm run marca` → `public/marca/eco1516-isotipo.svg`), con los
+  surcos de los dedos. Es la de tamaños grandes y la que los datos
+  estructurados declaran como `logo`.
+- **Reducida**, inline en la cabecera y el pie. Hereda `currentColor`, engorda
+  el trazo y **quita los surcos**: a cuarenta píxeles ese detalle no se lee,
+  se emborrona, y un logotipo emborronado se ve peor que uno simple.
 
 ## Las imágenes
 

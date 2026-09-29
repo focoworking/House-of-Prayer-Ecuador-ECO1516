@@ -41,7 +41,7 @@ export const organizacion = (lang) => ({
   description: T(site.mission, lang),
   slogan: T(site.tagline, lang),
   url: url(lang === 'es' ? '/' : '/en/'),
-  logo: { '@type': 'ImageObject', url: url('/marca/eco1516-logo.svg'), caption: site.name },
+  logo: { '@type': 'ImageObject', url: url('/marca/eco1516-isotipo.svg'), caption: site.name },
   image: url('/og/eco1516.png'),
   foundingDate: String(site.founded),
   foundingLocation: { '@type': 'Place', name: 'Quito, Ecuador' },

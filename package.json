@@ -10,14 +10,15 @@
   "scripts": {
     "pages": "node scripts/build-pages.mjs",
     "og": "node scripts/build-og.mjs",
-    "predev": "npm run og && npm run pages",
+    "predev": "npm run marca && npm run og && npm run pages",
     "dev": "vite",
-    "prebuild": "npm run og && npm run pages",
+    "prebuild": "npm run marca && npm run og && npm run pages",
     "build": "vite build",
     "preview": "vite preview --port 4173",
     "build:preview": "npm run build && node scripts/build-preview.mjs",
     "check": "node scripts/check-seo.mjs",
-    "img": "node scripts/build-imagenes.mjs"
+    "img": "node scripts/build-imagenes.mjs",
+    "marca": "node scripts/build-marca.mjs"
   },
   "devDependencies": {
     "vite": "^5.4.11"
