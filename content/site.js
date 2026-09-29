@@ -32,13 +32,20 @@ export const site = {
   ],
   /* La frase de la organizacion, tal como la sostiene desde el principio. */
   mission: t(
-    'Establecer la oración como cultura de la Iglesia ecuatoriana y como el medio del gobierno de Dios en Ecuador.',
-    'To establish prayer as the culture of the Ecuadorian Church and as the means of God’s government in Ecuador.'
+    'Establecer la oración como la Cultura de la Iglesia y el medio del gobierno de Dios en la tierra, mientras proclamamos juntos su reino y preparamos las naciones para la venida de Jesucristo el Señor.',
+    'To establish prayer as the Culture of the Church and the means of God’s government on the earth, while we proclaim His kingdom together and prepare the nations for the coming of Jesus Christ the Lord.'
   ),
   tagline: t(
-    'Oración con adoración día y noche en Ecuador',
-    'Night-and-day prayer with worship in Ecuador'
+    'Movimiento de oración 24/7 de la Iglesia de Ecuador',
+    '24/7 prayer movement of the Church of Ecuador'
   ),
+  /* El versículo que la organización pone como lema en su propio documento. */
+  lema: t(
+    '«Mi casa, casa de oración será llamada» (Mt. 21:13)',
+    '“My house shall be called a house of prayer” (Mt. 21:13)'
+  ),
+  // TODO ECO1516: confirmar el año de inicio del movimiento. El documento de
+  // la casa no lo dice y esta fecha viene del encargo inicial.
   founded: 2011,
   origin: 'https://www.eco1516.org',
 
@@ -50,12 +57,16 @@ export const site = {
    * TODO ECO1516: sustituir por la direccion y los telefonos reales antes
    * de publicar. Los valores de abajo son marcadores de posicion.
    * ------------------------------------------------------------------ */
+  /* El cuarto de oración todavía no está construido: es el proyecto que la
+     casa está levantando. Por eso aquí no hay calle ni número, y los datos
+     estructurados declaran ciudad y país, que es lo único cierto hoy.
+     TODO ECO1516: cuando haya sede, añadir `street` y revisar `geo`. */
   address: {
-    street: 'Av. Amazonas N34-451 y Av. Atahualpa',
-    district: 'La Carolina',
+    street: '',
+    district: '',
     city: 'Quito',
     region: 'Pichincha',
-    postalCode: '170102',
+    postalCode: '',
     country: 'EC',
     countryName: t('Ecuador', 'Ecuador'),
   },
@@ -63,16 +74,21 @@ export const site = {
 
   phone: '+59322000000',
   phoneDisplay: '(02) 200 0000',
-  /* La linea de oracion es la promesa central del sitio: atiende 24/7 y es
-     el unico numero que aparece en la barra de accion fija. */
+  /* La línea de oración es la puerta de entrada del sitio y el único número
+     que aparece en la barra de acción fija.
+     TODO ECO1516: confirmar número real y en qué horas hay alguien
+     atendiendo. Mientras no esté confirmado, el sitio no promete 24 horas:
+     dice que respondemos, no que contestamos al instante. */
   prayerLine: '+593999000000',
   prayerLineDisplay: '099 900 0000',
   whatsapp: '593999000000',
   email: 'hola@eco1516.org',
   prayerEmail: 'oracion@eco1516.org',
 
-  /* Horario de la sala: la sala esta abierta siempre, y eso se declara tal
-     cual en los datos estructurados (Mo-Su 00:00-23:59). La oficina no. */
+  /* La oración se sostiene 24/7 cada semana entre las congregaciones del
+     movimiento; no es un local abierto al público las 24 horas, y el sitio
+     no debe dar a entender lo contrario.
+     TODO ECO1516: confirmar el horario real de la semana de oración. */
   officeHours: t('Lunes a viernes, 09:00 a 18:00', 'Monday to Friday, 9am to 6pm'),
 
   /* GEO: el area que servimos, enumerada. "Ecuador" no le dice a un motor que
@@ -184,8 +200,8 @@ export const ui = {
   close: t('Cerrar menú', 'Close menu'),
   languageLabel: t('Read in English', 'Leer en español'),
   languageShort: t('EN', 'ES'),
-  prayNow: t('Pide oración ahora', 'Ask for prayer now'),
-  callNow: t('Llamar a la línea 24/7', 'Call the 24/7 line'),
+  prayNow: t('Pide oración', 'Ask for prayer'),
+  callNow: t('Llamar', 'Call'),
   whatsapp: t('Escribir por WhatsApp', 'Message us on WhatsApp'),
   watchLive: t('Ver la sala en vivo', 'Watch the room live'),
   give: t('Dar', 'Give'),
@@ -207,16 +223,17 @@ export const ui = {
 /** Navegacion principal. El orden es la jerarquia: la ayuda va primero
  *  porque es la promesa del sitio, no un pie de pagina. */
 export const nav = [
-  { slug: 'ayuda', label: t('Ayuda ahora', 'Help now'), highlight: true },
-  { slug: 'oracion', label: t('Sala 24/7', 'Prayer room') },
+  { slug: 'ayuda', label: t('Pide oración', 'Ask for prayer'), highlight: true },
+  { slug: 'oracion', label: t('Oración 24/7', '24/7 prayer') },
   { slug: 'nosotros', label: t('Quiénes somos', 'About') },
-  { slug: 'formacion', label: t('Formación', 'Training') },
-  { slug: 'misiones', label: t('Misiones', 'Outreach') },
-  { slug: 'eventos', label: t('Eventos', 'Events') },
+  { slug: 'proyecto', label: t('El proyecto', 'The project') },
+  { slug: 'justicia', label: t('Justicia', 'Justice') },
   { slug: 'dar', label: t('Dar', 'Give') },
 ]
 
 export const footerNav = [
+  { slug: 'montes', label: t('Desde los montes', 'From the mountains') },
+  { slug: 'formacion', label: t('Formación', 'Training') },
   { slug: 'recursos', label: t('Recursos', 'Resources') },
   { slug: 'preguntas', label: t('Preguntas frecuentes', 'FAQ') },
   { slug: 'contacto', label: t('Contacto', 'Contact') },

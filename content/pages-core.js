@@ -1,39 +1,43 @@
 /**
- * Inicio, ayuda inmediata y sala de oración. Son las tres páginas que
- * sostienen la promesa del proyecto.
+ * Inicio, ayuda y oración 24/7.
+ *
+ * Todo el contenido de estas páginas sale del documento «INFORMACIÓN PARA
+ * PÁGINA WEB ECO» —ver content/eco.js—, y donde el documento no dice nada,
+ * la página no afirma nada.
  *
  * Dos registros conviven a propósito. El de la casa es profético: habla de
- * altar, de guardas sobre los muros y de visitación, porque eso es lo que
- * la congregación cree y sostiene. El de /ayuda es llano: quien llega ahí a
- * las tres de la mañana no necesita vocabulario, necesita un teléfono.
+ * altar, de sacerdocio real y de las naciones, porque eso es lo que el
+ * movimiento cree y sostiene. El de /ayuda es llano: quien llega ahí en una
+ * crisis no necesita vocabulario, necesita a alguien que conteste.
  *
- * Toda cita bíblica es Reina-Valera 1960, textual, con su referencia. Una
- * Escritura mal citada le cuesta a esta casa más que un titular flojo.
+ * Las citas conservan la versión que usa el documento de la casa: RVR1960
+ * salvo donde dice NVI, y entonces se marca NVI.
  */
 import { t, site } from './site.js'
-import { historia, bloques, preguntas } from './datos.js'
+import { queEs, objetivos, temasIntercesion, proyecto } from './eco.js'
+import { preguntas } from './datos.js'
 
 const wa = (texto) => `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(texto)}`
 
 export const inicio = {
   slug: { es: 'index', en: 'index' },
   title: t(
-    'Ecuador Casa de Oración — oración 24/7 y ayuda inmediata en Quito',
-    'Ecuador Casa de Oración — 24/7 prayer and immediate help in Quito'
+    'ECO Ecuador Casa de Oración — movimiento de oración 24/7',
+    'ECO Ecuador Casa de Oración — a 24/7 prayer movement'
   ),
   description: t(
-    'Altar de oración con adoración 24 horas en Quito desde 2011. Pide oración ahora por teléfono o WhatsApp: un intercesor responde en menos de treinta minutos, gratis.',
-    '24-hour altar of prayer with worship in Quito since 2011. Ask for prayer now by phone or WhatsApp: an intercessor replies within thirty minutes, free.'
+    'Pastores y congregaciones de distintas denominaciones de Ecuador sostienen adoración e intercesión 24/7 cada semana. Pide oración o suma a tu iglesia.',
+    'Pastors and congregations from different denominations in Ecuador sustain 24/7 worship and intercession each week. Ask for prayer or bring your church in.'
   ),
   priority: 1.0,
   sections: [
     {
       type: 'hero',
-      eyebrow: t('Quito · desde 2011 · 15 años de clamor', 'Quito · since 2011 · 15 years of crying out'),
-      title: t('El altar no se apaga. La línea tampoco.', 'The altar never goes out. Neither does the line.'),
+      eyebrow: t('Ecuador · oración 24/7', 'Ecuador · 24/7 prayer'),
+      title: t('Una Iglesia que no deja de orar.', 'A Church that never stops praying.'),
       lead: t(
-        'Somos guardas puestos sobre los muros de Ecuador: oración con adoración las 24 horas en Quito. Si necesitas que alguien clame contigo ahora mismo, escribe o llama. Un intercesor responde en menos de treinta minutos, a cualquier hora, sin costo.',
-        'We are watchmen set on the walls of Ecuador: prayer with worship 24 hours a day in Quito. If you need someone to cry out with you right now, write or call. An intercessor answers within thirty minutes, at any hour, at no cost.'
+        'ECO reúne a pastores, congregaciones y ministerios de diferentes denominaciones que oran juntos día y noche cada semana, por el establecimiento del Reino de Dios y el retorno de Jesucristo, Rey Eterno de las Naciones.',
+        'ECO gathers pastors, congregations and ministries from different denominations who pray together day and night each week, for the establishing of God’s Kingdom and the return of Jesus Christ, Eternal King of the Nations.'
       ),
       image: {
         src: '/img/amanecer.png',
@@ -45,88 +49,97 @@ export const inicio = {
         ),
       },
       actions: [
-        { label: t('Pide oración ahora', 'Ask for prayer now'), href: { es: '/ayuda', en: '/en/help' }, kind: 'primary' },
-        { label: t('Ver la sala en vivo', 'Watch the room live'), href: site.streamUrl, kind: 'ghost', external: true },
+        { label: t('Pide oración', 'Ask for prayer'), href: { es: '/ayuda', en: '/en/help' }, kind: 'primary' },
+        { label: t('Súmate a la oración 24/7', 'Join the 24/7 prayer'), href: { es: '/oracion', en: '/en/prayer-24-7' }, kind: 'ghost' },
       ],
-      note: t(
-        'Línea 24/7 · WhatsApp · presencial en La Carolina, norte de Quito',
-        '24/7 line · WhatsApp · in person in La Carolina, northern Quito'
-      ),
-      live: true,
       verse: {
         text: t(
-          '«Sobre tus muros, oh Jerusalén, he puesto guardas; todo el día y toda la noche no callarán jamás.»',
-          '“On your walls, O Jerusalem, I have set watchmen; all the day and all the night they shall never be silent.”'
+          '«Mi casa, casa de oración será llamada.»',
+          '“My house shall be called the house of prayer.”'
         ),
-        ref: 'Isaías 62:6',
+        ref: 'Mateo 21:13',
       },
     },
     {
       type: 'stats',
       items: [
-        { value: '24/7', label: t('Oración con adoración, todos los días', 'Prayer with worship, every day') },
-        { value: '15', label: t('Años sosteniendo el altar', 'Years sustaining the altar') },
-        { value: '12', label: t('Vigilias diarias de dos horas', 'Daily two-hour watches') },
-        { value: '5', label: t('Provincias con equipos enviados', 'Provinces with teams sent out') },
+        { value: '24/7', label: t('Adoración e intercesión, cada semana', 'Worship and intercession, every week') },
+        { value: '200 m²', label: t('El cuarto de oración, en construcción', 'The prayer room, under construction') },
+        { value: '4', label: t('Objetivos que sostienen el movimiento', 'Aims that hold the movement together') },
+        { value: '6', label: t('Temas de la intercesión corporativa', 'Themes of corporate intercession') },
       ],
+    },
+    {
+      type: 'lead',
+      title: t('Qué es ECO', 'What ECO is'),
+      text: queEs,
     },
     {
       type: 'scripture',
       text: t(
-        'Porque mi casa será llamada casa de oración para todos los pueblos.',
-        'For my house shall be called a house of prayer for all peoples.'
+        'Y los envió a predicar el reino de Dios, y a sanar a los enfermos.',
+        'And he sent them to preach the kingdom of God, and to heal the sick.'
       ),
-      ref: 'Isaías 56:7',
+      ref: 'Lucas 9:2',
     },
     {
       type: 'cards',
-      title: t('Empieza por donde estás', 'Start where you are'),
+      title: t('Por dónde entrar', 'Where to start'),
       lead: t(
-        'Tres puertas, y ninguna te pide que seas de una iglesia ni que des nada.',
-        'Three doors, and none of them asks you to belong to a church or to give anything.'
+        'Tres puertas, y ninguna te pide dejar tu congregación ni dar nada.',
+        'Three doors, and none of them asks you to leave your congregation or to give anything.'
       ),
       items: [
         {
-          title: t('Necesito oración hoy', 'I need prayer today'),
+          title: t('Necesito oración', 'I need prayer'),
           text: t(
-            'Cuéntanos qué está pasando y un intercesor clama contigo por teléfono, por WhatsApp o en persona. Confidencial y gratuito.',
-            'Tell us what is happening and an intercessor cries out with you by phone, WhatsApp or in person. Confidential and free.'
+            'Cuéntanos qué está pasando. Tu petición la lee el equipo de intercesión y se lleva a la oración corporativa. Confidencial y gratuita.',
+            'Tell us what is happening. Your request is read by the intercession team and carried into corporate prayer. Confidential and free.'
           ),
           href: { es: '/ayuda', en: '/en/help' },
-          cta: t('Ir a ayuda inmediata', 'Go to immediate help'),
+          cta: t('Pedir oración', 'Ask for prayer'),
         },
         {
           title: t('Quiero orar con ustedes', 'I want to pray with you'),
           text: t(
-            'La sala está abierta día y noche. Entras, te sientas delante del Señor y te quedas el tiempo que quieras. También se transmite en vivo.',
-            'The room is open day and night. Come in, sit before the Lord and stay as long as you like. It is streamed live too.'
+            'Tu congregación puede tomar un turno de la semana de oración, o puedes sumarte a los turnos que ya están cubiertos.',
+            'Your congregation can take a shift in the week of prayer, or you can join shifts already covered.'
           ),
-          href: { es: '/oracion', en: '/en/prayer-room' },
-          cta: t('Ver las vigilias y la sala', 'See the watches and the room'),
+          href: { es: '/oracion', en: '/en/prayer-24-7' },
+          cta: t('Ver la oración 24/7', 'See the 24/7 prayer'),
         },
         {
-          title: t('Quiero ser formado y enviado', 'I want to be trained and sent'),
+          title: t('Quiero sostener el cuarto de oración', 'I want to help build the prayer room'),
           text: t(
-            'Internados de seis meses, escuela de adoración y equipos de misión urbana. Con becas para quien no puede pagar.',
-            'Six-month internships, a worship school and urban outreach teams. With scholarships for those who cannot pay.'
+            'El lugar permanente para la oración 24/7 se levanta al norte de Quito, en tres fases. Se puede sembrar en cualquiera de ellas.',
+            'The permanent place for 24/7 prayer is being built in northern Quito, in three phases. You can give towards any of them.'
           ),
-          href: { es: '/formacion', en: '/en/training' },
-          cta: t('Ver la formación', 'See the training'),
+          href: { es: '/proyecto', en: '/en/prayer-room-project' },
+          cta: t('Ver el proyecto', 'See the project'),
         },
       ],
     },
     {
+      type: 'rows',
+      title: t('Los cuatro objetivos', 'The four aims'),
+      items: objetivos.map((texto, i) => ({
+        title: [
+          t('Oración 24/7 como cultura', '24/7 prayer as culture'),
+          t('Equipar a la Iglesia', 'Equipping the Church'),
+          t('Preparar a la Novia', 'Preparing the Bride'),
+          t('Una generación de discípulos íntimos', 'A generation of intimate disciples'),
+        ][i],
+        text: texto,
+      })),
+    },
+    {
       type: 'split',
-      title: t('Quince años, sin atajos', 'Fifteen years, no shortcuts'),
+      title: t('Lo que se ora', 'What is prayed'),
       text: t(
-        'Empezamos en 2011 con doce personas en una sala prestada. Hoy sostenemos doce vigilias diarias de oración con adoración, una escuela, equipos de compasión en cinco provincias y una línea telefónica que no cuelga. El Señor lo hizo despacio y lo hizo verificable: está fechado abajo.',
-        'We began in 2011 with twelve people in a borrowed living room. Today we sustain twelve daily watches of prayer with worship, a school, compassion teams in five provinces and a phone line that never hangs up. The Lord did it slowly and He did it verifiably: it is dated below.'
+        'La intercesión corporativa no improvisa: hay temas que el movimiento sostiene semana tras semana, por acuerdo entre las congregaciones. El pueblo de Dios unido para interceder por las cosas que están en el corazón de Dios, como una expresión de la unidad de la Iglesia.',
+        'Corporate intercession does not improvise: there are themes the movement holds week after week, by agreement between the congregations. God’s people united to intercede for what is on God’s heart, as an expression of the unity of the Church.'
       ),
-      items: [
-        t('El altar encendido las 24 horas, todos los días del año', 'The altar lit 24 hours, every day of the year'),
-        t('La línea la atienden intercesores, no un contestador', 'The line is answered by intercessors, not a machine'),
-        t('Informe de uso de fondos publicado cada semestre', 'Use-of-funds report published every six months'),
-      ],
+      items: temasIntercesion.slice(0, 4),
       image: {
         src: '/img/incienso.png',
         w: 1500,
@@ -136,38 +149,60 @@ export const inicio = {
           'Two columns of incense smoke rising against a pale ground, one lavender and one cyan.'
         ),
       },
-      action: { label: t('Conoce la casa', 'Get to know the house'), href: { es: '/nosotros', en: '/en/about' } },
+      action: { label: t('Ver los seis temas', 'See all six themes'), href: { es: '/oracion', en: '/en/prayer-24-7' } },
     },
-    { type: 'timeline', title: t('La línea de tiempo', 'The timeline'), items: historia },
     {
-      type: 'schedule',
-      title: t('Las doce vigilias de hoy', 'Today’s twelve watches'),
-      lead: t(
-        'Cada vigilia dura dos horas y la sostiene un equipo distinto. Puedes entrar en cualquiera, sin avisar.',
-        'Each watch lasts two hours and a different team holds it. You can walk into any of them, unannounced.'
-      ),
-      items: bloques,
-      action: { label: t('Cómo funciona la sala', 'How the room works'), href: { es: '/oracion', en: '/en/prayer-room' } },
+      type: 'cards',
+      title: t('Lo que hacemos', 'What we do'),
+      items: [
+        {
+          title: t('Oración profética desde los montes', 'Prophetic prayer from the mountains'),
+          text: t(
+            'Movilizamos a la Iglesia a las alturas para proclamar a las naciones el mensaje del Reino y levantar sus banderas.',
+            'We mobilise the Church to the heights to proclaim the message of the Kingdom to the nations and raise their flags.'
+          ),
+          href: { es: '/montes', en: '/en/mountains' },
+          cta: t('Ver', 'See'),
+        },
+        {
+          title: t('Actos de justicia', 'Acts of justice'),
+          text: t(
+            'Vivienda solidaria, restauración familiar y misiones integrales para las personas más vulnerables del país.',
+            'Solidarity housing, family restoration and integral missions for the country’s most vulnerable.'
+          ),
+          href: { es: '/justicia', en: '/en/justice' },
+          cta: t('Ver', 'See'),
+        },
+        {
+          title: t('Entrenamientos y conferencias', 'Training and conferences'),
+          text: t(
+            'Presenciales y en línea, en Ecuador y en otros países, para restaurar y establecer la oración 24/7.',
+            'In person and online, in Ecuador and other countries, to restore and establish 24/7 prayer.'
+          ),
+          href: { es: '/formacion', en: '/en/training' },
+          cta: t('Ver', 'See'),
+        },
+      ],
     },
     {
       type: 'scripture',
       text: t(
-        '¿Y acaso Dios no hará justicia a sus escogidos, que claman a él día y noche? ¿Se tardará en responderles?',
-        'And shall not God avenge his own elect, which cry day and night unto him, though he bear long with them?'
+        '«Yo soy el Alfa y la Omega —dice el Señor Dios—, el que es y que era y que ha de venir, el Todopoderoso.»',
+        '“I am the Alpha and the Omega, saith the Lord God, which is, and which was, and which is to come, the Almighty.”'
       ),
-      ref: 'Lucas 18:7',
+      ref: 'Apocalipsis 1:8',
     },
     { type: 'faq', title: t('Preguntas frecuentes', 'Frequently asked questions'), items: preguntas.slice(0, 5), schema: true },
     {
       type: 'cta',
-      title: t('¿Clamamos juntos ahora?', 'Shall we cry out together now?'),
+      title: t('Ora con nosotros esta semana', 'Pray with us this week'),
       text: t(
-        'No hace falta cita, ni formulario largo, ni saber cómo se ora. Escribe una línea y alguien se pone de acuerdo contigo delante del Señor.',
-        'No appointment, no long form, no need to know how to pray. Write one line and someone will agree with you before the Lord.'
+        'Si tu congregación quiere tomar un turno, si necesitas oración o si quieres sembrar en el cuarto de oración, escríbenos.',
+        'If your congregation wants to take a shift, if you need prayer, or if you want to give towards the prayer room, write to us.'
       ),
       actions: [
-        { label: t('Escribir por WhatsApp', 'Message on WhatsApp'), href: wa('Hola, necesito oración.'), kind: 'primary', external: true },
-        { label: t('Llamar a la línea 24/7', 'Call the 24/7 line'), href: `tel:${site.prayerLine}`, kind: 'ghost' },
+        { label: t('Escribir por WhatsApp', 'Message on WhatsApp'), href: wa('Hola, quiero orar con ECO.'), kind: 'primary', external: true },
+        { label: t('Ver el proyecto', 'See the project'), href: { es: '/proyecto', en: '/en/prayer-room-project' }, kind: 'ghost' },
       ],
     },
   ],
@@ -175,30 +210,26 @@ export const inicio = {
 
 export const ayuda = {
   slug: { es: 'ayuda', en: 'help' },
-  title: t(
-    'Pide oración ahora — ayuda inmediata 24/7 en Ecuador',
-    'Ask for prayer now — immediate 24/7 help in Ecuador'
-  ),
+  title: t('Pide oración — ECO Ecuador Casa de Oración', 'Ask for prayer — ECO Ecuador Casa de Oración'),
   description: t(
-    'Pide oración ahora: llama, escribe por WhatsApp o llena el formulario. Un intercesor responde en menos de treinta minutos, gratis y confidencial. Ecuador, 24/7.',
-    'Ask for prayer now: call, WhatsApp us or fill the form. An intercessor replies within thirty minutes, free and confidential. Ecuador, 24/7.'
+    'Pide oración: escribe por WhatsApp, llama o envía el formulario. Tu petición la lee el equipo de intercesión y entra en la oración corporativa. Gratis.',
+    'Ask for prayer: message on WhatsApp, call, or send the form. Your request is read by the intercession team and carried into corporate prayer. Free and confidential.'
   ),
   priority: 0.9,
   sections: [
     {
       type: 'hero',
       variant: 'urgent',
-      eyebrow: t('Ayuda inmediata · 24 horas', 'Immediate help · 24 hours'),
-      title: t('Cuéntanos qué pasa. Oramos contigo hoy.', 'Tell us what is happening. We pray with you today.'),
+      eyebrow: t('Pedir oración', 'Ask for prayer'),
+      title: t('Cuéntanos qué pasa. Oramos contigo.', 'Tell us what is happening. We pray with you.'),
       lead: t(
-        'Contesta una persona, no un robot, a cualquier hora del día o de la noche. Es gratuito, es confidencial y no tienes que pertenecer a ninguna iglesia ni saber qué decir. Tiempo de respuesta habitual: menos de treinta minutos.',
-        'A person answers, not a bot, at any hour of the day or night. It is free, it is confidential, and you do not have to belong to any church or know what to say. Usual response time: under thirty minutes.'
+        'Te responde una persona, no un robot. Es gratuito, es confidencial y no tienes que pertenecer a ninguna iglesia ni saber qué decir. Tu petición se lleva a la oración corporativa de la semana.',
+        'A person answers, not a bot. It is free, it is confidential and you do not have to belong to any church or know what to say. Your request is carried into the week’s corporate prayer.'
       ),
       actions: [
-        { label: t('Llamar ahora', 'Call now'), href: `tel:${site.prayerLine}`, kind: 'primary' },
-        { label: t('Escribir por WhatsApp', 'Message on WhatsApp'), href: wa('Hola, necesito oración.'), kind: 'ghost', external: true },
+        { label: t('Escribir por WhatsApp', 'Message on WhatsApp'), href: wa('Hola, necesito oración.'), kind: 'primary', external: true },
+        { label: t('Llamar', 'Call'), href: `tel:${site.prayerLine}`, kind: 'ghost' },
       ],
-      note: t(`Línea de oración ${site.prayerLineDisplay} · atendida siempre`, `Prayer line ${site.prayerLineDisplay} · always answered`),
       verse: {
         text: t(
           '«Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar.»',
@@ -226,15 +257,15 @@ export const ayuda = {
         {
           title: t('Un intercesor responde', 'An intercessor replies'),
           text: t(
-            'En menos de treinta minutos, a la hora que sea. Ora contigo por teléfono, por audio o por escrito, como prefieras.',
-            'Within thirty minutes, whatever the hour. They pray with you by phone, by voice note or in writing, as you prefer.'
+            'Ora contigo por teléfono, por audio o por escrito, como prefieras, y te acompaña si lo pides.',
+            'They pray with you by phone, by voice note or in writing, as you prefer, and walk with you if you ask.'
           ),
         },
         {
-          title: t('Seguimos contigo si quieres', 'We stay with you if you want'),
+          title: t('Tu petición entra en la oración de la semana', 'Your request enters the week’s prayer'),
           text: t(
-            'Te podemos acompañar por semanas, llevar tu nombre a la vigilia del mediodía o conectarte con un equipo cerca de donde vives. Solo si tú lo pides.',
-            'We can walk with you for weeks, carry your name into the midday watch, or connect you with a team near where you live. Only if you ask.'
+            'Con el nombre solo si tú lo autorizas. La intercesión corporativa la sostienen equipos de varias congregaciones.',
+            'With your name only if you allow it. Corporate intercession is sustained by teams from several congregations.'
           ),
         },
       ],
@@ -255,8 +286,8 @@ export const ayuda = {
       ],
       submit: t('Enviar petición', 'Send request'),
       note: t(
-        'Tu petición la lee únicamente el equipo de intercesión. No se publica, no se comparte, no se lee en voz alta con tu nombre y no se usa para enviarte promociones.',
-        'Your request is read only by the intercession team. It is not published, not shared, never read aloud with your name, and not used to send you promotions.'
+        'Tu petición la lee únicamente el equipo de intercesión. No se publica, no se comparte, no se lee en voz alta con tu nombre sin permiso y no se usa para enviarte promociones.',
+        'Your request is read only by the intercession team. It is not published, not shared, never read aloud with your name without permission, and not used to send you promotions.'
       ),
     },
     {
@@ -269,36 +300,31 @@ export const ayuda = {
     },
     {
       type: 'cards',
-      title: t('Otras formas de ayuda que damos', 'Other kinds of help we give'),
+      title: t('Otras formas de ayuda', 'Other kinds of help'),
       items: [
         {
-          title: t('Acompañamiento pastoral', 'Pastoral accompaniment'),
+          title: t('Ayuda material y acompañamiento', 'Material help and accompaniment'),
           text: t(
-            'Conversaciones periódicas con una persona del equipo, presenciales o en línea, sin costo.',
-            'Regular conversations with someone from the team, in person or online, at no cost.'
+            'Los programas de Actos de Justicia atienden a familias en riesgo con vivienda, alimentos, útiles escolares y medicinas.',
+            'The Acts of Justice programmes serve families at risk with housing, food, school supplies and medicine.'
           ),
+          href: { es: '/justicia', en: '/en/justice' },
+          cta: t('Ver actos de justicia', 'See acts of justice'),
         },
         {
-          title: t('Ayuda práctica y alimentos', 'Practical help and food'),
+          title: t('Orientación familiar y legal', 'Family and legal guidance'),
           text: t(
-            'Los equipos de compasión entregan alimentos y acompañan a familias en Quito cada semana. Cuéntanos tu caso.',
-            'Compassion teams deliver food and walk with families in Quito every week. Tell us your situation.'
+            'Restauración Familiar ofrece talleres de orientación familiar y relaciones, discipulado y orientación legal.',
+            'Family Restoration offers family and relationship workshops, discipleship and legal guidance.'
           ),
-          href: { es: '/misiones', en: '/en/outreach' },
-          cta: t('Ver misiones', 'See outreach'),
+          href: { es: '/justicia', en: '/en/justice' },
+          cta: t('Ver el programa', 'See the programme'),
         },
         {
-          title: t('Oración por los enfermos', 'Prayer for the sick'),
+          title: t('Oración por tu congregación', 'Prayer for your congregation'),
           text: t(
-            'La vigilia del mediodía se dedica a orar por enfermos por nombre. Envía el nombre y clamamos ese mismo día.',
-            'The midday watch is set apart to pray for the sick by name. Send the name and we cry out that same day.'
-          ),
-        },
-        {
-          title: t('Oración por tu ciudad o tu iglesia', 'Prayer for your city or church'),
-          text: t(
-            'Coordinamos vigilias con iglesias de otras provincias. Si quieres sumar tu equipo a la cobertura, escríbenos.',
-            'We coordinate watches with churches in other provinces. To add your team to the coverage, write to us.'
+            'Si tu iglesia quiere sostener un turno de la semana de oración o recibir entrenamiento, escríbenos.',
+            'If your church wants to hold a shift of the week of prayer or receive training, write to us.'
           ),
           href: { es: '/contacto', en: '/en/contact' },
           cta: t('Escribir', 'Write'),
@@ -310,84 +336,56 @@ export const ayuda = {
 }
 
 export const oracion = {
-  slug: { es: 'oracion', en: 'prayer-room' },
-  title: t(
-    'Sala de oración 24/7 en Quito — vigilias y transmisión en vivo',
-    '24/7 prayer room in Quito — watches and live stream'
-  ),
+  slug: { es: 'oracion', en: 'prayer-24-7' },
+  title: t('Oración 24/7 — cómo se sostiene y cómo sumarse', '24/7 prayer — how it is sustained and how to join'),
   description: t(
-    'Sala de oración con adoración abierta 24 horas en La Carolina, norte de Quito. Doce vigilias diarias de dos horas, entrada libre y transmisión en vivo.',
-    'Prayer room with worship open 24 hours in La Carolina, northern Quito. Twelve daily two-hour watches, free entry and a live stream.'
+    'Adoración e intercesión 24/7 sostenidas cada semana por congregaciones de distintas denominaciones en Ecuador. Estos son los temas que se oran y cómo tomar un turno.',
+    '24/7 worship and intercession sustained each week by congregations from different denominations in Ecuador. These are the themes prayed and how to take a shift.'
   ),
   priority: 0.9,
   sections: [
     {
       type: 'hero',
-      eyebrow: t('La sala', 'The room'),
-      title: t('Abierta las 24 horas. Sin registro, sin ofrenda.', 'Open 24 hours. No registration, no offering.'),
+      eyebrow: t('Oración 24/7', '24/7 prayer'),
+      title: t('Día y noche, cada semana.', 'Day and night, every week.'),
       lead: t(
-        'Un equipo de músicos e intercesores sostiene la oración con adoración en vigilias de dos horas, día y noche. Puedes entrar en cualquier momento, quedarte lo que quieras y salir sin avisar.',
-        'A team of musicians and intercessors sustains prayer with worship in two-hour watches, day and night. You can walk in at any time, stay as long as you like and leave without a word.'
+        'Varios pastores, líderes y hermanos ministran juntos la oración y la adoración en Ecuador Casa de Oración, sosteniendo 24/7 cada semana. La gracia de Dios une cada vez a más pastores y hermanos a este movimiento.',
+        'Pastors, leaders and brothers and sisters minister prayer and worship together in Ecuador Casa de Oración, sustaining 24/7 each week. God’s grace keeps joining more of them to this movement.'
       ),
       actions: [
-        { label: t('Ver en vivo', 'Watch live'), href: site.streamUrl, kind: 'primary', external: true },
-        { label: t('Cómo llegar', 'How to get here'), href: { es: '/contacto', en: '/en/contact' }, kind: 'ghost' },
+        { label: t('Tomar un turno', 'Take a shift'), href: { es: '/contacto', en: '/en/contact' }, kind: 'primary' },
+        { label: t('Pedir oración', 'Ask for prayer'), href: { es: '/ayuda', en: '/en/help' }, kind: 'ghost' },
       ],
-      live: true,
       verse: {
         text: t(
-          '«Mirad, bendecid a Jehová, vosotros todos los siervos de Jehová, los que en la casa de Jehová estáis por las noches.»',
-          '“Behold, bless ye the LORD, all ye servants of the LORD, which by night stand in the house of the LORD.”'
+          '«Sobre tus muros, oh Jerusalén, he puesto guardas; todo el día y toda la noche no callarán jamás.»',
+          '“I have set watchmen upon thy walls, O Jerusalem, which shall never hold their peace day nor night.”'
         ),
-        ref: 'Salmos 134:1',
+        ref: 'Isaías 62:6',
       },
     },
     {
-      type: 'schedule',
-      title: t('Las doce vigilias', 'The twelve watches'),
-      lead: t(
-        'El mismo calendario todos los días del año, incluidos feriados. Cada vigilia tiene un enfoque y un equipo.',
-        'The same calendar every day of the year, holidays included. Each watch has its own focus and team.'
-      ),
-      items: bloques,
-      note: t(
-        'Las vigilias de madrugada son las más silenciosas: si vienes por primera vez y te incomoda la gente, ese es tu momento.',
-        'The night watches are the quietest: if this is your first time and crowds make you uneasy, that is your moment.'
+      type: 'lead',
+      title: t('Intercesión corporativa y adoración profética', 'Corporate intercession and prophetic worship'),
+      text: t(
+        'Trabajamos en relación con el resto del cuerpo de Cristo dentro y fuera del país, a fin de establecer la intercesión corporativa y la adoración profética 24/7 en el espíritu de la intercesión celestial (Ap. 5:8-9) en cada ciudad.',
+        'We work alongside the rest of the body of Christ inside and outside the country, to establish corporate intercession and prophetic worship 24/7 in the spirit of heavenly intercession (Rev. 5:8-9) in every city.'
       ),
     },
     {
       type: 'rows',
-      title: t('Cómo funciona, en concreto', 'How it works, concretely'),
-      items: [
-        {
-          title: t('Entras y te sientas', 'You come in and sit down'),
-          text: t(
-            'Hay un anfitrión en la puerta que te dice dónde sentarte y nada más. No se pasa lista ni se pide el nombre.',
-            'A host at the door shows you where to sit and nothing else. No roll call, no names asked.'
-          ),
-        },
-        {
-          title: t('Nadie te va a señalar', 'Nobody will single you out'),
-          text: t(
-            'No hay predicación dirigida a los visitantes, ni llamados al frente, ni momentos incómodos. La sala adora, tú decides qué haces.',
-            'There is no preaching aimed at visitors, no altar calls, no awkward moments. The room worships; you decide what you do.'
-          ),
-        },
-        {
-          title: t('Puedes pedir oración en el momento', 'You can ask for prayer on the spot'),
-          text: t(
-            'En cada vigilia hay dos personas disponibles para orar contigo aparte, en voz baja, cuando lo pidas.',
-            'In every watch two people are free to pray with you separately, quietly, whenever you ask.'
-          ),
-        },
-        {
-          title: t('Se transmite, pero no se graba a la gente', 'It is streamed, but people are not filmed'),
-          text: t(
-            'La cámara apunta al escenario. Quien está en la sala no aparece en la transmisión.',
-            'The camera points at the stage. Whoever is in the room does not appear on the stream.'
-          ),
-        },
-      ],
+      title: t('Los temas de la intercesión corporativa', 'The themes of corporate intercession'),
+      items: temasIntercesion.map((texto, i) => ({
+        title: [
+          t('El Evangelio del Reino', 'The Gospel of the Kingdom'),
+          t('El sacerdocio real', 'The royal priesthood'),
+          t('El Pacto', 'The Covenant'),
+          t('El gobierno de Dios en las naciones', 'God’s government in the nations'),
+          t('La Palabra en poder', 'The Word in power'),
+          t('La unidad de la Iglesia', 'The unity of the Church'),
+        ][i],
+        text: texto,
+      })),
     },
     {
       type: 'scripture',
@@ -399,17 +397,17 @@ export const oracion = {
     },
     {
       type: 'split',
-      title: t('Si no estás en Quito', 'If you are not in Quito'),
+      title: t('Cómo suma una congregación', 'How a congregation joins'),
       text: t(
-        'La transmisión funciona las 24 horas y llega a todo Ecuador y al exterior. Equipos de Guayaquil, Cuenca y Ambato sostienen su propia vigilia conectados a la sala, con el mismo calendario. El altar no es un edificio: es un pueblo que no calla.',
-        'The stream runs 24 hours and reaches all of Ecuador and beyond. Teams in Guayaquil, Cuenca and Ambato hold their own watch connected to the room, on the same calendar. The altar is not a building: it is a people that will not keep silent.'
+        'No hay que pertenecer a ECO ni firmar nada: una congregación toma un turno de la semana y lo sostiene con su propio equipo. Coordinamos el calendario, acompañamos al equipo y damos el entrenamiento, presencial o en línea. El vínculo con la gente se queda en su iglesia local.',
+        'There is no membership and nothing to sign: a congregation takes a shift of the week and holds it with its own team. We coordinate the calendar, walk with the team and provide the training, in person or online. People’s ties stay with their local church.'
       ),
       items: [
-        t('Transmisión continua, sin cortes entre vigilias', 'Continuous stream, no gaps between watches'),
-        t('Vigilias remotas coordinadas con tu iglesia local', 'Remote watches coordinated with your local church'),
-        t('Línea de oración con cobertura nacional', 'Prayer line with nationwide coverage'),
+        t('Un turno fijo a la semana, sostenido por tu propio equipo', 'One fixed weekly shift, held by your own team'),
+        t('Entrenamiento presencial o en línea para el equipo', 'In-person or online training for the team'),
+        t('Calendario compartido entre las congregaciones del movimiento', 'A calendar shared across the congregations of the movement'),
       ],
-      action: { label: t('Sumar a mi equipo', 'Add my team'), href: { es: '/contacto', en: '/en/contact' } },
+      action: { label: t('Hablar con el equipo', 'Talk to the team'), href: { es: '/contacto', en: '/en/contact' } },
     },
     {
       type: 'figure',
@@ -427,14 +425,13 @@ export const oracion = {
     },
     {
       type: 'cta',
-      title: t('Ven esta noche', 'Come tonight'),
+      title: t('El lugar para que no se apague', 'A place so it never goes out'),
       text: t(
-        'El altar está encendido ahora mismo. Si estás leyendo esto de madrugada, es literal.',
-        'The altar is lit right now. If you are reading this at 3am, that is literal.'
+        `El cuarto de oración —${proyecto.superficie} m² en dos plantas al norte de Quito— es lo que permitirá sostener la oración 24/7 en un solo lugar, todos los días.`,
+        `The prayer room — ${proyecto.superficie} m² over two floors in northern Quito — is what will make it possible to sustain 24/7 prayer in one place, every day.`
       ),
       actions: [
-        { label: t('Cómo llegar', 'How to get here'), href: { es: '/contacto', en: '/en/contact' }, kind: 'primary' },
-        { label: t('Pedir oración', 'Ask for prayer'), href: { es: '/ayuda', en: '/en/help' }, kind: 'ghost' },
+        { label: t('Ver el proyecto', 'See the project'), href: { es: '/proyecto', en: '/en/prayer-room-project' }, kind: 'primary' },
       ],
     },
   ],

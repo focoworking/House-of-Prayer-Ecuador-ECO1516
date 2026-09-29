@@ -22,6 +22,13 @@ Requiere Node 20 o superior.
 
 ## El contenido manda
 
+La **fuente de autoridad del contenido** es el documento «INFORMACIÓN PARA
+PÁGINA WEB ECO» que entregó la casa, volcado en `content/eco.js`: qué es ECO,
+los cuatro objetivos, los seis temas de la intercesión corporativa, el proyecto
+del cuarto de oración con sus tres fases, los programas de Actos de Justicia y
+la oración profética desde los montes. Donde ese archivo y el resto del
+contenido no coincidan, manda ese archivo.
+
 **`content/` es la fuente de verdad.** Los `.html`, `sitemap.xml`,
 `robots.txt`, `llms.txt` y `src/styles/marca.css` son salida de build y están
 en `.gitignore`: no se editan a mano.
@@ -29,10 +36,11 @@ en `.gitignore`: no se editan a mano.
 ```
 content/
   site.js        Marca, paleta, NAP, navegación, pie, líneas de emergencia
-  datos.js       Historia, bloques de la sala, eventos y preguntas
-  pages-core.js  Inicio, ayuda inmediata, sala de oración
-  pages-more.js  Nosotros, formación, misiones, eventos, dar, recursos,
-                 contacto, preguntas, privacidad
+  eco.js         Lo que la casa dice de sí misma (documento fuente)
+  datos.js       Preguntas frecuentes
+  pages-core.js  Inicio, pedir oración, oración 24/7
+  pages-more.js  Nosotros, el proyecto, los montes, justicia, formación,
+                 dar, recursos, contacto, preguntas, privacidad
   pages.js       Ensambla el sitio y resuelve rutas y archivos
 ```
 
@@ -161,11 +169,23 @@ se corre `npm run img` a mano cuando se cambia el arte.
 Los datos marcados `TODO ECO1516` en `content/site.js` son marcadores de
 posición y hay que sustituirlos por los reales:
 
-- Dirección exacta y coordenadas de la sede.
-- Teléfono de oficina y número real de la línea de oración y del WhatsApp.
+- Teléfonos y WhatsApp reales, y en qué horas hay alguien atendiendo. Mientras
+  no esté confirmado, el sitio **no promete atención 24 horas**: dice que
+  respondemos, no que contestamos al instante.
 - Usuarios reales de YouTube, Instagram, Facebook y Spotify.
-- Fechas de los eventos en `content/datos.js` (un `Event` vencido en el
-  marcado resta credibilidad; revisar cada trimestre).
+- El año de inicio del movimiento (`founded`): el documento de la casa no lo
+  dice y la fecha actual viene del encargo inicial.
+- El calendario real de la semana de oración y las próximas convocatorias.
+  `content/datos.js` tiene `bloques` y `eventos` vacíos a propósito, y las
+  secciones `schedule` y `events` del renderizador los dibujan en cuanto se
+  llenen.
+- Las cifras del proyecto (`content/eco.js`) son las del documento: revisarlas
+  antes de cada campaña, porque un costo desactualizado en una página de
+  donaciones erosiona la confianza que esa página necesita.
+
+Lo que **no** se puede afirmar hasta que exista: que hay una sala de oración
+abierta al público las 24 horas. El cuarto de oración está en construcción, y
+el sitio, sus datos estructurados y `llms.txt` lo dicen así.
 
 El NAP —nombre, dirección, teléfono— tiene que quedar **idéntico** aquí, en
 Google Business Profile, en Apple Business Connect, en Bing Places y en cada

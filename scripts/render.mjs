@@ -380,15 +380,21 @@ const bloques = {
       <div class="ficha">
         <div class="ficha__bloque">
           <h3>${esc(T(ui.findUs, lang))}</h3>
-          <address>${esc(a.street)}<br />${esc(a.district)}, ${esc(a.city)}<br />${esc(a.region)}, ${esc(
-            T(a.countryName, lang)
-          )}</address>
+          <address>${[a.street, a.district].filter(Boolean).map(esc).join('<br />')}${
+            [a.street, a.district].filter(Boolean).length ? '<br />' : ''
+          }${esc(a.city)}<br />${esc(a.region)}, ${esc(T(a.countryName, lang))}</address>
           <p class="nota">${esc(
-            T({ es: 'Sala abierta las 24 horas, todos los días.', en: 'Room open 24 hours, every day.' }, lang)
+            T(
+              {
+                es: 'El cuarto de oración está en construcción. Hoy la oración se sostiene en las congregaciones del movimiento.',
+                en: 'The prayer room is under construction. Today prayer is sustained in the congregations of the movement.',
+              },
+              lang
+            )
           )}</p>
         </div>
         <div class="ficha__bloque">
-          <h3>${esc(T({ es: 'Línea de oración 24/7', en: '24/7 prayer line' }, lang))}</h3>
+          <h3>${esc(T({ es: 'Peticiones de oración', en: 'Prayer requests' }, lang))}</h3>
           <p class="ficha__destacado"><a href="tel:${esc(site.prayerLine)}">${esc(site.prayerLineDisplay)}</a></p>
           <p><a href="https://wa.me/${esc(site.whatsapp)}" target="_blank" rel="noopener">${esc(
             T(ui.whatsapp, lang)

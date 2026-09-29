@@ -1,29 +1,33 @@
 /**
- * Nosotros, formacion, misiones, eventos, dar, recursos, contacto,
- * preguntas y privacidad.
+ * Nosotros, el proyecto del cuarto de oración, los montes, actos de
+ * justicia, formación, dar, recursos, contacto, preguntas y privacidad.
+ *
+ * Todo sale del documento «INFORMACIÓN PARA PÁGINA WEB ECO» —ver
+ * content/eco.js—. Las citas conservan la versión que usa ese documento:
+ * RVR1960 salvo donde dice NVI, y entonces se marca NVI.
  */
 import { t, site, emergencia } from './site.js'
-import { historia, preguntas } from './datos.js'
+import { queEs, objetivos, temasIntercesion, proyecto, actosDeJusticia, beneficiarios, montes as montesTexto } from './eco.js'
+import { preguntas } from './datos.js'
+
+const dolares = (n) => `$${n.toLocaleString('en-US')}`
 
 export const nosotros = {
   slug: { es: 'nosotros', en: 'about' },
-  title: t(
-    'Quiénes somos — quince años de oración continua en Ecuador',
-    'About us — fifteen years of continuous prayer in Ecuador'
-  ),
+  title: t('Quiénes somos — ECO, movimiento de oración de Ecuador', 'About us — ECO, a prayer movement of Ecuador'),
   description: t(
-    'Nació en 2011 en una sala prestada en Quito y hoy sostiene oración con adoración 24 horas, una escuela y equipos de misión en cinco provincias. La historia, fechada.',
-    'It began in 2011 in a borrowed living room in Quito and today sustains 24-hour prayer with worship, a school and outreach teams in five provinces. The story, dated.'
+    'ECO reúne a pastores, congregaciones y ministerios de distintas denominaciones de Ecuador en adoración e intercesión 24/7. Estos son sus cuatro objetivos.',
+    'ECO gathers pastors, congregations and ministries from different denominations in Ecuador in 24/7 worship and intercession. These are its aims and what it holds to.'
   ),
   priority: 0.8,
   sections: [
     {
       type: 'hero',
-      eyebrow: t('Desde 2011', 'Since 2011'),
-      title: t('Una casa joven con quince años de altar', 'A young house with fifteen years of altar'),
+      eyebrow: t('Quiénes somos', 'About us'),
+      title: t('Un movimiento, no una denominación.', 'A movement, not a denomination.'),
       lead: t(
-        'No llegamos de afuera ni copiamos un modelo. Empezamos con doce personas, aprendimos a sostener vigilias y el Señor fue añadiendo hasta cubrir el día entero. Esto es lo que hay y lo que no hay.',
-        'We did not arrive from outside or copy a model. We began with twelve people, learned to hold watches, and the Lord kept adding until the whole day was covered. Here is what exists and what does not.'
+        'ECO no es una iglesia más ni pide que nadie deje la suya. Es la Iglesia de Ecuador orando junta: pastores, congregaciones y ministerios de tradiciones distintas que sostienen un mismo altar.',
+        'ECO is not another church and asks no one to leave theirs. It is the Church of Ecuador praying together: pastors, congregations and ministries from different traditions holding one altar.'
       ),
       verse: {
         text: t(
@@ -33,220 +37,240 @@ export const nosotros = {
         ref: 'Hechos 15:16',
       },
     },
-    {
-      type: 'lead',
-      title: t('Qué somos', 'What we are'),
-      text: t(
-        'Somos una casa de oración: un lugar donde se adora y se intercede sin interrupción, y desde donde salen equipos a servir a la ciudad. Nuestro llamado es establecer la oración como cultura de la Iglesia ecuatoriana y como el medio del gobierno de Dios en Ecuador. No somos una denominación y no pedimos que nadie deje su iglesia: trabajamos con hermanos de tradiciones distintas y sostenemos una sola cosa en común, el altar encendido.',
-        'We are a house of prayer: a place where worship and intercession go on without interruption, and from which teams go out to serve the city. Our call is to establish prayer as the culture of the Ecuadorian Church and as the means of God’s government in Ecuador. We are not a denomination and we do not ask anyone to leave their church: we work with believers from different traditions and hold one thing in common, the altar lit.'
-      ),
-    },
+    { type: 'lead', title: t('Qué es ECO', 'What ECO is'), text: queEs },
     {
       type: 'rows',
-      title: t('Lo que sostenemos', 'What we hold to'),
-      items: [
-        {
-          title: t('La oración es la obra, no la antesala de la obra', 'Prayer is the work, not the warm-up'),
-          text: t(
-            'Las doce vigilias diarias no preparan otra cosa: son la cosa. Todo lo demás —escuela, misiones, congregación— nace del altar y vuelve a él.',
-            'The twelve daily watches do not prepare for something else: they are the thing. Everything else — school, outreach, congregation — is born at the altar and returns to it.'
-          ),
-        },
-        {
-          title: t('La ayuda no se condiciona', 'Help is never conditional'),
-          text: t(
-            'Nadie tiene que creer, dar ni asistir a nada para recibir oración, alimento o acompañamiento.',
-            'Nobody has to believe, give or attend anything to receive prayer, food or accompaniment.'
-          ),
-        },
-        {
-          title: t('Las cuentas se publican', 'The books are published'),
-          text: t(
-            'Informe de uso de fondos cada semestre, con el desglose por área. Si algo no se puede explicar, no se hace.',
-            'A use-of-funds report every six months, broken down by area. If something cannot be explained, it is not done.'
-          ),
-        },
-        {
-          title: t('Nadie sirve solo', 'Nobody serves alone'),
-          text: t(
-            'Toda vigilia tiene dos personas como mínimo y todo equipo sale de dos en dos, como fueron enviados los setenta. También en la línea telefónica.',
-            'Every watch has at least two people and every team goes out two by two, as the seventy were sent. The phone line too.'
-          ),
-        },
-      ],
+      title: t('Los cuatro objetivos', 'The four aims'),
+      items: objetivos.map((texto, i) => ({
+        title: [
+          t('Oración 24/7 como cultura', '24/7 prayer as culture'),
+          t('Equipar a la Iglesia', 'Equipping the Church'),
+          t('Preparar a la Novia', 'Preparing the Bride'),
+          t('Una generación de discípulos íntimos', 'A generation of intimate disciples'),
+        ][i],
+        text: texto,
+      })),
     },
     {
-      type: 'scripture',
+      type: 'lead',
+      title: t('La Gran Comisión', 'The Great Commission'),
       text: t(
-        'Si se humillare mi pueblo, sobre el cual mi nombre es invocado, y oraren, y buscaren mi rostro, y se convirtieren de sus malos caminos; entonces yo oiré desde los cielos, y perdonaré sus pecados, y sanaré su tierra.',
-        'If my people, which are called by my name, shall humble themselves, and pray, and seek my face, and turn from their wicked ways; then will I hear from heaven, and will forgive their sin, and will heal their land.'
+        'ECO promueve la Gran Comisión y la predicación del Evangelio del Reino de Dios con sanidades y milagros, movilizando a familias, pequeños y grandes, para salir a las calles en busca de los perdidos.',
+        'ECO promotes the Great Commission and the preaching of the Gospel of the Kingdom with healings and miracles, mobilising families, young and old, to go out to the streets in search of the lost.'
       ),
-      ref: '2 Crónicas 7:14',
     },
-    { type: 'timeline', title: t('Quince años, fechados', 'Fifteen years, dated'), items: historia },
     {
       type: 'checklist',
       title: t('Lo que no hacemos', 'What we do not do'),
       items: [
-        t('No cobramos por oración, por acompañamiento ni por entrar a la sala.', 'We do not charge for prayer, accompaniment or entry to the room.'),
-        t('No vendemos sanidad, milagros ni profecía: creemos que Dios sana, y no cobramos por ello ni lo condicionamos a una ofrenda.', 'We do not sell healing, miracles or prophecy: we believe God heals, and we neither charge for it nor make it conditional on an offering.'),
+        t('No cobramos por oración, por entrenamiento ni por la ayuda de los programas de justicia.', 'We do not charge for prayer, training, or the help given through the justice programmes.'),
+        t('No vendemos sanidad, milagros ni profecía: creemos que Dios sana, y no lo condicionamos a una ofrenda.', 'We do not sell healing, miracles or prophecy: we believe God heals, and we never make it conditional on an offering.'),
+        t('No pedimos a nadie que deje su congregación ni que rinda cuentas a ECO en lugar de a su pastor.', 'We do not ask anyone to leave their congregation or to be accountable to ECO instead of their pastor.'),
         t('No publicamos peticiones de oración ni nombres sin permiso explícito.', 'We do not publish prayer requests or names without explicit permission.'),
         t('No reemplazamos atención médica, psicológica ni servicios de emergencia.', 'We do not replace medical care, psychological care or emergency services.'),
       ],
     },
     {
+      type: 'scripture',
+      text: t(
+        'Porque la tierra será llena del conocimiento de la gloria de Jehová, como las aguas cubren el mar.',
+        'For the earth shall be filled with the knowledge of the glory of the LORD, as the waters cover the sea.'
+      ),
+      ref: 'Habacuc 2:14',
+    },
+    {
+      type: 'lead',
+      title: t('La restauración del tabernáculo de David', 'The restoration of David’s tabernacle'),
+      text: t(
+        'Una de las profecías para los últimos tiempos es la restauración del Tabernáculo de David (Hch. 15:16-17). Creemos que vivimos en el tiempo de la generación en la cual el Señor regresará. ECO busca preparar a esta generación de creyentes con un corazón conforme al de Dios: creyentes que adoren, sirvan y amen a Dios con todo el corazón, con una pasión santa. Estableceremos la oración incesante día y noche hasta que la gloria y el conocimiento de Dios alcancen los confines de la tierra.',
+        'One of the prophecies for the last days is the restoration of the Tabernacle of David (Acts 15:16-17). We believe we live in the time of the generation in which the Lord will return. ECO seeks to prepare this generation of believers with a heart after God’s own: believers who worship, serve and love God with all their heart, with a holy passion. We will establish unceasing prayer day and night until the glory and knowledge of God reach the ends of the earth.'
+      ),
+    },
+    {
       type: 'cta',
-      title: t('Ven a verlo', 'Come and see'),
-      text: t('La forma más rápida de saber si esto es real es entrar a la sala una madrugada.', 'The fastest way to know if this is real is to walk into the room at 3am.'),
+      title: t('Ora con nosotros', 'Pray with us'),
+      text: t('La forma más rápida de conocer este movimiento es tomar un turno de la semana de oración.', 'The fastest way to know this movement is to take a shift in the week of prayer.'),
       actions: [
-        { label: t('Cómo llegar', 'How to get here'), href: { es: '/contacto', en: '/en/contact' }, kind: 'primary' },
-        { label: t('Ver la sala', 'See the room'), href: { es: '/oracion', en: '/en/prayer-room' }, kind: 'ghost' },
+        { label: t('Ver la oración 24/7', 'See the 24/7 prayer'), href: { es: '/oracion', en: '/en/prayer-24-7' }, kind: 'primary' },
+        { label: t('Escribirnos', 'Write to us'), href: { es: '/contacto', en: '/en/contact' }, kind: 'ghost' },
       ],
     },
   ],
 }
 
-export const formacion = {
-  slug: { es: 'formacion', en: 'training' },
+export const proyectoPagina = {
+  slug: { es: 'proyecto', en: 'prayer-room-project' },
   title: t(
-    'Formación — internado y escuela de adoración en Quito',
-    'Training — six-month internship and worship school in Quito'
+    'El Cuarto de Oración — proyecto de construcción en Quito',
+    'The Prayer Room — a building project in Quito'
   ),
   description: t(
-    'Internado presencial de seis meses en oración, adoración, estudio bíblico y misión urbana en Quito, con becas para quien no puede pagar.',
-    'A six-month residential internship in prayer, worship, Bible study and urban mission in Quito, with scholarships for those who cannot pay.'
+    'Un lugar físico para la oración 24/7 al norte de Quito: 200 m² en dos plantas y tres fases, con un costo aproximado de $200.000.',
+    'A physical place for 24/7 prayer in northern Quito: 200 m² over two floors, in three phases, at an approximate cost of $200,000. You can give towards any of them.'
   ),
-  priority: 0.8,
+  priority: 0.85,
   sections: [
     {
       type: 'hero',
-      eyebrow: t('Escuela', 'School'),
-      title: t('Seis meses que cambian el ritmo de una vida', 'Six months that change the rhythm of a life'),
-      lead: t(
-        'El internado combina vigilias reales en la sala, estudio bíblico, formación musical y salidas semanales de misión urbana. No es un retiro: se sirve desde el primer día y se aprende a orar orando.',
-        'The internship combines real watches in the room, Bible study, musical training and weekly urban outreach. It is not a retreat: you serve from day one and you learn to pray by praying.'
-      ),
+      eyebrow: t('Proyecto', 'Project'),
+      title: t('El lugar de reposo de Dios', 'The resting place of God'),
+      lead: proyecto.descripcion,
+      actions: [
+        { label: t('Sembrar en el proyecto', 'Give towards the project'), href: { es: '/dar', en: '/en/give' }, kind: 'primary' },
+        { label: t('Hablar con el equipo', 'Talk to the team'), href: { es: '/contacto', en: '/en/contact' }, kind: 'ghost' },
+      ],
       verse: {
         text: t(
-          '«Y después de esto derramaré mi Espíritu sobre toda carne, y profetizarán vuestros hijos y vuestras hijas.»',
-          '“And it shall come to pass afterward, that I will pour out my spirit upon all flesh; and your sons and your daughters shall prophesy.”'
+          '«Mi casa, casa de oración será llamada.»',
+          '“My house shall be called the house of prayer.”'
         ),
-        ref: 'Joel 2:28',
+        ref: 'Mateo 21:13',
       },
-      actions: [
-        { label: t('Postular', 'Apply'), href: { es: '/contacto', en: '/en/contact' }, kind: 'primary' },
-        { label: t('Ver fechas', 'See dates'), href: { es: '/eventos', en: '/en/events' }, kind: 'ghost' },
+    },
+    {
+      type: 'stats',
+      items: [
+        { value: `${proyecto.superficie} m²`, label: t('En dos plantas, al norte de Quito', 'Over two floors, in northern Quito') },
+        { value: dolares(proyecto.costoTotal), label: t('Costo aproximado del proyecto', 'Approximate cost of the project') },
+        { value: '3', label: t('Fases, y se puede sembrar en cualquiera', 'Phases — you can give towards any of them') },
       ],
+    },
+    {
+      type: 'rows',
+      title: t('Qué se construye', 'What is being built'),
+      items: proyecto.programa.map((texto, i) => ({
+        title: [t('Primer piso', 'Ground floor'), t('Segundo piso', 'First floor')][i],
+        text: texto,
+      })),
     },
     {
       type: 'cards',
-      title: t('Tres programas', 'Three programmes'),
-      items: [
-        {
-          title: t('Internado de seis meses', 'Six-month internship'),
-          text: t(
-            'Presencial en Quito, dos cohortes al año (enero y julio). Veinte horas semanales entre sala, aula y misión. Con becas completas y parciales.',
-            'Residential in Quito, two cohorts a year (January and July). Twenty weekly hours across room, classroom and outreach. Full and partial scholarships available.'
-          ),
-        },
-        {
-          title: t('Escuela de adoración', 'Worship school'),
-          text: t(
-            'Doce semanas para músicos y cantantes que quieren sostener turnos: repertorio, dinámica de equipo, sonido y liderazgo desde el instrumento.',
-            'Twelve weeks for musicians and singers who want to hold watches: repertoire, team dynamics, sound and leading from the instrument.'
-          ),
-        },
-        {
-          title: t('Turnos abiertos', 'Open watches'),
-          text: t(
-            'Sin aula y sin costo: tomas un turno fijo a la semana durante tres meses y aprendes sirviendo, acompañado por un equipo.',
-            'No classroom, no cost: you take one fixed weekly watch for three months and learn by serving, alongside a team.'
-          ),
-        },
-      ],
+      title: t('Las tres fases', 'The three phases'),
+      lead: t(
+        `Tomando como referencia el costo de construcción en Quito, ${dolares(proyecto.costoMetro)} por metro cuadrado con acabados medios.`,
+        `Based on construction costs in Quito, ${dolares(proyecto.costoMetro)} per square metre with mid-range finishes.`
+      ),
+      items: proyecto.fases.map((fase) => ({
+        title: fase.nombre,
+        text: t(
+          `${fase.detalle.es} Costo aproximado: ${dolares(fase.costo)} dólares americanos.`,
+          `${fase.detalle.en} Approximate cost: ${dolares(fase.costo)} US dollars.`
+        ),
+      })),
     },
     {
-      type: 'steps',
-      title: t('Cómo se postula', 'How to apply'),
-      items: [
-        { title: t('Escribes', 'You write'), text: t('Un correo o un WhatsApp contando quién eres y por qué. Sin formularios de diez páginas.', 'An email or a WhatsApp saying who you are and why. No ten-page forms.') },
-        { title: t('Conversamos', 'We talk'), text: t('Una conversación de una hora, presencial o en línea, con dos personas del equipo.', 'A one-hour conversation, in person or online, with two people from the team.') },
-        { title: t('Visitas una semana', 'You visit for a week'), text: t('Antes de decidir, haces una semana completa de turnos. Si no encaja, no pasa nada.', 'Before deciding, you do a full week of watches. If it does not fit, that is fine.') },
-        { title: t('Entras a la cohorte', 'You join the cohort'), text: t('Con beca si la necesitas. El dinero nunca es el filtro.', 'With a scholarship if you need one. Money is never the filter.') },
-      ],
+      type: 'lead',
+      title: t('Por qué un lugar físico', 'Why a physical place'),
+      text: t(
+        'La Palabra identifica a la Iglesia como Templo de Oración y medio del gobierno de Dios en las naciones. Un lugar propio permite que pastores y creyentes de todas las congregaciones se reúnan para la oración 24/7 sin depender de agendas prestadas ni de salones compartidos.',
+        'Scripture identifies the Church as a Temple of Prayer and the means of God’s government in the nations. A place of our own lets pastors and believers from every congregation gather for 24/7 prayer without depending on borrowed schedules or shared halls.'
+      ),
     },
     {
-      type: 'faq',
-      title: t('Sobre la formación', 'About the training'),
-      items: [
-        {
-          q: t('¿Cuánto cuesta el internado?', 'How much does the internship cost?'),
-          a: t(
-            'El internado tiene un costo de sostenimiento mensual, y existe beca completa o parcial para quien no puede cubrirlo. Nadie queda fuera por dinero: se postula igual y se resuelve en la conversación.',
-            'The internship has a monthly sustaining cost, with full or partial scholarships for those who cannot cover it. Nobody is left out over money: you apply the same way and it is resolved in the conversation.'
-          ),
-        },
-        {
-          q: t('¿Necesito saber tocar un instrumento?', 'Do I need to play an instrument?'),
-          a: t(
-            'No para el internado. La escuela de adoración sí pide nivel intermedio en tu instrumento o en voz, porque se entra directo a sostener turnos con el equipo.',
-            'Not for the internship. The worship school does require intermediate level on your instrument or voice, because you go straight into holding watches with the team.'
-          ),
-        },
-        {
-          q: t('¿Hay alojamiento?', 'Is housing available?'),
-          a: t(
-            'Hay casas de estudiantes con cupos limitados cerca de la sede, en el norte de Quito, y ayudamos a coordinar alojamiento compartido para quienes vienen de otras provincias.',
-            'There are student houses with limited places near the base, in northern Quito, and we help arrange shared housing for those coming from other provinces.'
-          ),
-        },
+      type: 'cta',
+      title: t('Te invitamos a ser parte de este proyecto', 'We invite you to be part of this project'),
+      text: t('Agradecemos tus donaciones y tus oraciones.', 'We are grateful for your giving and your prayers.'),
+      actions: [
+        { label: t('Quiero sembrar', 'I want to give'), href: { es: '/dar', en: '/en/give' }, kind: 'primary' },
       ],
-      schema: true,
     },
   ],
 }
 
-export const misiones = {
-  slug: { es: 'misiones', en: 'outreach' },
-  title: t(
-    'Misiones y compasión — equipos en cinco provincias del Ecuador',
-    'Outreach and compassion — teams in five provinces of Ecuador'
-  ),
+export const montes = {
+  slug: { es: 'montes', en: 'mountains' },
+  title: t('Oración profética desde los montes', 'Prophetic prayer from the mountains'),
   description: t(
-    'Equipos semanales de compasión en Quito y salidas mensuales a cinco provincias: alimentos, acompañamiento a familias y oración en la calle.',
-    'Weekly compassion teams in Quito and monthly trips to Pichincha, Guayas, Azuay, Tungurahua and Santo Domingo: food, family accompaniment and prayer on the street.'
+    'Movilizamos a la Iglesia a los montes para proclamar desde las alturas el mensaje del Reino a las naciones, alzando sus banderas con oraciones y cánticos proféticos.',
+    'We mobilise the Church to the mountains to proclaim the message of the Kingdom to the nations from the heights, raising their flags with prayers and prophetic songs.'
+  ),
+  priority: 0.7,
+  sections: [
+    {
+      type: 'hero',
+      eyebrow: t('Desde las alturas', 'From the heights'),
+      title: t('Oración profética desde los montes', 'Prophetic prayer from the mountains'),
+      lead: montesTexto.texto,
+      verse: {
+        text: t(
+          '«Portadora de buenas noticias a Sión, súbete a una alta montaña. Portadora de buenas noticias a Jerusalén, alza con fuerza tu voz.»',
+          '“You who bring good news to Zion, go up on a high mountain. You who bring good news to Jerusalem, lift up your voice with a shout.”'
+        ),
+        ref: 'Isaías 40:9 (NVI)',
+      },
+    },
+    {
+      type: 'figure',
+      src: '/img/amanecer.png',
+      w: 2000,
+      h: 1125,
+      alt: t(
+        'Amanecer sobre la cordillera andina, con las cadenas de montañas cada vez más claras hacia el horizonte.',
+        'Dawn over the Andean cordillera, ranges growing paler towards the horizon.'
+      ),
+      caption: t(
+        'Los montes del Ecuador, desde donde se proclama el mensaje del Reino a las naciones.',
+        'The mountains of Ecuador, from which the message of the Kingdom is proclaimed to the nations.'
+      ),
+    },
+    {
+      type: 'lead',
+      title: t('Las banderas de las naciones', 'The flags of the nations'),
+      text: montesTexto.banderas,
+    },
+    {
+      type: 'scripture',
+      text: t(
+        '«Álzala, no temas; di a las ciudades de Judá: “¡Aquí está su Dios!”. Miren, el Señor y Dios llega con poder y con su brazo gobierna. Su galardón lo acompaña; su recompensa lo precede.»',
+        '“Lift it up, do not be afraid; say to the towns of Judah, ‘Here is your God!’ See, the Sovereign LORD comes with power, and he rules with a mighty arm. See, his reward is with him, and his recompense accompanies him.”'
+      ),
+      ref: 'Isaías 40:9-10 (NVI)',
+    },
+    {
+      type: 'cta',
+      title: t('Sube con nosotros', 'Come up with us'),
+      text: t(
+        'Escríbenos para saber cuándo es la próxima subida y cómo prepararte.',
+        'Write to us to find out when the next climb is and how to prepare.'
+      ),
+      actions: [{ label: t('Escribir', 'Write'), href: { es: '/contacto', en: '/en/contact' }, kind: 'primary' }],
+    },
+  ],
+}
+
+export const justicia = {
+  slug: { es: 'justicia', en: 'justice' },
+  title: t('Actos de justicia — vivienda, familia y misiones integrales', 'Acts of justice — housing, family and integral missions'),
+  description: t(
+    'Vivienda solidaria, restauración familiar y misiones integrales para niños, madres solteras, personas enfermas, adultos mayores y familias vulnerables en Ecuador.',
+    'Solidarity housing, family restoration and integral missions for children, single mothers, the sick, the elderly and vulnerable families in Ecuador.'
   ),
   priority: 0.8,
   sections: [
     {
       type: 'hero',
-      eyebrow: t('Misiones', 'Outreach'),
-      title: t('Lo que se clama en el altar se camina en la calle', 'What is cried out at the altar is walked in the street'),
+      eyebrow: t('Actos de justicia', 'Acts of justice'),
+      title: t('El amor al prójimo se demuestra haciendo.', 'Love of neighbour is shown by doing.'),
       lead: t(
-        'Cada semana salen equipos de la sala a entregar alimentos, acompañar familias y orar con quien lo pida, en barrios de Quito y una vez al mes en otras provincias. La intercesión que no toca la puerta del vecino se quedó a mitad de camino.',
-        'Every week teams go out from the room to deliver food, walk with families and pray with whoever asks, in Quito neighbourhoods and once a month in other provinces. Intercession that never knocks on a neighbour’s door stopped halfway.'
+        'Nuestra pasión por Dios y el amor al prójimo nos conmueve a realizar actos de justicia en favor de las personas más vulnerables. Por esta razón la ayuda a los más necesitados forma parte de nuestro estilo de vida y servicio.',
+        'Our passion for God and love for our neighbour moves us to acts of justice for the most vulnerable. That is why helping those in greatest need is part of our way of life and service.'
       ),
+      actions: [
+        { label: t('Quiero ayudar', 'I want to help'), href: { es: '/contacto', en: '/en/contact' }, kind: 'primary' },
+        { label: t('Necesito ayuda', 'I need help'), href: { es: '/ayuda', en: '/en/help' }, kind: 'ghost' },
+      ],
       verse: {
         text: t(
-          '«Porque la tierra será llena del conocimiento de la gloria de Jehová, como las aguas cubren el mar.»',
-          '“For the earth shall be filled with the knowledge of the glory of the LORD, as the waters cover the sea.”'
+          '«Sólo nos pidieron que nos acordáramos de los pobres, y eso es precisamente lo que he venido haciendo con esmero.»',
+          '“All they asked was that we should continue to remember the poor, the very thing I had been eager to do all along.”'
         ),
-        ref: 'Habacuc 2:14',
+        ref: 'Gálatas 2:10 (NVI)',
       },
-      actions: [
-        { label: t('Sumarme a un equipo', 'Join a team'), href: { es: '/contacto', en: '/en/contact' }, kind: 'primary' },
-        { label: t('Sostener una salida', 'Fund a trip'), href: { es: '/dar', en: '/en/give' }, kind: 'ghost' },
-      ],
     },
     {
       type: 'cards',
-      title: t('Qué hacen los equipos', 'What the teams do'),
-      items: [
-        { title: t('Alimentos', 'Food'), text: t('Entrega semanal de raciones y canastas en barrios del sur y del noroccidente de Quito.', 'Weekly delivery of meals and food baskets in southern and north-western Quito neighbourhoods.') },
-        { title: t('Acompañamiento a familias', 'Family accompaniment'), text: t('Visitas periódicas a familias en crisis: escuchar, orar y conectar con servicios públicos cuando hace falta.', 'Regular visits to families in crisis: listening, praying and connecting them to public services when needed.') },
-        { title: t('Hospitales y casas de acogida', 'Hospitals and shelters'), text: t('Visitas coordinadas con capellanía y con las instituciones, nunca por sorpresa.', 'Visits coordinated with chaplaincy and the institutions, never unannounced.') },
-        { title: t('Salidas a provincias', 'Trips to the provinces'), text: t('Una salida al mes con una iglesia local que recibe y coordina: el equipo apoya, no dirige.', 'One trip a month with a host local church that coordinates: the team supports, it does not take over.') },
-      ],
+      title: t('Los tres programas', 'The three programmes'),
+      items: actosDeJusticia.map((programa) => ({ title: programa.nombre, text: programa.texto })),
     },
     {
       type: 'figure',
@@ -258,60 +282,102 @@ export const misiones = {
         'Quito at dawn seen from the hillside: towers in lavender against a pale sky.'
       ),
       caption: t(
-        'Cada ventana de esta ciudad es una casa por la que se ora por nombre en la vigilia de las 16:00.',
-        'Every window in this city is a household prayed for by name in the 4pm watch.'
+        'Los barrios marginados de las ciudades grandes y las comunidades del campo son donde trabajan los programas.',
+        'The marginalised neighbourhoods of the large cities and the rural communities are where the programmes work.'
       ),
     },
     {
-      type: 'stats',
-      items: [
-        { value: '5', label: t('Provincias con salidas mensuales', 'Provinces with monthly trips') },
-        { value: '52', label: t('Salidas al año en Quito', 'Trips a year in Quito') },
-        { value: '0', label: t('Costo para quien recibe', 'Cost to those who receive') },
-      ],
+      type: 'lead',
+      title: t('A quiénes benefician', 'Who they serve'),
+      text: beneficiarios,
     },
     {
-      type: 'split',
-      title: t('Cómo trabajamos con iglesias locales', 'How we work with local churches'),
+      type: 'lead',
+      title: t('No podemos solos', 'We cannot do it alone'),
       text: t(
-        'No abrimos sedes. Cuando una iglesia de otra provincia quiere sostener turnos o recibir un equipo, la iglesia local dirige y nosotros aportamos formación, calendario y músicos. El vínculo con la gente queda ahí, no con nosotros.',
-        'We do not plant branches. When a church in another province wants to hold watches or host a team, the local church leads and we contribute training, calendar and musicians. The relationship with people stays there, not with us.'
+        'La necesidad está más allá de nuestras posibilidades y solos no la podemos sobrellevar. Le invitamos a unirse a esta noble causa apoyándonos de la manera que sea posible.',
+        'The need is beyond our means and we cannot carry it alone. We invite you to join this noble cause, supporting us in whatever way you can.'
       ),
-      items: [
-        t('Formación de equipo en dos fines de semana', 'Team training over two weekends'),
-        t('Calendario de turnos compartido con la sala', 'Watch calendar shared with the room'),
-        t('Acompañamiento mensual durante el primer año', 'Monthly accompaniment through the first year'),
+    },
+    {
+      type: 'cta',
+      title: t('Súmate como puedas', 'Join in however you can'),
+      text: t(
+        'Con tiempo, con materiales, con oficio o con una siembra. Cuéntanos qué puedes aportar y lo encajamos donde más falta hace.',
+        'With time, materials, a trade or a gift. Tell us what you can offer and we will put it where it is most needed.'
+      ),
+      actions: [
+        { label: t('Escribir', 'Write'), href: { es: '/contacto', en: '/en/contact' }, kind: 'primary' },
+        { label: t('Dar', 'Give'), href: { es: '/dar', en: '/en/give' }, kind: 'ghost' },
       ],
-      action: { label: t('Hablar con el equipo', 'Talk to the team'), href: { es: '/contacto', en: '/en/contact' } },
     },
   ],
 }
 
-export const eventos = {
-  slug: { es: 'eventos', en: 'events' },
-  title: t('Eventos y conferencias — Ecuador Casa de Oración', 'Events and conferences — Ecuador Casa de Oración'),
+export const formacion = {
+  slug: { es: 'formacion', en: 'training' },
+  title: t('Entrenamientos y conferencias — ECO', 'Training and conferences — ECO'),
   description: t(
-    'Vigilias, conferencias y cohortes del internado en Quito. Entrada libre o aporte voluntario, con transmisión en vivo para el resto de Ecuador.',
-    'Vigils, conferences and internship cohorts in Quito. Free entry or voluntary offering, streamed live for the rest of Ecuador.'
+    'Entrenamientos presenciales y en línea y conferencias en diferentes países, para restaurar y establecer la oración 24/7 en la Iglesia.',
+    'In-person and online training and conferences in different countries, to restore and establish 24/7 prayer in the Church.'
   ),
-  priority: 0.7,
+  priority: 0.75,
   sections: [
     {
       type: 'hero',
-      eyebrow: t('Agenda', 'Calendar'),
-      title: t('Lo que viene', 'What is coming'),
+      eyebrow: t('Formación', 'Training'),
+      title: t('Equipar a la Iglesia para sostener el altar.', 'Equipping the Church to hold the altar.'),
       lead: t(
-        'Además de los doce bloques diarios, hay vigilias, conferencias y cohortes con fecha fija. Todo entra por la misma puerta: sin costo o con aporte voluntario.',
-        'Beyond the twelve daily watches there are vigils, conferences and cohorts with fixed dates. Everything comes through the same door: free, or by voluntary offering.'
+        'ECO sirve a la Iglesia de Cristo con entrenamientos presenciales y en línea, y con conferencias en diferentes países, con el firme propósito de establecer la oración como la Cultura de la Iglesia y el medio del gobierno de Dios en la tierra.',
+        'ECO serves the Church of Christ with in-person and online training, and with conferences in different countries, with the firm purpose of establishing prayer as the Culture of the Church and the means of God’s government on the earth.'
       ),
+      actions: [{ label: t('Pedir información', 'Ask for details'), href: { es: '/contacto', en: '/en/contact' }, kind: 'primary' }],
+      verse: {
+        text: t(
+          '«Y después de esto derramaré mi Espíritu sobre toda carne, y profetizarán vuestros hijos y vuestras hijas.»',
+          '“And it shall come to pass afterward, that I will pour out my spirit upon all flesh; and your sons and your daughters shall prophesy.”'
+        ),
+        ref: 'Joel 2:28',
+      },
     },
-    { type: 'events', title: t('Próximos eventos', 'Upcoming events'), schema: true },
+    {
+      type: 'cards',
+      title: t('Tres formas de recibirlo', 'Three ways to receive it'),
+      items: [
+        {
+          title: t('Entrenamiento presencial', 'In-person training'),
+          text: t(
+            'Para el equipo de una congregación que va a tomar un turno de la semana de oración: intercesión corporativa, adoración profética y cómo se sostiene un turno.',
+            'For the team of a congregation about to take a shift in the week of prayer: corporate intercession, prophetic worship, and how a shift is held.'
+          ),
+        },
+        {
+          title: t('Entrenamiento en línea', 'Online training'),
+          text: t(
+            'El mismo contenido para equipos de otras ciudades y de otros países, sin que nadie tenga que viajar.',
+            'The same content for teams in other cities and countries, with nobody having to travel.'
+          ),
+        },
+        {
+          title: t('Conferencias', 'Conferences'),
+          text: t(
+            'En Ecuador y en diferentes países, en relación con el resto del cuerpo de Cristo dentro y fuera del país.',
+            'In Ecuador and in different countries, alongside the rest of the body of Christ inside and outside the country.'
+          ),
+        },
+      ],
+    },
+    {
+      type: 'lead',
+      title: t('Para qué', 'What it is for'),
+      text: objetivos[1],
+    },
     {
       type: 'cta',
-      title: t('¿Vienes de otra ciudad?', 'Coming from another city?'),
+      title: t('Pide el entrenamiento para tu equipo', 'Request the training for your team'),
       text: t(
-        'Ayudamos a coordinar alojamiento compartido para equipos que viajan a una vigilia o conferencia. Avísanos con dos semanas.',
-        'We help arrange shared housing for teams travelling to a vigil or conference. Give us two weeks’ notice.'
+        'Cuéntanos de qué congregación vienen, cuántos son y si lo quieren presencial o en línea.',
+        'Tell us which congregation you come from, how many you are, and whether you want it in person or online.'
       ),
       actions: [{ label: t('Escribir', 'Write'), href: { es: '/contacto', en: '/en/contact' }, kind: 'primary' }],
     },
@@ -320,57 +386,78 @@ export const eventos = {
 
 export const dar = {
   slug: { es: 'dar', en: 'give' },
-  title: t('Dar — sostén la sala, las becas y la ayuda directa', 'Give — sustain the room, the scholarships and direct aid'),
+  title: t('Dar — sostén el cuarto de oración y los actos de justicia', 'Give — sustain the prayer room and the acts of justice'),
   description: t(
-    'Tu donación sostiene tres cosas: los equipos de la sala 24/7, las becas del internado y la ayuda directa en misiones. Publicamos el uso de fondos cada semestre.',
-    'Your giving sustains three things: the 24/7 room teams, internship scholarships and direct aid in outreach. We publish the use of funds every six months.'
+    'Tu siembra sostiene tres cosas: la construcción del cuarto de oración al norte de Quito, los entrenamientos para la Iglesia y los programas de Actos de Justicia.',
+    'Your giving sustains three things: building the prayer room in northern Quito, training for the Church, and the Acts of Justice programmes.'
   ),
-  priority: 0.7,
+  priority: 0.8,
   sections: [
     {
       type: 'hero',
       eyebrow: t('Dar', 'Give'),
-      title: t('Lo que siembras mantiene el altar encendido', 'What you sow keeps the altar lit'),
+      title: t('Te invitamos a ser parte de este proyecto.', 'We invite you to be part of this project.'),
       lead: t(
-        'No hay publicidad, no hay patrocinadores y no se cobra por nada de lo que hacemos. La casa se sostiene con la siembra de personas, la mayoría pequeña y mensual. Nadie compra un lugar delante de Dios: lo que das sostiene a los que velan, no tu acceso a Él.',
-        'There is no advertising, no sponsors and nothing we do is charged for. The house is sustained by people’s giving, mostly small and monthly. Nobody buys a place before God: what you give sustains those who keep watch, not your access to Him.'
+        'Nada de lo que hacemos se cobra: ni la oración, ni los entrenamientos, ni la ayuda de los programas de justicia. El movimiento se sostiene con la siembra de personas e iglesias. Nadie compra un lugar delante de Dios: lo que das sostiene a los que sirven, no tu acceso a Él.',
+        'Nothing we do is charged for: not prayer, not the training, not the help given through the justice programmes. The movement is sustained by the giving of people and churches. Nobody buys a place before God: what you give sustains those who serve, not your access to Him.'
       ),
-      actions: [{ label: t('Donar ahora', 'Give now'), href: { es: '/contacto', en: '/en/contact' }, kind: 'primary' }],
+      actions: [{ label: t('Cómo dar', 'How to give'), href: { es: '/contacto', en: '/en/contact' }, kind: 'primary' }],
     },
     {
       type: 'rows',
-      title: t('A dónde va, exactamente', 'Where it goes, exactly'),
+      title: t('A dónde va', 'Where it goes'),
       items: [
-        { title: t('Equipos de la sala', 'Room teams'), text: t('Sostenimiento de músicos e intercesores de tiempo completo, sonido, transmisión y servicios del edificio.', 'Support for full-time musicians and intercessors, sound, streaming and building costs.') },
-        { title: t('Becas del internado', 'Internship scholarships'), text: t('Cubren el costo mensual de quienes no pueden pagarlo. Es la línea que más crece y la que más falta hace.', 'They cover the monthly cost for those who cannot pay it. This is the fastest-growing line and the one most needed.') },
-        { title: t('Ayuda directa', 'Direct aid'), text: t('Alimentos, transporte y gastos concretos de familias acompañadas por los equipos de compasión.', 'Food, transport and concrete expenses of families walked with by the compassion teams.') },
+        {
+          title: t('El cuarto de oración', 'The prayer room'),
+          text: t(
+            `La construcción al norte de Quito: ${proyecto.superficie} m² en dos plantas, ${dolares(proyecto.costoTotal)} en tres fases. Es la línea que más hace falta hoy.`,
+            `The building in northern Quito: ${proyecto.superficie} m² over two floors, ${dolares(proyecto.costoTotal)} in three phases. This is the line most needed today.`
+          ),
+        },
+        {
+          title: t('Los entrenamientos', 'The training'),
+          text: t(
+            'Presenciales y en línea, para que cada congregación que quiera sostener un turno pueda hacerlo bien.',
+            'In person and online, so every congregation that wants to hold a shift can do it well.'
+          ),
+        },
+        {
+          title: t('Actos de justicia', 'Acts of justice'),
+          text: t(
+            'Vivienda solidaria, restauración familiar y misiones integrales: materiales, alimentos, útiles escolares y medicinas.',
+            'Solidarity housing, family restoration and integral missions: materials, food, school supplies and medicine.'
+          ),
+        },
       ],
+    },
+    {
+      type: 'cards',
+      title: t('Las tres fases del cuarto de oración', 'The three phases of the prayer room'),
+      items: proyecto.fases.map((fase) => ({
+        title: fase.nombre,
+        text: t(`${fase.detalle.es} ${dolares(fase.costo)} aproximadamente.`, `${fase.detalle.en} Around ${dolares(fase.costo)}.`),
+      })),
     },
     {
       type: 'checklist',
-      title: t('Nuestro compromiso con quien da', 'Our commitment to those who give'),
+      title: t('Nuestro compromiso con quien siembra', 'Our commitment to those who give'),
       items: [
-        t('Informe de uso de fondos publicado cada semestre, con desglose por área.', 'Use-of-funds report published every six months, broken down by area.'),
-        t('Ninguna donación cambia el acceso a oración, formación o ayuda.', 'No donation changes anyone’s access to prayer, training or help.'),
+        t('Ninguna donación cambia el acceso de nadie a la oración, al entrenamiento o a la ayuda.', 'No donation changes anyone’s access to prayer, training or help.'),
         t('No vendemos, cedemos ni intercambiamos datos de donantes.', 'We do not sell, share or trade donor data.'),
-        t('Puedes cancelar un aporte mensual con un mensaje, sin preguntas.', 'You can cancel a monthly gift with one message, no questions asked.'),
+        t('Puedes cancelar un aporte periódico con un mensaje, sin preguntas.', 'You can cancel a recurring gift with one message, no questions asked.'),
+        t('Las cifras del proyecto son aproximadas y se revisan: si cambian, se publican aquí.', 'The project figures are approximate and reviewed: if they change, they are published here.'),
       ],
     },
-    {
-      type: 'faq',
-      title: t('Sobre dar', 'About giving'),
-      items: [preguntas[6]],
-      schema: true,
-    },
+    { type: 'faq', title: t('Sobre dar', 'About giving'), items: [preguntas[6]], schema: true },
   ],
 }
 
 export const recursos = {
   slug: { es: 'recursos', en: 'resources' },
-  title: t('Recursos — enseñanzas, guías de oración y música', 'Resources — teaching, prayer guides and music'),
+  title: t('Recursos — enseñanzas y guías de oración', 'Resources — teaching and prayer guides'),
   description: t(
-    'Enseñanzas en audio y video, guías para sostener un turno de oración y el repertorio de la sala. Todo gratuito y descargable, sin registro.',
-    'Audio and video teaching, guides for holding a prayer watch and the room’s repertoire. All free and downloadable, no sign-up.'
+    'Enseñanzas, guías para sostener un turno de oración y los temas de la intercesión corporativa. Todo gratuito, sin registro.',
+    'Teaching, guides for holding a prayer shift, and the themes of corporate intercession. All free, no sign-up.'
   ),
   priority: 0.6,
   sections: [
@@ -379,18 +466,36 @@ export const recursos = {
       eyebrow: t('Recursos', 'Resources'),
       title: t('Todo abierto, sin registro', 'Everything open, no sign-up'),
       lead: t(
-        'Publicamos lo que usamos: guías de turno, enseñanzas y el repertorio de la sala. Puedes usarlo en tu iglesia o en tu casa sin pedir permiso y sin pagar.',
-        'We publish what we use: watch guides, teaching and the room’s repertoire. Use it in your church or at home without asking permission and without paying.'
+        'Publicamos lo que usamos: los temas de la intercesión corporativa, guías de turno y enseñanzas. Puedes usarlo en tu congregación sin pedir permiso y sin pagar.',
+        'We publish what we use: the themes of corporate intercession, shift guides and teaching. Use it in your congregation without asking permission and without paying.'
       ),
     },
     {
+      type: 'rows',
+      title: t('Los temas de la intercesión corporativa', 'The themes of corporate intercession'),
+      lead: t(
+        'Esta es la lista con la que se ora. Sirve igual para un turno de dos horas que para una reunión de tu iglesia.',
+        'This is the list prayed through. It works as well for a two-hour shift as for a meeting in your own church.'
+      ),
+      items: temasIntercesion.map((texto, i) => ({
+        title: [
+          t('El Evangelio del Reino', 'The Gospel of the Kingdom'),
+          t('El sacerdocio real', 'The royal priesthood'),
+          t('El Pacto', 'The Covenant'),
+          t('El gobierno de Dios en las naciones', 'God’s government in the nations'),
+          t('La Palabra en poder', 'The Word in power'),
+          t('La unidad de la Iglesia', 'The unity of the Church'),
+        ][i],
+        text: texto,
+      })),
+    },
+    {
       type: 'links',
-      title: t('Empieza por aquí', 'Start here'),
+      title: t('Más', 'More'),
       items: [
-        { label: t('Cómo sostener un turno de dos horas', 'How to hold a two-hour watch'), note: t('Guía en PDF, 12 páginas', 'PDF guide, 12 pages'), href: { es: '/contacto', en: '/en/contact' } },
-        { label: t('Transmisión en vivo de la sala', 'Live stream of the room'), note: t('24 horas, YouTube', '24 hours, YouTube'), href: site.streamUrl, external: true },
-        { label: t('Enseñanzas en audio', 'Audio teaching'), note: t('Podcast semanal', 'Weekly podcast'), href: site.social.find((s) => s.label === 'Spotify').url, external: true },
         { label: t('Preguntas frecuentes', 'Frequently asked questions'), note: t('Respuestas cortas', 'Short answers'), href: { es: '/preguntas', en: '/en/faq' } },
+        { label: t('El proyecto del cuarto de oración', 'The prayer room project'), note: t('Fases y costos', 'Phases and costs'), href: { es: '/proyecto', en: '/en/prayer-room-project' } },
+        { label: t('Canal de YouTube', 'YouTube channel'), note: t('Transmisiones y enseñanzas', 'Streams and teaching'), href: site.streamUrl, external: true },
       ],
     },
   ],
@@ -398,35 +503,46 @@ export const recursos = {
 
 export const contacto = {
   slug: { es: 'contacto', en: 'contact' },
-  title: t('Contacto y cómo llegar — Ecuador Casa de Oración, Quito', 'Contact and directions — Ecuador Casa de Oración, Quito'),
+  title: t('Contacto — ECO Ecuador Casa de Oración, Quito', 'Contact — ECO Ecuador Casa de Oración, Quito'),
   description: t(
-    'Dirección, teléfonos y cómo llegar a la sala de oración en La Carolina, norte de Quito. Línea de oración 24/7 y WhatsApp siempre atendidos.',
-    'Address, phone numbers and directions to the prayer room in La Carolina, northern Quito. The 24/7 prayer line and WhatsApp are always answered.'
+    'Escríbenos para pedir oración, tomar un turno de la semana de oración, recibir entrenamiento o sembrar en el cuarto de oración. Quito, Ecuador.',
+    'Write to us to ask for prayer, take a shift in the week of prayer, receive training or give towards the prayer room. Quito, Ecuador.'
   ),
   priority: 0.7,
   sections: [
     {
       type: 'hero',
       eyebrow: t('Contacto', 'Contact'),
-      title: t('Dónde estamos y cómo se nos encuentra', 'Where we are and how to reach us'),
+      title: t('Escríbenos', 'Write to us'),
       lead: t(
-        'La sala está en el sector La Carolina, norte de Quito. Abierta las 24 horas, todos los días del año. La oficina atiende en horario laboral; la línea de oración, siempre.',
-        'The room is in La Carolina, northern Quito. Open 24 hours, every day of the year. The office keeps business hours; the prayer line never closes.'
+        'Estamos en Quito y trabajamos con congregaciones de todo Ecuador. Dinos qué necesitas —oración, un turno, entrenamiento o cómo sembrar— y te respondemos.',
+        'We are in Quito and work with congregations across Ecuador. Tell us what you need — prayer, a shift, training or how to give — and we will reply.'
       ),
       actions: [
-        { label: t('Abrir en el mapa', 'Open in maps'), href: 'https://www.google.com/maps/search/?api=1&query=-0.180653,-78.467834', kind: 'primary', external: true },
-        { label: t('Llamar a la línea 24/7', 'Call the 24/7 line'), href: `tel:${site.prayerLine}`, kind: 'ghost' },
+        { label: t('Escribir por WhatsApp', 'Message on WhatsApp'), href: `https://wa.me/${site.whatsapp}`, kind: 'primary', external: true },
       ],
     },
     { type: 'contact' },
     {
       type: 'rows',
-      title: t('Cómo llegar', 'How to get here'),
+      title: t('Según lo que necesites', 'Depending on what you need'),
       items: [
-        { title: t('En transporte público', 'By public transport'), text: t('Parada del Ecovía a cinco minutos caminando; varias líneas de bus sobre la Av. Amazonas.', 'Ecovía stop five minutes on foot; several bus lines along Av. Amazonas.') },
-        { title: t('En carro', 'By car'), text: t('Parqueo en la calle y un parqueadero público a media cuadra. De noche el acceso es por la puerta lateral.', 'Street parking and a public car park half a block away. At night access is through the side door.') },
-        { title: t('De madrugada', 'In the small hours'), text: t('La puerta lateral tiene timbre y siempre hay un anfitrión. Si vienes solo y quieres avisar antes, escríbenos por WhatsApp.', 'The side door has a bell and there is always a host. If you are coming alone and want to let us know first, message us on WhatsApp.') },
-        { title: t('Accesibilidad', 'Accessibility'), text: t('Acceso a nivel de calle, sin escalones, y baño accesible. Escríbenos si necesitas apoyo adicional.', 'Step-free access from the street and an accessible toilet. Write to us if you need further support.') },
+        {
+          title: t('Pedir oración', 'To ask for prayer'),
+          text: t('Usa la página de ayuda o escribe por WhatsApp: llega directo al equipo de intercesión.', 'Use the help page or message on WhatsApp: it reaches the intercession team directly.'),
+        },
+        {
+          title: t('Tomar un turno con tu congregación', 'To take a shift with your congregation'),
+          text: t('Escríbenos con el nombre de la iglesia, la ciudad y cuántos son en el equipo.', 'Write to us with the church name, the city and how many are on the team.'),
+        },
+        {
+          title: t('Pedir entrenamiento o una conferencia', 'To request training or a conference'),
+          text: t('Dinos si lo quieren presencial o en línea y para cuántas personas.', 'Tell us whether you want it in person or online, and for how many people.'),
+        },
+        {
+          title: t('Sembrar en el cuarto de oración', 'To give towards the prayer room'),
+          text: t('Escríbenos y te indicamos la fase en la que más falta hace y cómo hacerlo.', 'Write to us and we will point you to the phase most in need and how to give.'),
+        },
       ],
     },
   ],
@@ -434,10 +550,10 @@ export const contacto = {
 
 export const paginaPreguntas = {
   slug: { es: 'preguntas', en: 'faq' },
-  title: t('Preguntas frecuentes — Ecuador Casa de Oración', 'Frequently asked questions — Ecuador Casa de Oración'),
+  title: t('Preguntas frecuentes — ECO Ecuador Casa de Oración', 'Frequently asked questions — ECO Ecuador Casa de Oración'),
   description: t(
-    'Respuestas cortas y directas sobre la sala de oración 24/7, cómo pedir oración urgente, costos, ubicación, formación y uso de las donaciones.',
-    'Short, direct answers about the 24/7 prayer room, how to ask for urgent prayer, costs, location, training and how giving is used.'
+    'Qué es ECO, qué significa oración 24/7, cómo pedir oración, dónde se reúnen, qué cuesta participar y en qué se usa lo que se dona.',
+    'What ECO is, what 24/7 prayer means, how to ask for prayer, where they meet, what it costs to take part and how giving is used.'
   ),
   priority: 0.7,
   sections: [
@@ -471,7 +587,6 @@ export const privacidad = {
     'What we do with what you tell us: prayer requests are read only by the intercession team, never published, never shared, and you can ask for them to be deleted.'
   ),
   priority: 0.3,
-  noindexHint: false,
   sections: [
     {
       type: 'hero',
@@ -489,8 +604,8 @@ export const privacidad = {
           h: t('Peticiones de oración', 'Prayer requests'),
           p: [
             t(
-              'Las peticiones que llegan por formulario, WhatsApp, teléfono o correo las lee únicamente el equipo de intercesión de turno. No se publican, no se leen en voz alta con nombre y apellido sin permiso, y no se comparten con terceros.',
-              'Requests arriving by form, WhatsApp, phone or email are read only by the intercession team on duty. They are not published, not read aloud with full names without permission, and not shared with third parties.'
+              'Las peticiones que llegan por formulario, WhatsApp, teléfono o correo las lee únicamente el equipo de intercesión. No se publican, no se leen en voz alta con nombre y apellido sin permiso, y no se comparten con terceros.',
+              'Requests arriving by form, WhatsApp, phone or email are read only by the intercession team. They are not published, not read aloud with full names without permission, and not shared with third parties.'
             ),
             t(
               'Puedes pedir en cualquier momento que borremos tu petición y tus datos escribiendo a nuestro correo. Lo hacemos en un plazo máximo de siete días y te confirmamos.',

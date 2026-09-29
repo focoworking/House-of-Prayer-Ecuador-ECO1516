@@ -1,194 +1,86 @@
 /**
- * Datos que se repiten en varias paginas y que ademas alimentan los datos
- * estructurados: la historia, los bloques de la sala, los eventos y las
- * preguntas. Viven aqui una sola vez para que la pagina y el JSON-LD nunca
- * se contradigan.
+ * Preguntas frecuentes.
+ *
+ * Aquí vivían además una línea de tiempo, una tabla de doce vigilias diarias
+ * y tres eventos con fecha. Se retiraron: eran material de encargo, no datos
+ * de la casa, y el documento «INFORMACIÓN PARA PÁGINA WEB ECO» no los
+ * sostiene. Un `Event` con fecha inventada o un horario que no se cumple
+ * hacen más daño que una sección de menos, porque el sitio los publica
+ * también como datos estructurados y alguien se presenta.
+ *
+ * TODO ECO1516: cuando la casa entregue el calendario real de la semana de
+ * oración y sus próximas convocatorias, vuelven aquí como `bloques` y
+ * `eventos`, y las secciones `schedule` y `events` del renderizador —que
+ * siguen funcionando— las dibujan sin más trabajo.
+ *
+ * Regla de las respuestas: cada una abre contestando, en menos de cuarenta
+ * palabras, y después amplía. Ese primer párrafo es lo que se cita en un
+ * resumen de IA o en un fragmento destacado.
  */
 import { t } from './site.js'
 
-/* ---------------------------------------------------------------- *
- * Quince anos, contados. Solo hechos que se pueden sostener: fechas,
- * aperturas y cifras de cosas que existen. Nada de metricas de impacto
- * que no podamos documentar.
- * ---------------------------------------------------------------- */
-export const historia = [
-  {
-    ano: '2011',
-    titulo: t('Doce personas y una sala prestada', 'Twelve people and a borrowed room'),
-    texto: t(
-      'Empezamos con una reunión de oración los viernes en la sala de una casa en el norte de Quito. Sin equipo de sonido y sin nombre.',
-      'We started with a Friday prayer meeting in the living room of a house in northern Quito. No sound system, no name.'
-    ),
-  },
-  {
-    ano: '2014',
-    titulo: t('Primera semana continua', 'First continuous week'),
-    texto: t(
-      'Cubrimos 168 horas seguidas de oración con adoración por primera vez. Salió de ahí el calendario de turnos que todavía usamos.',
-      'We covered 168 straight hours of prayer with worship for the first time. The rota we still use came out of that week.'
-    ),
-  },
-  {
-    ano: '2017',
-    titulo: t('Sede propia y sala permanente', 'Our own building, a permanent room'),
-    texto: t(
-      'Abrimos la sala de oración en su dirección actual y pasamos de reuniones a turnos fijos, con equipos de músicos e intercesores.',
-      'We opened the prayer room at its current address and moved from meetings to fixed watches, with teams of musicians and intercessors.'
-    ),
-  },
-  {
-    ano: '2019',
-    titulo: t('Escuela de formación', 'Training school'),
-    texto: t(
-      'Primer internado de seis meses. Doce alumnos, una sola aula y el compromiso de que nadie pagara por no poder pagar.',
-      'First six-month internship. Twelve students, one classroom, and a commitment that nobody would be left out for lack of money.'
-    ),
-  },
-  {
-    ano: '2021',
-    titulo: t('La sala no cerró', 'The room did not close'),
-    texto: t(
-      'Durante la pandemia mantuvimos la oración en línea sin interrumpirla y abrimos la línea telefónica de oración 24/7, que sigue activa.',
-      'Through the pandemic we kept prayer going online without a break and opened the 24/7 prayer phone line, still running today.'
-    ),
-  },
-  {
-    ano: '2023',
-    titulo: t('Misiones en cinco provincias', 'Outreach in five provinces'),
-    texto: t(
-      'Equipos semanales de compasión en Quito y salidas mensuales a Pichincha, Guayas, Azuay, Tungurahua y Santo Domingo.',
-      'Weekly compassion teams in Quito and monthly trips to Pichincha, Guayas, Azuay, Tungurahua and Santo Domingo.'
-    ),
-  },
-  {
-    ano: '2026',
-    titulo: t('Quince años y la sala sigue encendida', 'Fifteen years and the room is still lit'),
-    texto: t(
-      'Doce bloques diarios, equipos de las tres ciudades y una meta declarada: oración continua sin interrupción, todos los días del año.',
-      'Twelve daily watches, teams from three cities and one stated goal: continuous prayer, unbroken, every day of the year.'
-    ),
-  },
-]
+/* Vacíos a propósito, no olvidados: el renderizador y los datos
+   estructurados siguen sabiendo dibujar vigilias y eventos, y en cuanto la
+   casa entregue los reales basta con llenarlos aquí. Mientras estén vacíos,
+   ninguna página los muestra y el JSON-LD no publica ningún Event. */
+export const bloques = []
+export const eventos = []
 
-/* Los doce bloques de dos horas. Es el mismo dato que dibuja la tabla de la
-   pagina y el que se publica como horario en los datos estructurados. */
-export const bloques = [
-  { hora: '00:00', tipo: t('Vigilia', 'Night watch'), equipo: t('Intercesión', 'Intercession') },
-  { hora: '02:00', tipo: t('Vigilia', 'Night watch'), equipo: t('Adoración', 'Worship') },
-  { hora: '04:00', tipo: t('Vigilia', 'Night watch'), equipo: t('Salmos', 'Psalms') },
-  { hora: '06:00', tipo: t('Mañana', 'Morning'), equipo: t('Devocional', 'Devotional') },
-  { hora: '08:00', tipo: t('Mañana', 'Morning'), equipo: t('Intercesión por Ecuador', 'Intercession for Ecuador') },
-  { hora: '10:00', tipo: t('Mañana', 'Morning'), equipo: t('Adoración', 'Worship') },
-  { hora: '12:00', tipo: t('Mediodía', 'Midday'), equipo: t('Oración por los enfermos', 'Prayer for the sick') },
-  { hora: '14:00', tipo: t('Tarde', 'Afternoon'), equipo: t('Escuela en vivo', 'School live') },
-  { hora: '16:00', tipo: t('Tarde', 'Afternoon'), equipo: t('Intercesión por la ciudad', 'Intercession for the city') },
-  { hora: '18:00', tipo: t('Noche', 'Evening'), equipo: t('Adoración abierta', 'Open worship') },
-  { hora: '20:00', tipo: t('Noche', 'Evening'), equipo: t('Oración por familias', 'Prayer for families') },
-  { hora: '22:00', tipo: t('Noche', 'Evening'), equipo: t('Intercesión por misiones', 'Intercession for missions') },
-]
-
-/* Eventos. Cada uno se publica como Event en JSON-LD, asi que las fechas van
-   en ISO y el lugar es el real. Editar aqui actualiza pagina, listado,
-   sitemap y datos estructurados a la vez.
-   TODO ECO1516: revisar fechas cada trimestre; un Event vencido en el
-   marcado resta credibilidad. */
-export const eventos = [
-  {
-    slug: 'vigilia-nacional',
-    nombre: t('Vigilia nacional por Ecuador', 'National vigil for Ecuador'),
-    inicio: '2026-10-17T19:00:00-05:00',
-    fin: '2026-10-18T06:00:00-05:00',
-    modalidad: 'mixto',
-    precio: 0,
-    resumen: t(
-      'Once horas de oración con adoración por el país, con equipos de Quito, Guayaquil y Cuenca. Entrada libre, también en transmisión.',
-      'Eleven hours of prayer with worship for the country, with teams from Quito, Guayaquil and Cuenca. Free entry, also streamed.'
-    ),
-  },
-  {
-    slug: 'conferencia-quince-anos',
-    nombre: t('Conferencia 15 años', 'Fifteen years conference'),
-    inicio: '2026-11-20T09:00:00-05:00',
-    fin: '2026-11-22T21:00:00-05:00',
-    modalidad: 'presencial',
-    precio: 0,
-    resumen: t(
-      'Tres días de enseñanza, adoración y envío de equipos, en el aniversario de la casa. Aporte voluntario.',
-      'Three days of teaching, worship and sending out teams, on the house anniversary. Voluntary offering.'
-    ),
-  },
-  {
-    slug: 'internado-enero',
-    nombre: t('Internado de seis meses — cohorte de enero', 'Six-month internship — January cohort'),
-    inicio: '2027-01-12T08:00:00-05:00',
-    fin: '2027-07-09T18:00:00-05:00',
-    modalidad: 'presencial',
-    precio: 0,
-    resumen: t(
-      'Formación en oración, adoración, estudio bíblico y misión urbana. Postulaciones abiertas hasta el 30 de noviembre.',
-      'Training in prayer, worship, Bible study and urban mission. Applications open until 30 November.'
-    ),
-  },
-]
-
-/* Preguntas. Son la materia prima de AEO: cada respuesta abre con la frase
-   que responde, en menos de 40 palabras, y despues amplia. Ese primer parrafo
-   es lo que se cita en un resumen de IA o en un fragmento destacado. */
 export const preguntas = [
   {
-    q: t('¿Qué es la Ecuador Casa de Oración?', 'What is Ecuador Casa de Oración?'),
+    q: t('¿Qué es ECO, Ecuador Casa de Oración?', 'What is ECO, Ecuador Casa de Oración?'),
     a: t(
-      'Ecuador Casa de Oración es una casa de oración con adoración las 24 horas en Quito, fundada en 2011. Reúne equipos de músicos e intercesores en doce bloques diarios de dos horas, y atiende una línea de oración abierta todo el día.',
-      'Ecuador Casa de Oración is a 24-hour house of prayer with worship in Quito, founded in 2011. It gathers teams of musicians and intercessors in twelve daily two-hour watches and runs a prayer line open around the clock.'
+      'ECO es un movimiento de oración de la Iglesia de Ecuador que reúne a pastores, congregaciones y ministerios de distintas denominaciones para sostener adoración e intercesión 24/7 cada semana. No es una denominación ni una iglesia más.',
+      'ECO is a prayer movement of the Church of Ecuador that gathers pastors, congregations and ministries from different denominations to sustain 24/7 worship and intercession each week. It is not a denomination or another church.'
     ),
   },
   {
-    q: t('¿Cómo pido oración urgente?', 'How do I ask for urgent prayer?'),
+    q: t('¿Tengo que dejar mi iglesia para participar?', 'Do I have to leave my church to take part?'),
     a: t(
-      'Llama a la línea de oración 24/7, escribe por WhatsApp o envía el formulario de la página de ayuda. Un intercesor responde en menos de treinta minutos a cualquier hora, todos los días del año, sin costo.',
-      'Call the 24/7 prayer line, send a WhatsApp message or submit the form on the help page. An intercessor replies within thirty minutes at any hour, every day of the year, free of charge.'
+      'No. ECO existe para servir a la Iglesia, no para reemplazarla: los que oran juntos vienen de congregaciones distintas y siguen en ellas. Participar no cambia dónde te congregas ni a quién rindes cuentas.',
+      'No. ECO exists to serve the Church, not to replace it: those who pray together come from different congregations and remain in them. Taking part changes neither where you gather nor to whom you are accountable.'
     ),
   },
   {
-    q: t('¿Cuánto cuesta pedir oración o visitar la sala?', 'Does prayer or visiting the room cost anything?'),
+    q: t('¿Cómo pido oración?', 'How do I ask for prayer?'),
     a: t(
-      'Nada. La oración, la visita a la sala y el acompañamiento son gratuitos y no requieren registro. La casa se sostiene con donaciones voluntarias y nunca condiciona la ayuda a un aporte.',
-      'Nothing. Prayer, visiting the room and pastoral accompaniment are free and require no registration. The house is sustained by voluntary giving and never conditions help on a donation.'
+      'Escribe por WhatsApp, llama a la línea de oración o envía el formulario de la página de ayuda. Tu petición la lee el equipo de intercesión y se lleva a la oración corporativa. Es gratuito y confidencial.',
+      'Send a WhatsApp message, call the prayer line or submit the form on the help page. Your request is read by the intercession team and carried into corporate prayer. It is free and confidential.'
     ),
   },
   {
-    q: t('¿Dónde queda y cómo llego?', 'Where is it and how do I get there?'),
+    q: t('¿Qué significa «oración 24/7»?', 'What does “24/7 prayer” mean?'),
     a: t(
-      'La sala está en el sector La Carolina, norte de Quito, sobre la Av. Amazonas, a pocos minutos de la parada del Ecovía y con parqueo en la calle. Está abierta día y noche, también de madrugada.',
-      'The room is in La Carolina, northern Quito, on Av. Amazonas, minutes from the Ecovía stop, with street parking. It is open day and night, including the small hours.'
+      'Significa adoración e intercesión sin interrupción, cubiertas por turnos entre las congregaciones del movimiento. Hoy se sostiene 24/7 cada semana, y el propósito declarado es que llegue a ser continua, todos los días del año.',
+      'It means worship and intercession without interruption, covered in shifts across the congregations of the movement. Today it is sustained 24/7 each week, and the stated aim is for it to become continuous, every day of the year.'
     ),
   },
   {
-    q: t('¿Tengo que pertenecer a una iglesia para entrar?', 'Do I need to belong to a church to come in?'),
+    q: t('¿Dónde se reúnen?', 'Where do you meet?'),
     a: t(
-      'No. La sala está abierta a cualquier persona, de cualquier iglesia o de ninguna. No se pide membresía, ni ofrenda, ni datos personales para entrar y quedarse el tiempo que quieras.',
-      'No. The room is open to anyone, from any church or none. No membership, offering or personal data is required to come in and stay as long as you like.'
+      'Hoy la oración se sostiene en las congregaciones que forman el movimiento, en Quito y en otras ciudades. El cuarto de oración propio —un lugar permanente para la oración 24/7— está en construcción al norte de Quito.',
+      'Today prayer is sustained in the congregations that make up the movement, in Quito and other cities. Our own prayer room — a permanent place for 24/7 prayer — is being built in northern Quito.'
     ),
   },
   {
-    q: t('¿Puedo servir aunque no sea músico?', 'Can I serve if I am not a musician?'),
+    q: t('¿Cuánto cuesta participar?', 'What does it cost to take part?'),
     a: t(
-      'Sí. Los equipos necesitan intercesores, anfitriones de sala, sonido, transmisión, cocina y logística de misiones. El único requisito es sostener un turno fijo a la semana durante tres meses.',
-      'Yes. Teams need intercessors, room hosts, sound, streaming, kitchen and outreach logistics. The only requirement is holding one fixed weekly watch for three months.'
+      'Nada. La oración, los entrenamientos en línea y la ayuda de los programas de justicia no se cobran ni se condicionan a una ofrenda. El movimiento se sostiene con donaciones voluntarias.',
+      'Nothing. Prayer, the online training and the help given through the justice programmes are never charged for or made conditional on an offering. The movement is sustained by voluntary giving.'
     ),
   },
   {
-    q: t('¿Cómo se usa lo que dono?', 'How is my giving used?'),
+    q: t('¿En qué se usa lo que dono?', 'What is my giving used for?'),
     a: t(
-      'El 100 % sostiene tres cosas: los equipos de la sala 24/7, las becas del internado y la ayuda directa en misiones. Publicamos un informe de uso de fondos cada semestre.',
-      'All of it sustains three things: the 24/7 room teams, internship scholarships and direct aid in outreach. We publish a use-of-funds report every six months.'
+      'Hoy, principalmente en la construcción del cuarto de oración al norte de Quito, dividida en tres fases: obra gris, terminados y amoblamiento. Lo demás sostiene los entrenamientos y los programas de Actos de Justicia.',
+      'Today, mainly in building the prayer room in northern Quito, in three phases: shell, finishes and furnishing. The rest sustains the training and the Acts of Justice programmes.'
     ),
   },
   {
-    q: t('¿Atienden fuera de Quito?', 'Do you serve outside Quito?'),
+    q: t('¿Trabajan fuera de Ecuador?', 'Do you work outside Ecuador?'),
     a: t(
-      'Sí. La línea de oración y la transmisión llegan a todo Ecuador, y hay equipos y salidas mensuales en Pichincha, Guayas, Azuay, Tungurahua y Santo Domingo de los Tsáchilas.',
-      'Yes. The prayer line and the stream reach all of Ecuador, and there are teams and monthly trips in Pichincha, Guayas, Azuay, Tungurahua and Santo Domingo de los Tsáchilas.'
+      'Sí. ECO sirve a la Iglesia con entrenamientos presenciales y en línea, y con conferencias en diferentes países, en relación con el resto del cuerpo de Cristo dentro y fuera del país.',
+      'Yes. ECO serves the Church with in-person and online training, and with conferences in different countries, working alongside the rest of the body of Christ inside and outside Ecuador.'
     ),
   },
 ]
