@@ -121,22 +121,22 @@ export const preguntasDonante = [
   {
     q: t('¿Puedo dar solo a una parte del proyecto?', 'Can I give to one part of the project only?'),
     a: t(
-      'Sí. Puedes dirigir tu siembra a una fase concreta de la construcción, a las becas de entrenamiento o a los programas de Actos de Justicia. Dínoslo al dar y se registra así.',
+      'Sí. Puedes dirigir tu donación a una fase concreta de la construcción, a las becas de entrenamiento o a los programas de Actos de Justicia. Dínoslo al dar y se registra así.',
       'Yes. You can direct your gift to a specific phase of the building, to training scholarships, or to the Acts of Justice programmes. Tell us when you give and it is recorded that way.'
     ),
   },
   {
     q: t('¿Qué pasa si el proyecto no reúne todo el dinero?', 'What if the project does not raise all the money?'),
     a: t(
-      'La construcción está dividida en tres fases justamente por eso: cada fase se ejecuta cuando está cubierta, y lo recaudado no se gasta en otra cosa. Si un proyecto se detuviera, lo decimos y acordamos con quienes sembraron a dónde va lo suyo.',
+      'La construcción está dividida en tres fases justamente por eso: cada fase se ejecuta cuando está cubierta, y lo recaudado no se gasta en otra cosa. Si un proyecto se detuviera, lo decimos y acordamos con quienes dieron a dónde va lo suyo.',
       'The building is split into three phases precisely for that: each phase is carried out once it is covered, and what is raised is not spent on anything else. If a project were halted, we say so and agree with those who gave where their gift goes.'
     ),
   },
   {
     q: t('¿Reciben algún beneficio quienes dan más?', 'Do those who give more receive anything?'),
     a: t(
-      'No delante de Dios, y tampoco aquí: dar no cambia el acceso de nadie a la oración, al entrenamiento ni a la ayuda. Quien siembra un metro cuadrado queda con su nombre en el registro de fundadores del cuarto de oración, y eso es todo.',
-      'Not before God, and not here either: giving changes nobody’s access to prayer, training or help. Whoever gives a square metre has their name in the founders’ register of the prayer room, and that is all.'
+      'Ninguno. No hay placas, ni nombres en la pared, ni menciones públicas, ni acceso distinto a la oración, al entrenamiento o a la ayuda. «Cuando tú des limosna, no sepa tu izquierda lo que hace tu derecha» (Mt. 6:3): lo que das queda entre tú y Dios, y nosotros lo guardamos así.',
+      'None. There are no plaques, no names on the wall, no public mentions, and no different access to prayer, training or help. “When thou doest alms, let not thy left hand know what thy right hand doeth” (Mt. 6:3): what you give stays between you and God, and we keep it that way.'
     ),
   },
 ]

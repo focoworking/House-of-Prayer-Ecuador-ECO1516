@@ -1,6 +1,14 @@
 /**
- * La campaña: metas, niveles de siembra y las cifras del país con las que se
+ * La campaña: metas, formas de dar y las cifras del país con las que se
  * sostiene el caso.
+ *
+ * **Terminología.** Aquí no se usa «sembrar» ni «siembra» para hablar de
+ * dinero. En buena parte del mundo evangélico esas palabras arrastran la
+ * teología de la prosperidad —siembra tu semilla y recibirás—, y para un
+ * lector conservador suenan a manipulación financiera. Se dice **dar**,
+ * **ofrendar**, **aportar** y **donación**, que es además el vocabulario del
+ * propio documento de la casa. Tampoco se dice que una cantidad «compra»
+ * algo: se dice para qué alcanza.
  *
  * Dos decisiones de fondo, explicadas en CASO.md, que este archivo hace
  * cumplir por diseño:
@@ -37,10 +45,15 @@ export const campana = {
 }
 
 /**
- * Los niveles de siembra. El metro cuadrado a mil dólares no es un invento de
+ * Las formas de dar. El metro cuadrado a mil dólares no es un invento de
  * campaña: sale de los propios números del proyecto —200 m² por $1.000 el
  * metro— y por eso se cuenta solo. Doscientas familias y el edificio está
  * pagado.
+ *
+ * Ninguna cantidad da nombre en una pared, placa ni mención pública. La
+ * recompensa por dar es una práctica que Mateo 6:3-4 desaconseja
+ * expresamente, y ofrecerla habría costado más credibilidad de la que
+ * cualquier donativo trae.
  */
 export const niveles = [
   {
@@ -57,8 +70,8 @@ export const niveles = [
     monto: 1000,
     nombre: t('Un metro cuadrado', 'One square metre'),
     texto: t(
-      'Con tu nombre, o el de tu familia, en el registro de fundadores del cuarto de oración.',
-      'With your name, or your family’s, in the founders’ register of the prayer room.'
+      'Un metro del piso donde se va a orar día y noche. Es la unidad con la que está hecha la cuenta entera.',
+      'One square metre of the floor where prayer will go on day and night. It is the unit the whole sum is made of.'
     ),
     destacado: true,
   },

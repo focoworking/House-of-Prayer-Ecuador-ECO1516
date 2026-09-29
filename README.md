@@ -122,80 +122,26 @@ su pila de reserva declarada.
 
 ## El logotipo
 
-El original de la organización —manos abiertas que sostienen el techo de una
-casa, con la llama en el centro— está en
-`public/marca/eco1516-logo-original.png` y es la referencia de la que sale
-todo lo demás.
+El logotipo de la casa está en `public/marca/eco1516-logo-original.png`.
+`scripts/recorta-isotipo.py` (`npm run isotipo`) extrae de ahí el emblema —las
+manos, el techo y la llama—, recortado antes de la palabra ECUADOR y con el
+fondo gris de la lámina convertido en transparencia. Esa salida,
+`eco1516-isotipo.png`, es el logotipo del sitio y el que declaran los datos
+estructurados.
 
-`scripts/lib/isotipo.mjs` lo redibuja como vector. Está **calculado, no
-escrito a mano**: una mano abierta es un contorno de cinco puntas y cuatro
-valles, y acertarlo a ojo en coordenadas SVG cuesta muchas más iteraciones que
-declarar los cinco dedos —ángulo, largo y grosor— y dejar que el trazo salga
-de ahí. Abrir más la mano es cambiar un número. La mano derecha se calcula y
-la izquierda es su espejo, como en el original.
+El fondo se separa por saturación, no por color exacto: el dibujo es morado y
+celeste saturados y el fondo es gris casi neutro, así que basta con volver
+transparente lo que casi no tiene color. La rampa entre 0,06 y 0,16 de
+saturación conserva el antialiasing del original en vez de dejar un borde
+dentado.
 
-Salen dos versiones de la misma fuente:
+Aquí hubo un tiempo una reconstrucción vectorial del emblema, calculada a
+partir de los cinco dedos de la mano. Se retiró: por cuidada que estuviera no
+era el logotipo de nadie, y tener dos marcas que no coinciden es peor que
+tener una.
 
-- **Completa** (`npm run marca` → `public/marca/eco1516-isotipo.svg`), con los
-  surcos de los dedos. Es la de tamaños grandes y la que los datos
-  estructurados declaran como `logo`.
-- **Reducida**, inline en la cabecera y el pie. Hereda `currentColor`, engorda
-  el trazo y **quita los surcos**: a cuarenta píxeles ese detalle no se lee,
-  se emborrona, y un logotipo emborronado se ve peor que uno simple.
-
-## Las imágenes
-
-`scripts/build-imagenes.mjs` dibuja las cuatro piezas del sitio con el
-rasterizador de `scripts/lib/lienzo.mjs`: el amanecer sobre la cordillera, el
-incienso, Quito al alba y la llama del altar. Son originales, no hay banco de
-imágenes detrás, no hay licencia que renovar y ninguna persona real aparece en
-una foto que no autorizó.
-
-El registro es el amanecer, no la noche: el proyecto anuncia luz y las imágenes
-dicen lo mismo que el texto. Todas se resuelven en la mitad clara de la escala
-y se funden con el papel por los bordes, así que la página no se parte en
-bloques de color.
-
-Cada pieza es determinista —misma semilla, mismo archivo— y se guarda como PNG
-de paleta con difusión de error: en 128 colores bien difundidos no se ve la
-banda y el archivo baja a un quinto de lo que pesa en color verdadero.
-
-Las imágenes están en `.gitignore` como cualquier otra salida de build.
-Regenerarlas tarda unos treinta segundos, así que `npm run build` no las toca:
-se corre `npm run img` a mano cuando se cambia el arte.
-
-## Pendientes antes de publicar
-
-Los datos marcados `TODO ECO1516` en `content/site.js` son marcadores de
-posición y hay que sustituirlos por los reales:
-
-- Teléfonos y WhatsApp reales, y en qué horas hay alguien atendiendo. Mientras
-  no esté confirmado, el sitio **no promete atención 24 horas**: dice que
-  respondemos, no que contestamos al instante.
-- Usuarios reales de YouTube, Instagram, Facebook y Spotify.
-- El calendario real de la semana de oración y las próximas convocatorias.
-  `content/datos.js` tiene `bloques` y `eventos` vacíos a propósito, y las
-  secciones `schedule` y `events` del renderizador los dibujan en cuanto se
-  llenen.
-- Las cifras del proyecto (`content/eco.js`) son las del documento: revisarlas
-  antes de cada campaña, porque un costo desactualizado en una página de
-  donaciones erosiona la confianza que esa página necesita.
-
-Lo que **no** se puede afirmar hasta que exista: que hay una sala de oración
-abierta al público las 24 horas. El cuarto de oración está en construcción, y
-el sitio, sus datos estructurados y `llms.txt` lo dicen así.
-
-El NAP —nombre, dirección, teléfono— tiene que quedar **idéntico** aquí, en
-Google Business Profile, en Apple Business Connect, en Bing Places y en cada
-directorio. Se edita en `content/site.js` y en ningún otro sitio.
-
-## Quién lo respalda
-
-ECO nació en **octubre de 2012** en Quito, de Hernán y Janeth Robalino,
-pastores fundadores de la congregación El Sendero de la Vida Cristiana. Su
-sitio, `hernanrobalino.com`, se declara como `sameAs` en los datos
-estructurados: eso le dice a un buscador que ECO y ese sitio son la misma
-obra, no dos ministerios sueltos con nombres parecidos.
+La terminología de marca —qué palabras se usan y cuáles cierran puertas— está
+en [`CASO.md`](./CASO.md).
 
 ## La campaña
 

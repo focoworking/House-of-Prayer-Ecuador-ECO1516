@@ -11,7 +11,6 @@ import { dirname, resolve } from 'node:path'
 import { site, ui, nav, footerNav, marca, fuentes, LANGUAGES } from '../content/site.js'
 import { pages, pathOf, fileOf } from '../content/pages.js'
 import { renderSections, T, esc } from './render.mjs'
-import { isotipo } from './lib/isotipo.mjs'
 import { metaTags, jsonLd, sitemap, robots, llms, llmsFull, aiTxt } from './seo.mjs'
 
 const raiz = process.cwd()
@@ -26,10 +25,13 @@ const escribir = async (rel, contenido) => {
 /* Piezas de la plantilla                                              */
 /* ------------------------------------------------------------------ */
 
-/* El mismo isotipo que el archivo suelto, en su versión inline: hereda
-   `currentColor` en el trazo, así que la cabecera y el pie lo tiñen con su
-   propio color sin tener dos dibujos que mantener. */
-const logo = isotipo({ modo: 'inline' })
+/* El isotipo es el logotipo real de la casa, recortado de su lámina y con el
+   fondo quitado (scripts/recorta-isotipo.py). Antes aquí había una
+   reconstrucción vectorial: por cuidada que estuviera, no era el logotipo de
+   nadie. El `alt` va vacío a propósito, porque el nombre de la marca está
+   escrito al lado en texto y repetirlo haría que un lector de pantalla lo
+   dijera dos veces. */
+const logo = `<img class="logo" src="/marca/eco1516-isotipo.png" alt="" width="638" height="312" />`
 
 const iconos = {
   youtube: 'M21.6 7.2a2.8 2.8 0 0 0-2-2C17.9 4.8 12 4.8 12 4.8s-5.9 0-7.6.4a2.8 2.8 0 0 0-2 2A29 29 0 0 0 2 12a29 29 0 0 0 .4 4.8 2.8 2.8 0 0 0 2 2c1.7.4 7.6.4 7.6.4s5.9 0 7.6-.4a2.8 2.8 0 0 0 2-2A29 29 0 0 0 22 12a29 29 0 0 0-.4-4.8ZM10 15.2V8.8l5.2 3.2Z',

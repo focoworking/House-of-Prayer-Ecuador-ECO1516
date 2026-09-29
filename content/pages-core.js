@@ -91,10 +91,10 @@ export const inicio = {
       ),
       items: [
         t('Primera fase abierta: $85.000 para cimientos y paredes', 'First phase open: $85,000 for foundations and walls'),
-        t('Un metro cuadrado, $1.000, con tu nombre en el registro de fundadores', 'One square metre, $1,000, with your name in the founders’ register'),
+        t('Un metro cuadrado, $1.000: la unidad con la que está hecha la cuenta', 'One square metre, $1,000: the unit the whole sum is made of'),
         t('Cada fase se construye cuando está cubierta', 'Each phase is built once it is covered'),
       ],
-      action: { label: t('Ver cómo sembrar', 'See how to give'), href: { es: '/dar', en: '/en/give' } },
+      action: { label: t('Ver cómo dar', 'See how to give'), href: { es: '/dar', en: '/en/give' } },
     },
     {
       type: 'scripture',
@@ -133,7 +133,7 @@ export const inicio = {
         {
           title: t('Quiero sostener el cuarto de oración', 'I want to help build the prayer room'),
           text: t(
-            'El lugar permanente para la oración 24/7 se levanta al norte de Quito, en tres fases. Se puede sembrar en cualquiera de ellas.',
+            'El lugar permanente para la oración 24/7 se levanta al norte de Quito, en tres fases. Se puede aportar a cualquiera de ellas.',
             'The permanent place for 24/7 prayer is being built in northern Quito, in three phases. You can give towards any of them.'
           ),
           href: { es: '/proyecto', en: '/en/prayer-room-project' },
@@ -219,12 +219,12 @@ export const inicio = {
       type: 'cta',
       title: t('Ora con nosotros esta semana', 'Pray with us this week'),
       text: t(
-        'Si tu congregación quiere tomar un turno, si necesitas oración o si quieres sembrar en el cuarto de oración, escríbenos.',
+        'Si tu congregación quiere tomar un turno, si necesitas oración o si quieres aportar al cuarto de oración, escríbenos.',
         'If your congregation wants to take a shift, if you need prayer, or if you want to give towards the prayer room, write to us.'
       ),
       actions: [
         { label: t('Escribir por WhatsApp', 'Message on WhatsApp'), href: wa('Hola, quiero orar con ECO.'), kind: 'primary', external: true },
-        { label: t('Sembrar en el cuarto de oración', 'Give towards the prayer room'), href: site.giveUrl, kind: 'ghost', external: true },
+        { label: t('Dar para el cuarto de oración', 'Give towards the prayer room'), href: site.giveUrl, kind: 'ghost', external: true },
         { label: t('Vivo fuera de Ecuador', 'I live outside Ecuador'), href: { es: '/desde-el-exterior', en: '/en/from-abroad' }, kind: 'ghost' },
       ],
     },

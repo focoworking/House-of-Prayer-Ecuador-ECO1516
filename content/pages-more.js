@@ -131,7 +131,7 @@ export const proyectoPagina = {
       title: t('El lugar de reposo de Dios', 'The resting place of God'),
       lead: proyecto.descripcion,
       actions: [
-        { label: t('Sembrar en el proyecto', 'Give towards the project'), href: site.giveUrl, kind: 'primary', external: true },
+        { label: t('Dar al proyecto', 'Give towards the project'), href: site.giveUrl, kind: 'primary', external: true },
         { label: t('Hablar con el equipo', 'Talk to the team'), href: { es: '/contacto', en: '/en/contact' }, kind: 'ghost' },
       ],
       verse: {
@@ -147,7 +147,7 @@ export const proyectoPagina = {
       items: [
         { value: `${proyecto.superficie} m²`, label: t('En dos plantas, al norte de Quito', 'Over two floors, in northern Quito') },
         { value: dolares(proyecto.costoTotal), label: t('Costo aproximado del proyecto', 'Approximate cost of the project') },
-        { value: '3', label: t('Fases, y se puede sembrar en cualquiera', 'Phases — you can give towards any of them') },
+        { value: '3', label: t('Fases, y se puede aportar a cualquiera', 'Phases — you can give towards any of them') },
       ],
     },
     {
@@ -180,7 +180,7 @@ export const proyectoPagina = {
         'No pedimos los $200.000 de golpe: pedimos la primera fase. Cada fase se construye cuando está cubierta, y lo recaudado para una no se gasta en otra.',
         'We are not asking for the full $200,000 at once: we are asking for the first phase. Each phase is built once it is covered, and what is raised for one is not spent on another.'
       ),
-      action: { label: t('Sembrar en la primera fase', 'Give towards the first phase'), href: site.giveUrl },
+      action: { label: t('Dar a la primera fase', 'Give towards the first phase'), href: site.giveUrl },
     },
     {
       type: 'niveles',
@@ -336,7 +336,7 @@ export const justicia = {
       type: 'cta',
       title: t('Súmate como puedas', 'Join in however you can'),
       text: t(
-        'Con tiempo, con materiales, con oficio o con una siembra. Cuéntanos qué puedes aportar y lo encajamos donde más falta hace.',
+        'Con tiempo, con materiales, con tu oficio o con dinero. Cuéntanos qué puedes aportar y lo encajamos donde más falta hace.',
         'With time, materials, a trade or a gift. Tell us what you can offer and we will put it where it is most needed.'
       ),
       actions: [
@@ -419,10 +419,10 @@ export const formacion = {
 
 export const dar = {
   slug: { es: 'dar', en: 'give' },
-  title: t('Dar — siembra en el cuarto de oración', 'Give — sow into the prayer room'),
+  title: t('Dar — construir el cuarto de oración', 'Give — building the prayer room'),
   description: t(
-    'Siembra en la primera fase del cuarto de oración: $85.000 para cimientos y paredes. Desde $25, o un metro cuadrado con tu nombre en el registro de fundadores.',
-    'Give towards the first phase of the prayer room: $85,000 for foundations and walls. From $25, or a square metre with your name in the founders’ register.'
+    'Aporta a la primera fase del cuarto de oración: $85.000 para cimientos y paredes. Desde $25, o un metro cuadrado completo por $1.000.',
+    'Give towards the first phase of the prayer room: $85,000 for foundations and walls. From $25, or a whole square metre for $1,000.'
   ),
   priority: 0.85,
   sections: [
@@ -446,14 +446,14 @@ export const dar = {
         'No pedimos los $200.000 del proyecto entero: pedimos la primera fase. Es una cifra que se puede cumplir, y cada fase se ejecuta cuando está cubierta.',
         'We are not asking for the project’s full $200,000: we are asking for the first phase. It is a figure that can be met, and each phase is built once it is covered.'
       ),
-      action: { label: t('Sembrar en la primera fase', 'Give towards the first phase'), href: site.giveUrl },
+      action: { label: t('Dar a la primera fase', 'Give towards the first phase'), href: site.giveUrl },
     },
     {
       type: 'niveles',
-      title: t('Cuánto quieres sembrar', 'How much you want to give'),
+      title: t('Cuánto quieres dar', 'How much you want to give'),
       lead: t(
-        'Cada cantidad dice lo que compra, porque «veinticinco dólares» no significa nada y «un saco de cemento» sí.',
-        'Each amount says what it buys, because “twenty-five dollars” means nothing and “a bag of cement” does.'
+        'Cada cantidad dice para qué alcanza, porque «veinticinco dólares» no significa nada y «un saco de cemento» sí.',
+        'Each amount says what it covers, because “twenty-five dollars” means nothing and “a bag of cement” does.'
       ),
       note: t(
         'El enlace abre la plataforma de recaudación del Banco Pichincha, donde escribes el monto. Puedes dar una vez o volver cuando quieras: no queda ninguna suscripción activa.',
@@ -489,11 +489,12 @@ export const dar = {
     },
     {
       type: 'checklist',
-      title: t('Nuestro compromiso con quien siembra', 'Our commitment to those who give'),
+      title: t('Nuestro compromiso con quien da', 'Our commitment to those who give'),
       items: [
         t('Publicamos el uso de fondos cada semestre y el avance de obra cada mes, también los meses en que no entra nada.', 'We publish the use of funds every six months and the building’s progress monthly — including the months when nothing comes in.'),
         t('Cada fase se ejecuta cuando está cubierta. Lo recaudado no se gasta en otra cosa.', 'Each phase is built once it is covered. What is raised is not spent on anything else.'),
         t('Ninguna donación cambia el acceso de nadie a la oración, al entrenamiento o a la ayuda.', 'No donation changes anyone’s access to prayer, training or help.'),
+        t('No hay placas, ni nombres en la pared, ni menciones públicas por dar: «no sepa tu izquierda lo que hace tu derecha» (Mt. 6:3).', 'There are no plaques, names on the wall or public mentions for giving: “let not thy left hand know what thy right hand doeth” (Mt. 6:3).'),
         t('No vendemos, cedemos ni intercambiamos datos de donantes.', 'We do not sell, share or trade donor data.'),
         t('Las cifras del proyecto son aproximadas y se revisan: si cambian, se publican aquí.', 'The project figures are approximate and reviewed: if they change, they are published here.'),
       ],
@@ -510,7 +511,7 @@ export const dar = {
     },
     {
       type: 'cta',
-      title: t('Siembra hoy', 'Give today'),
+      title: t('Da hoy', 'Give today'),
       text: t(
         '¿Prefieres coordinarlo con alguien, dirigirlo a una fase concreta o dar desde el exterior? Escríbenos y lo resolvemos contigo.',
         'Would you rather arrange it with someone, direct it to a specific phase, or give from abroad? Write to us and we will sort it out with you.'
@@ -547,7 +548,7 @@ export const desdeElExterior = {
     {
       type: 'hero',
       eyebrow: t('Desde el exterior', 'From abroad'),
-      title: t('Tu familia está allá. Tu altar también puede estarlo.', 'Your family is there. Your altar can be too.'),
+      title: t('Tu familia está allá. El altar también.', 'Your family is there. So is the altar.'),
       lead: t(
         'Si vives en Estados Unidos, España, Italia o donde sea que te llevó el camino, ya sabes hacer esto: entras a un enlace, pones un monto y llega a Ecuador. Es el mismo gesto de todos los meses, con un destino más.',
         'If you live in the United States, Spain, Italy or wherever the road took you, you already know how to do this: you open a link, enter an amount and it reaches Ecuador. It is the same gesture as every month, with one more destination.'
@@ -558,10 +559,10 @@ export const desdeElExterior = {
       ],
       verse: {
         text: t(
-          '«Si me olvidare de ti, oh Jerusalén, pierda mi diestra su destreza.»',
-          '“If I forget thee, O Jerusalem, let my right hand forget her cunning.”'
+          '«Y procurad la paz de la ciudad a la cual os hice transportar, y rogad por ella a Jehová; porque en su paz tendréis vosotros paz.»',
+          '“And seek the peace of the city whither I have caused you to be carried away captives, and pray unto the LORD for it: for in the peace thereof shall ye have peace.”'
         ),
-        ref: 'Salmos 137:5',
+        ref: 'Jeremías 29:7',
       },
     },
     {
@@ -583,10 +584,10 @@ export const desdeElExterior = {
     },
     {
       type: 'niveles',
-      title: t('Un metro cuadrado a tu nombre', 'A square metre in your name'),
+      title: t('Un metro cuadrado desde donde estés', 'One square metre, from wherever you are'),
       lead: t(
-        'El cuarto de oración son 200 metros a mil dólares cada uno. Un metro puede llevar el nombre de tu familia, el de tus padres o el del pueblo del que saliste.',
-        'The prayer room is 200 metres at a thousand dollars each. One metre can carry your family’s name, your parents’ name, or the name of the town you left.'
+        'El cuarto de oración son 200 metros a mil dólares cada uno. No hay placas ni nombres en la pared: lo que das queda entre tú y Dios, como enseña Mateo 6:3-4.',
+        'The prayer room is 200 metres at a thousand dollars each. There are no plaques and no names on the wall: what you give stays between you and God, as Matthew 6:3-4 teaches.'
       ),
       note: t(
         'El enlace abre la plataforma del Banco Pichincha y acepta tarjeta desde el exterior. Si desde tu país no carga, escríbenos por WhatsApp y lo resolvemos.',
@@ -601,13 +602,13 @@ export const desdeElExterior = {
     },
     {
       type: 'cta',
-      title: t('Que tu nombre esté en esa pared', 'Let your name be on that wall'),
+      title: t('Cuando vuelvas, va a estar en pie', 'When you come back, it will be standing'),
       text: t(
-        'Cuando vuelvas a Quito, vas a poder entrar y quedarte el tiempo que quieras en un lugar que ayudaste a levantar desde lejos.',
-        'When you come back to Quito, you will be able to walk in and stay as long as you like in a place you helped build from far away.'
+        'Vas a poder entrar y quedarte el tiempo que quieras en un lugar que ayudaste a levantar desde lejos, sin que nadie sepa que fuiste tú.',
+        'You will be able to walk in and stay as long as you like in a place you helped build from far away, with nobody knowing it was you.'
       ),
       actions: [
-        { label: t('Sembrar un metro', 'Give a square metre'), href: site.giveUrl, kind: 'primary', external: true },
+        { label: t('Dar un metro', 'Give a square metre'), href: site.giveUrl, kind: 'primary', external: true },
         { label: t('Escribir por WhatsApp', 'Message on WhatsApp'), href: `https://wa.me/${site.whatsapp}`, kind: 'ghost', external: true },
       ],
     },
@@ -673,7 +674,7 @@ export const contacto = {
   slug: { es: 'contacto', en: 'contact' },
   title: t('Contacto — ECO Ecuador Casa de Oración, Quito', 'Contact — ECO Ecuador Casa de Oración, Quito'),
   description: t(
-    'Escríbenos para pedir oración, tomar un turno de la semana de oración, recibir entrenamiento o sembrar en el cuarto de oración. Quito, Ecuador.',
+    'Escríbenos para pedir oración, tomar un turno de la semana de oración, recibir entrenamiento o dar para el cuarto de oración. Quito, Ecuador.',
     'Write to us to ask for prayer, take a shift in the week of prayer, receive training or give towards the prayer room. Quito, Ecuador.'
   ),
   priority: 0.7,
@@ -683,7 +684,7 @@ export const contacto = {
       eyebrow: t('Contacto', 'Contact'),
       title: t('Escríbenos', 'Write to us'),
       lead: t(
-        'Estamos en Quito y trabajamos con congregaciones de todo Ecuador. Dinos qué necesitas —oración, un turno, entrenamiento o cómo sembrar— y te respondemos.',
+        'Estamos en Quito y trabajamos con congregaciones de todo Ecuador. Dinos qué necesitas —oración, un turno, entrenamiento o cómo dar— y te respondemos.',
         'We are in Quito and work with congregations across Ecuador. Tell us what you need — prayer, a shift, training or how to give — and we will reply.'
       ),
       actions: [

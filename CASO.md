@@ -202,7 +202,37 @@ respuesta a una persona en crisis.
 
 ---
 
-## 9. Líneas rojas
+## 9. Terminología: las palabras que cierran puertas
+
+Esta causa se dirige a un público donde una sola palabra mal elegida invalida
+todo lo demás. No es una cuestión de estilo: es de credibilidad.
+
+| No decir | Decir | Por qué |
+| --- | --- | --- |
+| **sembrar**, **siembra**, «siembra tu semilla» | dar, ofrendar, aportar, donación | Arrastra la teología de la prosperidad. Para un lector conservador suena a manipulación financiera, y es la palabra que más rápido cierra una puerta |
+| «tu nombre en la pared», placas, registro de donantes | nada: dar es anónimo | Mateo 6:3-4 desaconseja expresamente la limosna con recompensa visible. Ofrecerla cuesta más credibilidad de la que trae cualquier donativo |
+| «tu aporte **compra** X» | «alcanza para X», «cubre X» | Comprar y donación juntos evocan simonía: lo de Dios no se vende |
+| «tu altar» | el altar | El altar es uno. El posesivo suena a espiritualidad privada |
+| Salmo 137:5 aplicado a Ecuador | **Jeremías 29:7** | Aplicar a un país lo dicho de Jerusalén activa la discusión sobre teología de reemplazo. Jeremías 29:7 es literalmente el texto del que vive lejos y no toca esa cuestión |
+| «invierte en el Reino», ROI espiritual | — | Lenguaje financiero aplicado a lo santo: fuera |
+| «apadrina», «adopta un metro» | «un metro cuadrado» | «Adoptar» está tomado por el apadrinamiento de niños y confunde el objeto |
+
+Las que **sí** se usan, porque son de la casa y están en su propio documento:
+*altar, intercesión, adoración profética, sacerdocio real, Novia de Cristo,
+actos de justicia, Gran Comisión.* No se traducen ni se suavizan.
+
+**La versión de la Biblia también es terminología.** Todo el sitio cita
+Reina-Valera 1960, y solo marca NVI donde el documento de la casa cita NVI.
+Mezclar versiones sin decirlo es, para este lector, una señal de descuido.
+
+**Y la transparencia se convierte en argumento, no en descargo.** «No hay
+placas, ni nombres en la pared, ni menciones públicas por dar» no es una
+disculpa por no premiar: es exactamente lo que distingue a esta casa de lo que
+la gente teme al oír «donación» e «iglesia» en la misma frase.
+
+---
+
+## 10. Líneas rojas
 
 - **No usar la violencia como espectáculo.** Los datos se citan con fuente y
   sin fotos de víctimas. La dignidad de quien sufre no es material de campaña.
@@ -216,7 +246,7 @@ respuesta a una persona en crisis.
 
 ---
 
-## 10. Los próximos 30 días
+## 11. Los próximos 30 días
 
 1. Grabar el video en el terreno y conseguir el render de los planos.
 2. Listar 15 posibles donantes principales entre los pastores del movimiento y
