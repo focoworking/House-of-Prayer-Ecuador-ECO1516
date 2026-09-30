@@ -11,6 +11,8 @@
  */
 import { site, ui, emergencia } from '../content/site.js'
 import { campana, niveles as nivelesCampana, contexto } from '../content/campana.js'
+import { areas, fases, MODOS } from '../content/obra.js'
+import { iconosOficio } from './lib/oficios.mjs'
 import { eventos as eventosData } from '../content/datos.js'
 import { pathOf, pages } from '../content/pages.js'
 
@@ -197,6 +199,42 @@ const bloques = {
        ${s.note ? `<p class="nota">${esc(T(s.note, lang))}</p>` : ''}`,
       lang
     )
+  },
+
+  /* El mercado de la obra: en qué puede aportar cada oficio.
+     Se agrupa por fase porque así es como avanza una construcción, y cada
+     tarjeta dice qué hace falta en concreto: «buscamos voluntarios» no mueve
+     a nadie, «cálculo estructural de una losa de 200 m²» sí. */
+  oficios(s, lang) {
+    const grupos = [0, 1, 2, 3]
+      .map((fase) => ({ fase, items: areas.filter((a) => a.fase === fase) }))
+      .filter((g) => g.items.length)
+
+    const tarjeta = (a) => `<li class="oficio${a.clave ? ' oficio--clave' : ''}">
+      <svg class="oficio__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="${iconosOficio[a.icono]}" fill="none" stroke="currentColor"
+          stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <div class="oficio__cuerpo">
+        <p class="oficio__modo">${esc(T(MODOS[a.modo], lang))}</p>
+        <h3 class="oficio__nombre">${esc(T(a.nombre, lang))}</h3>
+        <p class="oficio__necesidad">${esc(T(a.necesidad, lang))}</p>
+      </div>
+      <p class="oficio__cta"><a href="${esc(s.href)}#${esc(a.id)}">${esc(
+        T({ es: 'Quiero aportar aquí', en: 'I can help here' }, lang)
+      )}</a></p>
+    </li>`
+
+    const bloques = grupos
+      .map(
+        (g) => `<div class="oficios__grupo">
+          <h3 class="oficios__fase">${esc(T(fases[g.fase], lang))}</h3>
+          <ul class="oficios">${g.items.map(tarjeta).join('')}</ul>
+        </div>`
+      )
+      .join('')
+
+    return wrap('oficios', s.title, `${head(s.title, s.lead, lang)}${bloques}`, lang)
   },
 
   /* Las cifras del país. Cada una con su fuente enlazada: sin fuente esto es
@@ -403,7 +441,11 @@ const bloques = {
         const control =
           f.type === 'textarea'
             ? `<textarea id="${id}" name="${esc(f.name)}" rows="5"${f.required ? ' required' : ''}></textarea>`
-            : `<input id="${id}" name="${esc(f.name)}" type="${esc(f.type)}"${f.required ? ' required' : ''} />`
+            : f.type === 'select'
+              ? `<select id="${id}" name="${esc(f.name)}"${f.required ? ' required' : ''}>${f.options
+                  .map((o) => `<option value="${esc(T(o, lang))}">${esc(T(o, lang))}</option>`)
+                  .join('')}</select>`
+              : `<input id="${id}" name="${esc(f.name)}" type="${esc(f.type)}"${f.required ? ' required' : ''} />`
         return `<p class="campo"><label for="${id}">${esc(T(f.label, lang))}${
           f.required ? ' <span aria-hidden="true">*</span>' : ''
         }</label>${control}</p>`

@@ -10,6 +10,7 @@ import { t, site, emergencia } from './site.js'
 import { queEs, objetivos, temasIntercesion, proyecto, actosDeJusticia, beneficiarios, montes as montesTexto } from './eco.js'
 import { preguntas, preguntasDonante } from './datos.js'
 import { campana, remesas } from './campana.js'
+import { areas } from './obra.js'
 
 const dolares = (n) => `$${n.toLocaleString('en-US')}`
 
@@ -129,7 +130,10 @@ export const proyectoPagina = {
       type: 'hero',
       eyebrow: t('Proyecto', 'Project'),
       title: t('El lugar de reposo de Dios', 'The resting place of God'),
-      lead: proyecto.descripcion,
+      lead: t(
+        `El terreno ya está donado. ${proyecto.descripcion.es}`,
+        `The land is already donated. ${proyecto.descripcion.en}`
+      ),
       actions: [
         { label: t('Dar al proyecto', 'Give towards the project'), href: site.giveUrl, kind: 'primary', external: true },
         { label: t('Hablar con el equipo', 'Talk to the team'), href: { es: '/contacto', en: '/en/contact' }, kind: 'ghost' },
@@ -145,7 +149,7 @@ export const proyectoPagina = {
     {
       type: 'stats',
       items: [
-        { value: `${proyecto.superficie} m²`, label: t('En dos plantas, al norte de Quito', 'Over two floors, in northern Quito') },
+        { value: `${proyecto.superficie} m²`, label: t('En dos plantas, sobre terreno ya donado', 'Over two floors, on land already donated') },
         { value: dolares(proyecto.costoTotal), label: t('Costo aproximado del proyecto', 'Approximate cost of the project') },
         { value: '3', label: t('Fases, y se puede aportar a cualquiera', 'Phases — you can give towards any of them') },
       ],
@@ -172,6 +176,14 @@ export const proyectoPagina = {
           `${fase.detalle.en} Approximate cost: ${dolares(fase.costo)} US dollars.`
         ),
       })),
+    },
+    {
+      type: 'lead',
+      title: t('El primer paso ya está dado', 'The first step is already taken'),
+      text: t(
+        'El terreno donde va el cuarto de oración fue donado. No pedimos para comprar un lote: pedimos para levantar lo que va encima. Y una parte del presupuesto ya está reunida.',
+        'The land where the prayer room will stand was donated. We are not asking to buy a plot: we are asking to raise what goes on top of it. And part of the budget has already been gathered.'
+      ),
     },
     {
       type: 'meta',
@@ -204,7 +216,7 @@ export const proyectoPagina = {
       text: t('Agradecemos tus donaciones y tus oraciones.', 'We are grateful for your giving and your prayers.'),
       actions: [
         { label: t('Dar ahora', 'Give now'), href: site.giveUrl, kind: 'primary', external: true },
-        { label: t('Ver a dónde va', 'See where it goes'), href: { es: '/dar', en: '/en/give' }, kind: 'ghost' },
+        { label: t('Aportar mi oficio', 'Contribute my trade'), href: { es: '/construir', en: '/en/build' }, kind: 'ghost' },
       ],
     },
   ],
@@ -519,6 +531,165 @@ export const dar = {
       actions: [
         { label: t('Dar por Banco Pichincha', 'Give via Banco Pichincha'), href: site.giveUrl, kind: 'primary', external: true },
         { label: t('Doy desde el exterior', 'I am giving from abroad'), href: { es: '/desde-el-exterior', en: '/en/from-abroad' }, kind: 'ghost' },
+      ],
+    },
+  ],
+}
+
+
+/**
+ * El mercado de la obra.
+ *
+ * Es la página que convierte «necesitamos dinero» en «necesitamos lo que tú
+ * sabes hacer». Un arquitecto que dona los planos aporta varios miles de
+ * dólares sin sacar un centavo, un ferretero aporta el hierro, un contador
+ * revisa las cuentas. Y todos ellos, además, se vuelven donantes y
+ * embajadores de una forma que no ocurre cuando solo se pide plata.
+ *
+ * El terreno ya está donado, y eso se dice en el titular: es lo primero que
+ * pregunta cualquiera que haya donado alguna vez a una construcción, y es la
+ * prueba de que esto ya arrancó.
+ */
+export const construir = {
+  slug: { es: 'construir', en: 'build' },
+  title: t(
+    'Construye con nosotros — aporta tu oficio al cuarto de oración',
+    'Build with us — bring your trade to the prayer room'
+  ),
+  description: t(
+    'El terreno ya está donado. Ahora hacen falta planos, cálculo estructural, instalaciones, materiales y manos. Encuentra tu área y aporta lo que sabes hacer.',
+    'The land is already donated. Now we need drawings, structural calculations, installations, materials and hands. Find your area and bring what you know how to do.'
+  ),
+  priority: 0.85,
+  sections: [
+    {
+      type: 'hero',
+      eyebrow: t('Construir', 'Build'),
+      title: t('El terreno ya es nuestro. Ahora hay que levantarlo.', 'The land is already ours. Now it has to be built.'),
+      lead: t(
+        'Alguien donó el terreno donde va el cuarto de oración. Ese paso ya está dado. Lo que falta es todo lo que va encima, y buena parte de eso no se compra con dinero: se aporta con lo que cada uno sabe hacer.',
+        'Someone donated the land where the prayer room will stand. That step is done. What is missing is everything that goes on top of it, and much of that is not bought with money: it is contributed with what each person knows how to do.'
+      ),
+      actions: [
+        { label: t('Ver dónde puedo aportar', 'See where I can help'), href: { es: '/construir#areas', en: '/en/build#areas' }, kind: 'primary' },
+        { label: t('Ver el proyecto', 'See the project'), href: { es: '/proyecto', en: '/en/prayer-room-project' }, kind: 'ghost' },
+      ],
+      verse: {
+        text: t(
+          '«Y todo varón de corazón generoso trajo ofrenda... para toda la obra del servicio.»',
+          '“And every man with a willing heart brought an offering... for all the work of the service.”'
+        ),
+        ref: 'Éxodo 35:21',
+      },
+    },
+    {
+      type: 'lead',
+      title: t('Por qué tu oficio vale más que tu billetera', 'Why your trade is worth more than your wallet'),
+      text: t(
+        'Un arquitecto que entrega los planos aporta varios miles de dólares sin sacar un centavo del bolsillo. Un ingeniero que firma el cálculo estructural desbloquea el permiso municipal. Un ferretero que pone el hierro mueve la primera fase más que veinte donaciones pequeñas. Y todos ellos terminan ligados a la obra de una manera que no ocurre cuando solo se da plata.',
+        'An architect who hands over the drawings contributes several thousand dollars without spending a cent. An engineer who signs off the structural calculations unlocks the municipal permit. A hardware supplier who provides the steel moves the first phase more than twenty small gifts. And all of them end up tied to the work in a way that giving money alone never achieves.'
+      ),
+    },
+    {
+      type: 'oficios',
+      title: t('Dónde hace falta lo que tú sabes', 'Where what you know is needed'),
+      lead: t(
+        'Ordenado como avanza una obra. Cada área dice qué hace falta en concreto, para que en cinco segundos sepas si esto es para ti.',
+        'Ordered the way a build advances. Each area says exactly what is needed, so that in five seconds you know whether this is for you.'
+      ),
+      href: { es: '/construir#postular', en: '/en/build#postular' },
+    },
+    {
+      type: 'steps',
+      title: t('Cómo funciona', 'How it works'),
+      lead: t(
+        'Sin trámites largos, pero con orden: una obra donde cada quien hace lo que se le ocurre se atrasa más que una sin voluntarios.',
+        'No long paperwork, but with order: a site where everyone does as they please falls further behind than one with no volunteers at all.'
+      ),
+      items: [
+        {
+          title: t('Nos escribes', 'You write to us'),
+          text: t(
+            'Dices tu oficio, en qué área puedes aportar y de cuánto tiempo dispones. Nada más.',
+            'You tell us your trade, which area you can help with and how much time you have. Nothing else.'
+          ),
+        },
+        {
+          title: t('Te responde el residente de obra', 'The site manager replies'),
+          text: t(
+            'En menos de 48 horas, siempre. Te dice si tu aporte hace falta ahora o más adelante, y en qué fase encaja.',
+            'Within 48 hours, always. They tell you whether your contribution is needed now or later, and which phase it fits.'
+          ),
+        },
+        {
+          title: t('Se acuerda por escrito', 'It is agreed in writing'),
+          text: t(
+            'Qué entregas, para cuándo y con qué alcance. Un correo basta, pero queda escrito: así nadie queda mal ni la obra se para esperando algo que nunca llegó.',
+            'What you deliver, by when and with what scope. An email is enough, but it is written down: that way nobody is left hanging and the build does not stall waiting for something that never came.'
+          ),
+        },
+      ],
+    },
+    {
+      type: 'checklist',
+      title: t('Las reglas de la obra', 'The rules of the site'),
+      items: [
+        t('Todo aporte pasa por el residente de obra. Nadie entra a trabajar por su cuenta.', 'Every contribution goes through the site manager. Nobody starts working on their own.'),
+        t('Quien trabaje en obra va con equipo de protección y bajo el plan de seguridad. Sin excepciones y sin importar quién sea.', 'Anyone working on site wears protective equipment under the safety plan. No exceptions, whoever they are.'),
+        t('La mano de obra en altura y de riesgo se contrata y se asegura: ahí el voluntariado no es un ahorro, es una responsabilidad.', 'High-risk and working-at-height labour is contracted and insured: there, volunteering is not a saving, it is a liability.'),
+        t('Los aportes profesionales se entregan firmados por quien tiene la competencia legal para firmarlos.', 'Professional contributions are delivered signed by whoever is legally qualified to sign them.'),
+        t('Ningún aporte da derecho a decidir sobre el uso del lugar ni sobre la casa.', 'No contribution grants any right to decide over the use of the place or over the house.'),
+      ],
+    },
+    {
+      type: 'form',
+      title: t('Postula tu aporte', 'Offer your contribution'),
+      lead: t(
+        'Llega directo al residente de obra. Te responde en menos de 48 horas, aunque sea para decirte que tu área todavía no está abierta.',
+        'It reaches the site manager directly. They reply within 48 hours, even if only to say your area is not open yet.'
+      ),
+      action: `mailto:${site.email}`,
+      fields: [
+        { name: 'nombre', label: t('Nombre', 'Name'), type: 'text', required: true },
+        { name: 'profesion', label: t('Profesión, oficio o empresa', 'Profession, trade or company'), type: 'text', required: true },
+        {
+          name: 'area',
+          label: t('¿En qué área quieres aportar?', 'Which area do you want to help with?'),
+          type: 'select',
+          required: true,
+          options: areas.map((a) => a.nombre),
+        },
+        {
+          name: 'como',
+          label: t('¿Cómo aportas?', 'How are you contributing?'),
+          type: 'select',
+          required: true,
+          options: [
+            t('Mi trabajo profesional', 'My professional work'),
+            t('Materiales o equipo', 'Materials or equipment'),
+            t('Trabajo en obra', 'Work on site'),
+            t('Puedo conectarlos con quien lo tiene', 'I can connect you with someone who has it'),
+          ],
+        },
+        { name: 'ciudad', label: t('Ciudad y país', 'City and country'), type: 'text', required: true },
+        { name: 'detalle', label: t('Cuéntanos en una línea qué puedes aportar', 'Tell us in one line what you can contribute'), type: 'textarea', required: true },
+      ],
+      submit: t('Enviar mi postulación', 'Send my offer'),
+      note: t(
+        'Tus datos se usan solo para coordinar tu aporte. No se publican, no se comparten y no entran en ninguna lista de correo.',
+        'Your details are used only to coordinate your contribution. They are not published, not shared, and go into no mailing list.'
+      ),
+    },
+    {
+      type: 'cta',
+      title: t('¿No es lo tuyo, pero conoces a quien sí?', 'Not your field, but you know someone whose it is?'),
+      text: t(
+        'Un contacto bien hecho vale tanto como un aporte. Pásanos el nombre y nosotros escribimos.',
+        'A good introduction is worth as much as a contribution. Send us the name and we will write.'
+      ),
+      actions: [
+        { label: t('Pasar un contacto', 'Send us a name'), href: `https://wa.me/${site.whatsapp}`, kind: 'primary', external: true },
+        { label: t('Dar', 'Give'), href: site.giveUrl, kind: 'ghost', external: true },
       ],
     },
   ],

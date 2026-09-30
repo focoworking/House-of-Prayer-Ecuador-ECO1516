@@ -23,9 +23,10 @@ sólido, pero **no es una pieza de recaudación**. Seis cosas lo impiden:
 3. **No hay una sola cifra de lo que ya existe.** Cuántas congregaciones,
    cuántos intercesores, cuántas familias atendidas. Sin eso, catorce años de
    trabajo son una afirmación, no un historial.
-4. **No dice si el terreno ya es suyo.** Es la primera pregunta de cualquiera
-   que haya donado alguna vez a una construcción. Si ya está comprado, es el
-   argumento más fuerte que tienen y no lo están usando.
+4. **No dice que el terreno ya está donado.** Es la primera pregunta de
+   cualquiera que haya donado alguna vez a una construcción, es el argumento
+   más fuerte que tienen, y en el documento no aparece. (Confirmado: el lote
+   fue donado, y ya hay una parte del presupuesto reunida.)
 5. **No hay nombres ni rostros.** Ni quién responde por el dinero, ni el
    equipo, ni un pastor de otra denominación diciendo por qué está dentro.
 6. **No pide nada.** Termina agradeciendo donaciones, pero no dice qué hacer
@@ -71,8 +72,8 @@ Catorce años sin un solo local propio. Cada vigilia se sostiene en salones
 prestados y con agendas ajenas.
 
 **Qué se construye**
-200 m² en dos plantas [en un terreno ya adquirido / cuyo costo está
-contemplado] al norte de Quito. Planta baja: el salón de oración 24/7. Planta
+200 m² en dos plantas, **sobre un terreno que ya nos fue donado**, al norte de
+Quito. Planta baja: el salón de oración 24/7. Planta
 alta: oficinas y aula de entrenamiento para la Iglesia.
 
 | Fase | Qué | Costo |
@@ -85,6 +86,10 @@ Cada fase se construye cuando está cubierta. Lo recaudado para una fase no se
 gasta en otra.
 
 **Cómo participar**
+Con dinero o con su oficio. Necesitamos planos, cálculo estructural, trámites,
+instalaciones, materiales y equipo: quien aporta lo que sabe hacer mueve esta
+obra tanto como quien firma un cheque (eco1516.org/construir).
+
 Un metro cuadrado son $1.000. Doscientos metros, doscientas familias, y el
 edificio está pagado. También se puede dar desde $25.
 
@@ -150,8 +155,9 @@ tratado da referidos; un «no» mal tratado cierra una red entera.
    No hace falta producción. Hace falta que exista.
 2. **Conseguir las tres cifras de tracción:** congregaciones, intercesores,
    familias atendidas el último año. Se cuentan una vez y sirven para todo.
-3. **Aclarar el tema del terreno** en la primera línea del proyecto. Si ya es
-   suyo, es el mejor argumento que tienen.
+3. **Poner el terreno donado en la primera línea**, y decir cuánto se lleva
+   levantado. Dos hechos que prueban que esto ya arrancó y que hoy no se
+   cuentan.
 4. **Bajar la petición pública a $85.000.** Ya está hecho en la web. Que el
    documento impreso diga lo mismo.
 5. **Conseguir el respaldo de un pastor de otra denominación**, por escrito y

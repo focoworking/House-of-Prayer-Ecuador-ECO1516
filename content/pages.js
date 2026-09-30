@@ -7,6 +7,7 @@ import { inicio, ayuda, oracion } from './pages-core.js'
 import {
   nosotros,
   proyectoPagina,
+  construir,
   montes,
   justicia,
   formacion,
@@ -24,6 +25,7 @@ export const pages = [
   oracion,
   nosotros,
   proyectoPagina,
+  construir,
   montes,
   justicia,
   formacion,

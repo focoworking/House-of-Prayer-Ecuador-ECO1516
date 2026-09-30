@@ -251,6 +251,7 @@ export const nav = [
   { slug: 'oracion', label: t('Oración 24/7', '24/7 prayer') },
   { slug: 'nosotros', label: t('Quiénes somos', 'About') },
   { slug: 'proyecto', label: t('El proyecto', 'The project') },
+  { slug: 'construir', label: t('Construir', 'Build') },
   { slug: 'justicia', label: t('Justicia', 'Justice') },
   { slug: 'dar', label: t('Dar', 'Give') },
 ]

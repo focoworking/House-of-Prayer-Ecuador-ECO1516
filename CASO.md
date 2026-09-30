@@ -41,6 +41,13 @@ Esa frase se sostiene con datos públicos, no con retórica:
 | Dónde crece esa Iglesia | zonas marginales de Quito y Guayaquil, y regiones indígenas | Es **exactamente** donde ya trabajan los Actos de Justicia de ECO |
 | ECO | desde **octubre de 2012**, 14 años uniendo denominaciones | Lo escaso no es la oración: es la unidad que ya funciona |
 
+**El terreno ya está donado.** Alguien creyó lo suficiente en esto como para
+regalar el lote donde va el edificio, y una parte del presupuesto ya está
+reunida. Eso cambia la conversación entera: no se pide para comprar un
+terreno —el gasto que más asusta a cualquier donante de construcción—, se pide
+para levantar lo que va encima, sobre algo que ya existe. Y responde de
+entrada la primera pregunta que hace quien ha donado alguna vez a una obra.
+
 El activo de ECO no es el terreno. Es que **ya logró que pastores de
 denominaciones distintas sostengan un mismo altar durante catorce años**. Eso
 en América Latina casi no existe, y es lo que hay que poner en primera línea.
@@ -104,6 +111,40 @@ después. Una meta creíble se cumple y genera impulso; una meta enorme se
 estanca públicamente y mata la campaña.
 
 ---
+
+## 4 bis. La cuarta palanca: el mercado de la obra
+
+Una construcción no se paga solo con dinero. Se paga con planos, cálculo
+estructural, trámites municipales, instalaciones, materiales y equipo. Un
+arquitecto que entrega los planos aporta varios miles de dólares sin sacar un
+centavo del bolsillo; un ingeniero que firma el cálculo desbloquea el permiso;
+un ferretero que pone el hierro mueve la primera fase más que veinte
+donaciones pequeñas.
+
+En recaudación eso se llama aporte en especie y pro bono, y en obra suele
+valer más de la mitad del presupuesto. Tiene además un efecto que el dinero no
+tiene: **quien aporta su oficio queda ligado al proyecto**. El arquitecto que
+dibujó esa planta va a ir a ver cómo va, va a llevar gente, y con el tiempo
+suele acabar dando también dinero. El marketplace de oficios no es solo un
+ahorro: es el mejor embudo de donantes que tiene este proyecto.
+
+La página `/construir` lo implementa: dieciocho áreas ordenadas como avanza
+una obra, cada una diciendo qué hace falta en concreto —«cálculo estructural
+de una losa de 200 m² en dos plantas», no «buscamos voluntarios»— y un
+formulario que llega al residente de obra.
+
+**Tres cosas que hay que sostener o esto se vuelve en contra:**
+
+1. **Responder en menos de 48 horas, siempre.** Quien se ofrece y no recibe
+   respuesta no vuelve, y lo cuenta. Un formulario desatendido hace más daño
+   que no haberlo puesto.
+2. **Un responsable único que acepte o rechace.** Sin residente de obra
+   llegan treinta ofertas y nadie sabe qué hacer con ellas. Trabajo donado sin
+   coordinar atrasa una obra más de lo que la adelanta.
+3. **Escritorio sí, andamio con cuidado.** Los aportes seguros son los de
+   gabinete y los de materiales. La mano de obra en altura necesita afiliación
+   y seguro de riesgos: ahí el voluntariado no es un ahorro, es una
+   responsabilidad, y un accidente hunde el proyecto y el testimonio.
 
 ## 5. La secuencia: nunca lanzar en cero
 

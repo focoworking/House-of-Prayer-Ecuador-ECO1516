@@ -165,6 +165,27 @@ Las cifras del país (`contexto`) **siempre llevan su fuente enlazada** y nunca
 van acompañadas de fotos de víctimas. Sin fuente esto es propaganda, y una
 cifra que no resiste una pregunta cuesta más que todo lo que recaudó.
 
+## El mercado de la obra
+
+`content/obra.js` describe las dieciocho áreas en las que alguien puede
+aportar su oficio al cuarto de oración, y `/construir` las publica agrupadas
+como avanza una construcción.
+
+Cada área dice qué hace falta **en concreto**: «cálculo estructural de una
+losa de 200 m² en dos plantas», no «buscamos voluntarios». Esa diferencia es
+la página entera — un profesional decide en cinco segundos si eso es para él.
+
+Cada área declara además su `modo`, y no es decorativo: `gabinete` es trabajo
+que se entrega terminado, `especie` es material o equipo, y `campo` es trabajo
+en obra, que siempre pasa por el residente y por el plan de seguridad. La mano
+de obra en altura necesita afiliación y seguro de riesgos; ahí el voluntariado
+no es un ahorro, es una responsabilidad.
+
+Los iconos (`scripts/lib/oficios.mjs`) son dibujos de línea y no fotos a
+propósito: una foto de banco de imágenes de un obrero sonriendo se reconoce al
+instante y resta credibilidad justo en la página donde alguien decide si
+confía. Cuando existan fotos de la obra real, esas sí van.
+
 ## El enlace de dar
 
 `site.giveUrl` en `content/site.js` es la **única URL del sitio que mueve

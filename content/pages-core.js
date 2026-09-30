@@ -90,11 +90,12 @@ export const inicio = {
         'We are not asking to start something: we are asking so it does not stop. Since 2012 the prayer has been held in borrowed halls and other people’s schedules. The prayer room is 200 square metres in northern Quito, at a thousand dollars each. Two hundred metres, two hundred families, and the altar has a home.'
       ),
       items: [
+        t('El terreno ya está donado: falta levantar lo que va encima', 'The land is already donated: what goes on top is what is missing'),
         t('Primera fase abierta: $85.000 para cimientos y paredes', 'First phase open: $85,000 for foundations and walls'),
         t('Un metro cuadrado, $1.000: la unidad con la que está hecha la cuenta', 'One square metre, $1,000: the unit the whole sum is made of'),
         t('Cada fase se construye cuando está cubierta', 'Each phase is built once it is covered'),
       ],
-      action: { label: t('Ver cómo dar', 'See how to give'), href: { es: '/dar', en: '/en/give' } },
+      action: { label: t('Aporta tu oficio a la obra', 'Bring your trade to the build'), href: { es: '/construir', en: '/en/build' } },
     },
     {
       type: 'scripture',
