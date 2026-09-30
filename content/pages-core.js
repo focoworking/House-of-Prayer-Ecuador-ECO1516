@@ -397,6 +397,15 @@ export const oracion = {
       ),
     },
     {
+      type: 'calendario',
+      title: t('La semana, hora por hora', 'The week, hour by hour'),
+      lead: t(
+        'Así se ve la cobertura de la semana. Lo que está lleno lo sostiene un equipo; lo que está vacío es lo que estamos pidiendo.',
+        'This is how the week’s coverage looks. What is full is held by a team; what is empty is what we are asking for.'
+      ),
+      action: { label: t('Tomar una hora', 'Take an hour'), href: { es: '/contacto', en: '/en/contact' } },
+    },
+    {
       type: 'rows',
       title: t('Los temas de la intercesión corporativa', 'The themes of corporate intercession'),
       items: temasIntercesion.map((texto, i) => ({

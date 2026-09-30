@@ -627,3 +627,64 @@
 .oficio__cta { margin: auto 0 0; padding-top: 0.4rem; font-weight: 600; font-size: 0.95rem; }
 .oficio__cta a { text-decoration: none; color: var(--morado); }
 .oficio__cta a:hover { text-decoration: underline; }
+
+/* --- Parrilla de la semana ------------------------------------------------ */
+.calendario__cifra {
+  font-family: var(--display);
+  font-size: clamp(1.3rem, 1.1rem + 1vw, 1.8rem);
+  font-weight: 300;
+  margin: 0 0 1.5rem;
+}
+.calendario__cifra strong { font-weight: 400; color: var(--morado-oscuro); }
+.calendario__cifra span { color: var(--tinta-suave); }
+
+.calendario { border-collapse: separate; border-spacing: 2px; min-width: 34rem; }
+.calendario thead th {
+  font-family: var(--texto);
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: var(--tinta-suave);
+  padding: 0 0 0.35rem;
+  text-align: center;
+}
+/* Solo se rotulan las horas en punto de cada tres —00, 03, 06…—: veinticuatro
+   números seguidos a este tamaño se convierten en una mancha, y una rejilla
+   con etiquetas a intervalos irregulares se lee peor que sin ninguna. La
+   primera columna es el día, así que la hora h es el hijo h + 2. */
+.calendario thead th:not(:nth-child(3n + 2)) span { visibility: hidden; }
+.calendario tbody th {
+  font-family: var(--texto);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--tinta-suave);
+  text-align: right;
+  padding-right: 0.6rem;
+  white-space: nowrap;
+  width: 1%;
+}
+.hora {
+  width: 1.15rem;
+  height: 1.15rem;
+  padding: 0;
+  border-radius: 3px;
+}
+/* El estado no depende solo del color: la hora cubierta va rellena y la libre
+   va con borde punteado y hueca. Se distinguen sin distinguir el tono. */
+.hora--cubierta { background: var(--morado); }
+.hora--libre { background: transparent; border: 1px dashed color-mix(in srgb, var(--morado) 35%, transparent); }
+.hora:hover { outline: 2px solid var(--celeste); outline-offset: 1px; }
+
+.calendario__leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.5rem;
+  list-style: none;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  font-size: 0.85rem;
+  color: var(--tinta-suave);
+}
+.calendario__leyenda li { display: flex; align-items: center; gap: 0.5rem; }
+.muestra { width: 0.9rem; height: 0.9rem; border-radius: 3px; flex: none; }
+.muestra--cubierta { background: var(--morado); }
+.muestra--libre { border: 1px dashed color-mix(in srgb, var(--morado) 45%, transparent); }

@@ -165,6 +165,27 @@ Las cifras del país (`contexto`) **siempre llevan su fuente enlazada** y nunca
 van acompañadas de fotos de víctimas. Sin fuente esto es propaganda, y una
 cifra que no resiste una pregunta cuesta más que todo lo que recaudó.
 
+## La parrilla de la semana
+
+`content/turnos.js` guarda quién cubre cada una de las 168 horas de la semana,
+y `/oracion` la publica como cuadrícula.
+
+Funciona al revés que el contador de la campaña: allí lo que llama es lo que
+ya está lleno, aquí lo que llama es **lo que falta**. «Únete a orar» no mueve a
+nadie; ver que el jueves a las 3 de la madrugada no hay nadie, sí.
+
+Tres decisiones que no son de estilo:
+
+- **Empieza vacía y se queda vacía hasta tener el dato real.** Mientras
+  `cobertura` esté vacío la sección no se dibuja. Publicar horarios inventados
+  en la página de una casa de oración hace que alguien se presente un martes a
+  las once y no encuentre a nadie.
+- **Es una tabla de verdad**, con encabezados de día y de hora y un texto
+  alternativo por celda. Así la lee un lector de pantalla y así se puede
+  tabular; una rejilla de `div`s no.
+- **El estado no se codifica solo con color.** La hora cubierta va rellena y
+  la libre va hueca con borde punteado: se distinguen sin distinguir el tono.
+
 ## El mercado de la obra
 
 `content/obra.js` describe las dieciocho áreas en las que alguien puede

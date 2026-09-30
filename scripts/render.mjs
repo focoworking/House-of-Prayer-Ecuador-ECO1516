@@ -12,6 +12,7 @@
 import { site, ui, emergencia } from '../content/site.js'
 import { campana, niveles as nivelesCampana, contexto } from '../content/campana.js'
 import { areas, fases, MODOS } from '../content/obra.js'
+import { cobertura, dias, modeloSemana, TOTAL_HORAS } from '../content/turnos.js'
 import { iconosOficio } from './lib/oficios.mjs'
 import { eventos as eventosData } from '../content/datos.js'
 import { pathOf, pages } from '../content/pages.js'
@@ -197,6 +198,82 @@ const bloques = {
       s.title,
       `${head(s.title, s.lead, lang)}<ul class="niveles">${items}</ul>
        ${s.note ? `<p class="nota">${esc(T(s.note, lang))}</p>` : ''}`,
+      lang
+    )
+  },
+
+  /* La parrilla de la semana.
+     Es una tabla de verdad —168 celdas con encabezados de día y de hora— y no
+     un dibujo: así la lee un lector de pantalla, así se puede tabular y así
+     cada celda puede llevar su propio texto alternativo. El estado no se
+     codifica solo con color: la hora cubierta va rellena y la libre va con
+     borde punteado, que es lo que la hace legible también para quien no
+     distingue el morado del gris.
+
+     Si no hay cobertura cargada, no se dibuja nada: una parrilla inventada en
+     la página de una casa de oración hace que alguien se presente un martes a
+     las once y no encuentre a nadie. */
+  calendario(s, lang) {
+    if (!cobertura.length) return ''
+
+    const mapa = new Map(cobertura.map((c) => [`${c.dia}-${c.hora}`, c]))
+    const cubiertas = mapa.size
+    const porcentaje = Math.round((cubiertas / TOTAL_HORAS) * 100)
+
+    const horas = Array.from({ length: 24 }, (_, h) => h)
+    const cabecera = horas
+      .map((h) => `<th scope="col"><span>${String(h).padStart(2, '0')}</span></th>`)
+      .join('')
+
+    const filas = dias
+      .map((dia, d) => {
+        const celdas = horas
+          .map((h) => {
+            const turno = mapa.get(`${d}-${h}`)
+            const etiqueta = `${T(dia, lang)} ${String(h).padStart(2, '0')}:00 — ${
+              turno
+                ? `${turno.equipo}${turno.ciudad ? `, ${turno.ciudad}` : ''}`
+                : T({ es: 'hora libre', en: 'hour free' }, lang)
+            }`
+            return `<td class="hora ${turno ? 'hora--cubierta' : 'hora--libre'}" title="${esc(etiqueta)}">
+              <span class="visualmente-oculto">${esc(etiqueta)}</span>
+            </td>`
+          })
+          .join('')
+        return `<tr><th scope="row">${esc(T(dia, lang))}</th>${celdas}</tr>`
+      })
+      .join('')
+
+    return wrap(
+      'calendario',
+      s.title,
+      `${head(s.title, s.lead, lang)}
+      <p class="calendario__cifra">
+        <strong>${cubiertas}</strong> ${esc(T({ es: 'de', en: 'of' }, lang))} ${TOTAL_HORAS}
+        ${esc(T({ es: 'horas de la semana cubiertas', en: 'hours of the week covered' }, lang))}
+        <span>· ${porcentaje}%</span>
+      </p>
+      <div class="tabla-scroll">
+        <table class="calendario">
+          <caption class="visualmente-oculto">${esc(
+            T({ es: 'Cobertura de oración por día y hora', en: 'Prayer coverage by day and hour' }, lang)
+          )}</caption>
+          <thead><tr><th scope="col"><span class="visualmente-oculto">${esc(
+            T({ es: 'Día', en: 'Day' }, lang)
+          )}</span></th>${cabecera}</tr></thead>
+          <tbody>${filas}</tbody>
+        </table>
+      </div>
+      <ul class="calendario__leyenda">
+        <li><span class="muestra muestra--cubierta" aria-hidden="true"></span>${esc(
+          T({ es: 'Hora sostenida por un equipo', en: 'Hour held by a team' }, lang)
+        )}</li>
+        <li><span class="muestra muestra--libre" aria-hidden="true"></span>${esc(
+          T({ es: 'Hora libre: esta es la que estamos pidiendo', en: 'Hour free: this is the one we are asking for' }, lang)
+        )}</li>
+      </ul>
+      <p class="nota">${esc(T(modeloSemana, lang))}</p>
+      ${s.action ? actions([{ ...s.action, kind: 'primary' }], lang) : ''}`,
       lang
     )
   },
