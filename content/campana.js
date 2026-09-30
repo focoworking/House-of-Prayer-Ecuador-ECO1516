@@ -28,7 +28,12 @@ import { t } from './site.js'
 import { proyecto } from './eco.js'
 
 export const campana = {
-  /** La fase que está abierta al público ahora mismo. */
+  /** La fase que está abierta al público ahora mismo.
+   *  TODO ECO1516: confirmar. La foto de la obra muestra paredes levantadas y
+   *  enlucidas y ventanas ya instaladas, que es más de lo que describe la
+   *  primera fase. Si la obra gris está cubierta en parte, la meta pública
+   *  debe decir qué falta de ella, o pasar directamente a la segunda: pedir
+   *  para algo que ya está hecho se nota y cuesta caro. */
   faseActual: 0,
   meta: proyecto.fases[0].costo,
 

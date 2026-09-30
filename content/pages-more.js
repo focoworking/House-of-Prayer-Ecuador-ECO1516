@@ -155,6 +155,52 @@ export const proyectoPagina = {
       ],
     },
     {
+      type: 'galeria',
+      title: t('Así va a quedar', 'This is how it will look'),
+      lead: t(
+        'Renders del proyecto arquitectónico. El terreno está donado y la obra ya empezó: esto no es una idea, es un plano en ejecución.',
+        'Renders of the architectural project. The land is donated and the build has started: this is not an idea, it is a drawing being executed.'
+      ),
+      items: [
+        {
+          src: '/img/obra/render-exterior.jpg',
+          w: 975,
+          h: 960,
+          alt: t(
+            'Render del edificio terminado: dos plantas, escalera exterior de hormigón, ventanales y volumen de madera en la planta alta.',
+            'Render of the finished building: two floors, an external concrete stair, large windows and a timber-clad volume on the upper floor.'
+          ),
+          caption: t('El edificio desde la calle.', 'The building from the street.'),
+        },
+        {
+          src: '/img/obra/render-salon.jpg',
+          w: 1600,
+          h: 900,
+          alt: t(
+            'Render del salón de oración: sillas dispuestas frente a un frente de madera con púlpito, ventanal a la calle y jardines verticales.',
+            'Render of the prayer hall: chairs facing a timber wall with a lectern, a window onto the street and vertical gardens.'
+          ),
+          caption: t(
+            'El salón de la planta baja: el lugar de la oración 24/7.',
+            'The ground-floor hall: the place of 24/7 prayer.'
+          ),
+        },
+        {
+          src: '/img/obra/render-oficina.jpg',
+          w: 1600,
+          h: 900,
+          alt: t(
+            'Render de la sala de reuniones de la planta alta, con mesa larga y piso de madera.',
+            'Render of the upper-floor meeting room, with a long table and wooden floor.'
+          ),
+          caption: t(
+            'Arriba: oficinas y el aula de entrenamiento para la Iglesia.',
+            'Upstairs: offices and the training room for the Church.'
+          ),
+        },
+      ],
+    },
+    {
       type: 'rows',
       title: t('Qué se construye', 'What is being built'),
       items: proyecto.programa.map((texto, i) => ({
@@ -581,6 +627,20 @@ export const construir = {
         ),
         ref: 'Éxodo 35:21',
       },
+    },
+    {
+      type: 'figure',
+      src: '/img/obra/obra-actual.jpg',
+      w: 1280,
+      h: 766,
+      alt: t(
+        'Interior del cuarto de oración en construcción: paredes enlucidas, ventanas instaladas con rejas, cables eléctricos a la vista y escombros en el piso.',
+        'Interior of the prayer room under construction: plastered walls, windows fitted with grilles, exposed wiring and rubble on the floor.'
+      ),
+      caption: t(
+        'La obra hoy. No es una maqueta ni un plano: es lo que hay en el terreno ahora mismo, y lo que falta es lo que estamos pidiendo.',
+        'The site today. Not a model or a drawing: this is what is on the ground right now, and what is missing is what we are asking for.'
+      ),
     },
     {
       type: 'lead',

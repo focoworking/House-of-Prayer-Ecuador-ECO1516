@@ -688,3 +688,19 @@
 .muestra { width: 0.9rem; height: 0.9rem; border-radius: 3px; flex: none; }
 .muestra--cubierta { background: var(--morado); }
 .muestra--libre { border: 1px dashed color-mix(in srgb, var(--morado) 45%, transparent); }
+
+/* --- Galería ------------------------------------------------------------- */
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: 1.25rem;
+}
+.galeria__pieza { margin: 0; display: grid; gap: 0.75rem; }
+.galeria__pieza img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: var(--radio);
+  border: 1px solid var(--linea-suave);
+}
+.galeria__pieza figcaption { font-size: 0.86rem; color: var(--tinta-suave); }

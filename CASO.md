@@ -172,10 +172,10 @@ mes, pase lo que pase — sobre todo los meses malos.
 
 ## 6. Lo que falta en el sitio, por orden de impacto
 
-1. **El video y los planos.** El propio documento de la casa dice «aquí
-   pondríamos el video y los planos» y siguen sin estar. Es el activo que más
-   convierte de toda la campaña: un donante necesita *ver* el lugar antes de
-   pagarlo. Con un render y noventa segundos de Hernán en el terreno alcanza.
+1. **El video.** Los renders del proyecto y una foto de la obra en curso ya
+   están en el sitio, y eran el hueco más caro que tenía la campaña. Falta lo
+   que los ata: noventa segundos de Hernán en el terreno diciendo qué se está
+   construyendo ahí. Con el celular basta.
 2. **Contador de la fase uno.** «$X de $85.000» con barra. La prueba social es
    la mitad del trabajo.
 3. **La escalera de montos** como botones, no como texto. Cada nivel con lo

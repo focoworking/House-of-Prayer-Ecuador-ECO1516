@@ -123,6 +123,22 @@ const bloques = {
     </section>`
   },
 
+  /* Varias imágenes juntas, cada una con su pie. Se usa para los renders del
+     proyecto: una sola no explica un edificio, y tres seguidas a ancho
+     completo lo convierten en un catálogo. */
+  galeria(s, lang) {
+    const items = s.items
+      .map(
+        (i) => `<figure class="galeria__pieza">
+          <img src="${esc(i.src)}" alt="${esc(T(i.alt, lang))}" width="${i.w}" height="${i.h}"
+            loading="lazy" decoding="async" />
+          ${i.caption ? `<figcaption>${esc(T(i.caption, lang))}</figcaption>` : ''}
+        </figure>`
+      )
+      .join('')
+    return wrap('galeria', s.title, `${head(s.title, s.lead, lang)}<div class="galeria">${items}</div>`, lang)
+  },
+
   figure(s, lang) {
     return `<section class="seccion seccion--figura">
       <figure class="figura">

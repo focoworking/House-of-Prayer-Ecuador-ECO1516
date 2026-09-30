@@ -18,8 +18,10 @@ sólido, pero **no es una pieza de recaudación**. Seis cosas lo impiden:
 1. **El proyecto aparece en la página tres.** Las dos primeras son teología.
    Quien lee decide en los primeros treinta segundos si sigue leyendo, y en
    esos treinta segundos todavía no sabe qué se le está pidiendo.
-2. **Dice «aquí pondríamos el video y los planos», y no están.** Es el hueco
-   más caro del documento: nadie paga una obra que no puede ver.
+2. **Dice «aquí pondríamos el video y los planos», y en el documento no
+   están.** Ya existen —hay renders del proyecto y fotos de la obra en curso,
+   publicados en el sitio— pero el documento que se entrega sigue sin ellos.
+   Nadie paga una obra que no puede ver.
 3. **No hay una sola cifra de lo que ya existe.** Cuántas congregaciones,
    cuántos intercesores, cuántas familias atendidas. Sin eso, catorce años de
    trabajo son una afirmación, no un historial.
@@ -73,7 +75,8 @@ prestados y con agendas ajenas.
 
 **Qué se construye**
 200 m² en dos plantas, **sobre un terreno que ya nos fue donado**, al norte de
-Quito. Planta baja: el salón de oración 24/7. Planta
+Quito. **La obra ya empezó.** Hay planos, renders y paredes levantadas: no
+pedimos para arrancar, pedimos para no parar. Planta baja: el salón de oración 24/7. Planta
 alta: oficinas y aula de entrenamiento para la Iglesia.
 
 | Fase | Qué | Costo |
@@ -150,9 +153,10 @@ tratado da referidos; un «no» mal tratado cierra una red entera.
 
 ## Parte 4 — Los siete cambios, por orden de impacto
 
-1. **Grabar el video y conseguir los planos.** Noventa segundos de Hernán en
-   el terreno, con el celular, diciendo qué se va a construir ahí y por qué.
-   No hace falta producción. Hace falta que exista.
+1. **Grabar el video.** Los renders y la foto de obra ya están. Falta lo que
+   los ata: noventa segundos de Hernán en el terreno, con el celular, diciendo
+   qué se está construyendo ahí y por qué. No hace falta producción; hace
+   falta que exista.
 2. **Conseguir las tres cifras de tracción:** congregaciones, intercesores,
    familias atendidas el último año. Se cuentan una vez y sirven para todo.
 3. **Poner el terreno donado en la primera línea**, y decir cuánto se lleva
