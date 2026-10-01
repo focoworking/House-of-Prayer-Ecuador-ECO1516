@@ -43,16 +43,50 @@ Incluye un `.htaccess` ya configurado, y un `404.html`.
 proveedor que active `AllowOverride All` para tu dominio. Mientras tanto, las
 páginas siguen siendo accesibles con `.html` al final.
 
-## Netlify, Vercel o Cloudflare Pages
+## Despliegue automático (recomendado)
 
-Conectas el repositorio y configuras:
+Es el camino que convierte «actualizar la web» en algo que ya no hay que
+hacer: se conecta el repositorio una vez y cada cambio se publica solo en dos
+minutos. Sin zips, sin extraer, sin un `.htaccess` que se olvida porque
+empieza por punto.
 
-- **Comando de build:** `npm run build`
-- **Directorio de publicación:** `dist`
-- **Versión de Node:** 20 o superior
+El repositorio ya trae la configuración (`netlify.toml` y `public/_redirects`),
+así que no hay nada que ajustar a mano.
 
-El `.htaccess` lo ignoran —es de Apache—, pero estas plataformas resuelven las
-URLs sin extensión por su cuenta. Cada `git push` vuelve a publicar solo.
+### Cloudflare Pages
+
+1. [dash.cloudflare.com](https://dash.cloudflare.com) → **Workers & Pages** →
+   **Create** → **Pages** → **Connect to Git**.
+2. Autoriza GitHub y elige el repositorio
+   `focoworking/House-of-Prayer-Ecuador-ECO1516`.
+3. Rellena cuatro campos y nada más:
+   - **Production branch:** `claude/fervent-dirac-fskqjj`
+   - **Build command:** `npm run build`
+   - **Build output directory:** `dist`
+   - **Environment variable:** `NODE_VERSION` = `20`
+4. **Save and Deploy.** El primer despliegue tarda un par de minutos y deja
+   una dirección `…pages.dev` para comprobar que todo está bien.
+5. **Custom domains** → añade `www.eco1516.org` y `eco1516.org`. Cloudflare
+   dice qué registro DNS crear.
+6. En Hostinger → **Dominios → DNS**, crea ese registro. Propaga en minutos.
+
+Netlify es equivalente: **Add new site → Import an existing project**, mismos
+cuatro campos, y el dominio en **Domain management**.
+
+### Qué pasa después
+
+Cada vez que se empuja un cambio al repositorio, el sitio se reconstruye y se
+publica solo. Si un build falla, la versión anterior sigue en pie: nunca se
+cae el sitio por un error.
+
+Hostinger sigue sirviendo para el dominio y el correo; solo deja de alojar los
+archivos.
+
+## Hosting compartido: Netlify, Vercel o Cloudflare por FTP
+
+Si se prefiere mantener los archivos en Hostinger, el `.htaccess` incluido ya
+resuelve las URLs sin extensión. Es el camino del apartado anterior, con el
+zip.
 
 ## Antes de publicar de verdad
 

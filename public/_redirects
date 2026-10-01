@@ -1,0 +1,4 @@
+# Cloudflare Pages lee este archivo; Netlify también, además de netlify.toml.
+# Resuelve las URLs sin extensión: /ayuda sirve ayuda.html sin redirigir.
+/*  /:splat.html  200
+/*  /404.html     404

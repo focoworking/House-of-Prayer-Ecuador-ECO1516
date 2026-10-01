@@ -1,0 +1,42 @@
+# Despliegue automático en Netlify o Cloudflare Pages.
+#
+# Con esto conectado, "actualizar la web" deja de ser una tarea: cada cambio
+# que se empuja al repositorio se publica solo en dos minutos. No hay zips que
+# subir, ni archivos que extraer, ni un .htaccess que se olvida porque empieza
+# por punto.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# El sitio publica URLs sin extensión —/ayuda, /proyecto— y en disco esos
+# archivos son ayuda.html y proyecto.html. En Apache eso lo resuelve el
+# .htaccess; aquí, esta línea.
+[[redirects]]
+  from = "/*"
+  to = "/:splat.html"
+  status = 200
+  force = false
+
+# La página de error del sitio, no la del servidor.
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
+# Los assets llevan hash en el nombre: pueden cachearse un año. El HTML no,
+# porque tiene que poder cambiar el mismo día que se publica.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "no-cache"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
