@@ -889,7 +889,10 @@ export const recursos = {
       items: [
         { label: t('Preguntas frecuentes', 'Frequently asked questions'), note: t('Respuestas cortas', 'Short answers'), href: { es: '/preguntas', en: '/en/faq' } },
         { label: t('El proyecto del cuarto de oración', 'The prayer room project'), note: t('Fases y costos', 'Phases and costs'), href: { es: '/proyecto', en: '/en/prayer-room-project' } },
-        { label: t('Canal de YouTube', 'YouTube channel'), note: t('Transmisiones y enseñanzas', 'Streams and teaching'), href: site.streamUrl, external: true },
+        /* El canal solo se enlaza si existe: ver content/site.js. */
+        ...(site.streamUrl
+          ? [{ label: t('Canal de YouTube', 'YouTube channel'), note: t('Transmisiones y enseñanzas', 'Streams and teaching'), href: site.streamUrl, external: true }]
+          : []),
         {
           label: t('hernanrobalino.com', 'hernanrobalino.com'),
           note: t('El sitio de los pastores fundadores', 'The founding pastors’ site'),

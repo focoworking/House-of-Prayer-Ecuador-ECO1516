@@ -49,7 +49,12 @@ export const organizacion = (lang) => ({
      un buscador entienda que ECO y hernanrobalino.com son la misma obra y no
      dos ministerios sueltos con nombres parecidos. */
   founder: [
-    { '@type': 'Person', name: 'Hernán Robalino', url: site.founderSite },
+    {
+      '@type': 'Person',
+      name: 'Hernán Robalino',
+      url: site.founderSite,
+      sameAs: [site.founderSite, ...site.socialFundador.map((s) => s.url)],
+    },
     { '@type': 'Person', name: 'Janeth Robalino', url: site.founderSite },
   ],
   /* Solo se declara lo que existe. Mientras el cuarto de oración esté en
@@ -195,9 +200,9 @@ const eventosSchema = (lang) =>
           addressCountry: site.address.country,
         },
       },
-      ...(e.modalidad === 'presencial'
-        ? []
-        : [{ '@type': 'VirtualLocation', url: site.streamUrl }]),
+      ...(e.modalidad !== 'presencial' && site.streamUrl
+        ? [{ '@type': 'VirtualLocation', url: site.streamUrl }]
+        : []),
     ],
     organizer: { '@id': ID.org },
     isAccessibleForFree: e.precio === 0,

@@ -111,7 +111,13 @@ export const site = {
     'Ecuador',
   ],
 
-  streamUrl: 'https://www.youtube.com/@eco1516/live',
+  /* No hay canal de transmisión confirmado. Estaba inventado —un
+     `youtube.com/@eco1516` que nadie ha verificado— y un enlace muerto en el
+     pie de un sitio de donaciones cuesta más confianza de la que aporta.
+     Queda en `null` y todo lo que lo usa se apaga solo.
+     TODO ECO1516: si existe canal de YouTube, ponerlo aquí y vuelve a
+     aparecer en Recursos y en el marcado de eventos en línea. */
+  streamUrl: null,
 
   /* El enlace de recaudación del Banco Pichincha. Vive aquí y en un solo
      sitio a propósito: es la única URL del sitio que mueve dinero, y el día
@@ -136,11 +142,25 @@ export const site = {
     sitio: 'https://www.hernanrobalino.com',
   },
 
+  /* Solo cuentas confirmadas. Las de YouTube y Spotify que había aquí me
+     las había inventado yo siguiendo el patrón del nombre, y en un sitio que
+     pide dinero un perfil que no existe es exactamente la clase de detalle
+     que hace dudar de todo lo demás.
+
+     La distinción entre las dos listas no es cosmética, es de marcado: en el
+     grafo de datos estructurados el `sameAs` de una organización dice «estos
+     perfiles son esta organización». La cuenta de Instagram es la de Hernán,
+     no la de ECO, así que va colgada de la persona. Mezclarlas le enseña a
+     un buscador que ECO y Hernán Robalino son la misma entidad, que es justo
+     lo que no son. */
   social: [
-    { label: 'YouTube', icon: 'youtube', url: 'https://www.youtube.com/@eco1516' },
-    { label: 'Instagram', icon: 'instagram', url: 'https://www.instagram.com/ecuadorcasadeoracion' },
     { label: 'Facebook', icon: 'facebook', url: 'https://www.facebook.com/EcuadorCasaDeOracion' },
-    { label: 'Spotify', icon: 'spotify', url: 'https://open.spotify.com/show/eco1516' },
+  ],
+
+  /* Perfiles personales de los fundadores. Aparecen en el pie junto a los de
+     la casa, pero en el marcado cuelgan de la persona. */
+  socialFundador: [
+    { label: 'Instagram', icon: 'instagram', url: 'https://www.instagram.com/hernanrobalinoeco/' },
   ],
 }
 
