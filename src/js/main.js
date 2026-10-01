@@ -7,8 +7,10 @@
  * que es cortesía: marcar en la tabla el bloque que se está orando ahora.
  */
 
+import { menu } from './modules/menu.js'
 import { marcarTurnoActual } from './modules/turno-actual.js'
 import { revelar } from './modules/revelar.js'
 
+menu()
 marcarTurnoActual()
 revelar()

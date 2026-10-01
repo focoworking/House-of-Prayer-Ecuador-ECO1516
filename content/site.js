@@ -81,9 +81,9 @@ export const site = {
      TODO ECO1516: confirmar número real y en qué horas hay alguien
      atendiendo. Mientras no esté confirmado, el sitio no promete 24 horas:
      dice que respondemos, no que contestamos al instante. */
-  prayerLine: '+593999000000',
-  prayerLineDisplay: '099 900 0000',
-  whatsapp: '593999000000',
+  prayerLine: '+593992273305',
+  prayerLineDisplay: '099 227 3305',
+  whatsapp: '593992273305',
   email: 'hola@eco1516.org',
   prayerEmail: 'oracion@eco1516.org',
 

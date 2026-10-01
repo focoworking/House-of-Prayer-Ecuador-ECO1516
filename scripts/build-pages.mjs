@@ -52,12 +52,15 @@ const redes = () =>
 
 const paginaPorSlug = (slug) => pages.find((p) => p.slug.es === slug)
 
-const enlaceNav = (item, lang, actual) => {
+const enlaceNav = (item, lang, actual, { secundario = false } = {}) => {
   const page = paginaPorSlug(item.slug)
   const ruta = pathOf(page, lang)
   const esActual = page === actual
-  const clase = item.highlight ? ' class="nav__destacado"' : ''
-  return `<li><a href="${ruta}"${clase}${esActual ? ' aria-current="page"' : ''}>${esc(T(item.label, lang))}</a></li>`
+  const clases = [item.highlight && 'nav__destacado', secundario && 'nav__secundario'].filter(Boolean)
+  const clase = clases.length ? ` class="${clases.join(' ')}"` : ''
+  return `<li${secundario ? ' class="nav__item--secundario"' : ''}><a href="${ruta}"${clase}${
+    esActual ? ' aria-current="page"' : ''
+  }>${esc(T(item.label, lang))}</a></li>`
 }
 
 const cabecera = (page, lang) => {
@@ -67,8 +70,15 @@ const cabecera = (page, lang) => {
     ${logo}
     <span class="marca__texto"><strong>${esc(site.wordmark)}</strong><small>${esc(site.name)}</small></span>
   </a>
-  <nav class="nav" aria-label="${esc(T(ui.mainNav, lang))}">
-    <ul>${nav.map((i) => enlaceNav(i, lang, page)).join('')}</ul>
+  <button class="menu" type="button" aria-expanded="false" aria-controls="menu-principal">
+    <span class="menu__lineas" aria-hidden="true"></span>
+    <span class="visualmente-oculto">${esc(T(ui.menu, lang))}</span>
+  </button>
+  <nav class="nav" id="menu-principal" aria-label="${esc(T(ui.mainNav, lang))}">
+    <ul>
+      ${nav.map((i) => enlaceNav(i, lang, page)).join('')}
+      ${footerNav.map((i) => enlaceNav(i, lang, page, { secundario: true })).join('')}
+    </ul>
   </nav>
   <a class="idioma" href="${pathOf(page, otro)}" hreflang="${otro}" lang="${otro}" title="${esc(
     T(ui.languageLabel, lang)
@@ -84,7 +94,11 @@ const barraAccion = (lang) => `<div class="barra-accion">
     ${esc(T(ui.prayNow, lang))}
   </a>
   <a class="barra-accion__secundario" href="tel:${esc(site.prayerLine)}">
-    <span aria-hidden="true">☎</span> ${esc(site.prayerLineDisplay)}
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="barra-accion__icono">
+      <path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.5.56 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .56 3.5 1 1 0 0 1-.25 1z"
+        fill="currentColor" />
+    </svg>
+    ${esc(site.prayerLineDisplay)}
   </a>
 </div>`
 

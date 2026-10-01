@@ -38,6 +38,10 @@
   color: var(--tinta-suave);
 }
 
+/* Los secundarios no existen en la barra de escritorio: ahí están en el pie,
+   que es donde se los busca. Solo aparecen dentro del panel de móvil. */
+.nav__item--secundario { display: none; }
+
 .nav ul {
   display: flex;
   align-items: center;
@@ -101,6 +105,41 @@
 .boton--fantasma:hover { background: var(--velo); border-color: var(--morado); color: var(--tinta); }
 
 .acciones { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 2rem 0 0; }
+
+/* El botón del menú. Solo aparece en móvil y solo cuando hay JavaScript que
+   lo haga funcionar: sin él, la navegación se queda visible y utilizable. */
+.menu {
+  display: none;
+  width: 2.6rem;
+  height: 2.6rem;
+  padding: 0;
+  border: 1px solid var(--linea-suave);
+  border-radius: 999px;
+  background: var(--papel);
+  cursor: pointer;
+  place-items: center;
+}
+.menu__lineas,
+.menu__lineas::before,
+.menu__lineas::after {
+  display: block;
+  width: 1.05rem;
+  height: 1.5px;
+  background: var(--tinta);
+  border-radius: 2px;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+.menu__lineas { position: relative; }
+.menu__lineas::before,
+.menu__lineas::after { content: ''; position: absolute; left: 0; }
+.menu__lineas::before { top: -5px; }
+.menu__lineas::after { top: 5px; }
+/* Abierto, las tres líneas se vuelven una equis. */
+.menu[aria-expanded='true'] .menu__lineas { background: transparent; }
+.menu[aria-expanded='true'] .menu__lineas::before { transform: translateY(5px) rotate(45deg); }
+.menu[aria-expanded='true'] .menu__lineas::after { transform: translateY(-5px) rotate(-45deg); }
+
+.barra-accion__icono { width: 1rem; height: 1rem; flex: none; }
 
 /* Barra de acción: fija abajo en móvil, pastilla flotante en escritorio. */
 .barra-accion {

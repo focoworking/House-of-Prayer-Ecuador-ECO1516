@@ -7,24 +7,133 @@
 }
 
 @media (max-width: 48rem) {
-  .cabecera { gap: 0.75rem; flex-wrap: wrap; }
-  .marca__texto small { display: none; }
-  .nav { order: 3; width: 100%; }
-  .nav ul {
+  /* --- Cabecera ---------------------------------------------------------
+     El logotipo se encoge y la firma larga desaparece: a este ancho, «ECO» y
+     el isotipo bastan para saber dónde estás, y lo que sobra es lo que hacía
+     que la cabecera se viera apretada. */
+  /* Sin `backdrop-filter` en móvil, y no por gusto: un elemento con filtro de
+     fondo se convierte en el bloque contenedor de sus descendientes
+     `position: fixed`, así que el panel del menú se posicionaba respecto a la
+     cabecera —una franja de cinco centímetros— en vez de respecto a la
+     pantalla. El desenfoque aquí aportaba poco; el menú roto costaba mucho. */
+  .cabecera {
     gap: 0.6rem;
-    overflow-x: auto;
-    padding-bottom: 0.4rem;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+    padding: 0.6rem var(--gutter);
+    z-index: 46;
+    background: var(--papel);
+    backdrop-filter: none;
   }
-  .nav ul::-webkit-scrollbar { display: none; }
-  .nav li { flex: none; }
+  /* El panel del menú es descendiente de la cabecera, así que con un
+     `z-index` positivo se pintaba por encima del logotipo y del botón de
+     cerrar: el menú abierto se quedaba sin salida visible. Los hermanos
+     suben por encima del panel. */
+  .cabecera > .marca,
+  .cabecera > .menu,
+  .cabecera > .idioma { position: relative; z-index: 44; }
+  .logo { height: 2rem; }
+  .marca__texto small { display: none; }
+  .marca__texto strong { font-size: 1.15rem; letter-spacing: 0.14em; }
+  .idioma { padding: 0.24rem 0.55rem; font-size: 0.7rem; }
+
+  /* --- El menú -----------------------------------------------------------
+     Antes la navegación era una tira horizontal que se desbordaba: media
+     palabra cortada por la derecha y ninguna señal de que hubiera más. Ahora
+     se despliega entera, en vertical y a tamaño de dedo. */
+  .con-menu .menu { display: grid; }
+  .con-menu .nav {
+    position: fixed;
+    inset: 0;
+    /* Por debajo de la cabecera, para que el botón de cerrar siga a la vista
+       y a mano cuando el panel está abierto. */
+    z-index: 42;
+    padding: 6rem var(--gutter) 2rem;
+    padding-top: calc(6rem + env(safe-area-inset-top, 0px));
+    background: var(--papel);
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.18s ease, visibility 0.18s;
+  }
+  .con-menu body.menu-abierto .nav { opacity: 1; visibility: visible; }
+  body.menu-abierto { overflow: hidden; }
+  /* Con el body sin scroll, un elemento `sticky` deja de pegarse: la cabecera
+     desaparecía justo cuando hace falta, que es para poder cerrar el panel. */
+  body.menu-abierto .cabecera { position: fixed; top: 0; left: 0; right: 0; }
+  /* Con el menú abierto, la barra fija se va: dos juegos de botones a la vez
+     compiten entre sí y ninguno se lee como el principal. */
+  body.menu-abierto .barra-accion { display: none; }
+
+  .con-menu .nav ul {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    font-size: 1.15rem;
+  }
+  .con-menu .nav li { border-bottom: 1px solid var(--linea-suave); }
+
+  /* Trece enlaces seguidos del mismo tamaño no son un menú, son una lista que
+     hay que leer entera. Los seis principales mandan; el resto va debajo,
+     más pequeño y sin líneas, como lo que es: un pie de página. */
+  .con-menu .nav li.nav__item--secundario { display: block; border-bottom: 0; }
+  /* `:first-of-type` miraba el primer `li` de la lista, que es el principal.
+     El hermano adyacente sí señala el salto: el primer secundario después del
+     último principal. */
+  .con-menu .nav li:not(.nav__item--secundario) + li.nav__item--secundario {
+    margin-top: 1.1rem;
+  }
+  /* El último principal ya no lleva raya: la del grupo y la suya dejaban una
+     banda vacía entre dos líneas. */
+  .con-menu .nav li:has(+ li.nav__item--secundario) { border-bottom: 0; }
+  .con-menu .nav__secundario { font-size: 0.95rem; padding: 0.45rem 0; color: var(--tinta-suave); }
+  .con-menu .nav a {
+    display: block;
+    padding: 1rem 0;
+    border-bottom: 0;
+    color: var(--tinta);
+  }
+  .con-menu .nav a[aria-current='page'] { color: var(--morado); font-weight: 600; }
+  /* Dentro del panel, «Pide oración» es un enlace más: la pastilla celeste
+     ya está siempre a la vista en la barra de abajo, y repetirla aquí haría
+     que la lista dejara de leerse como una lista. */
+  .con-menu .nav__destacado {
+    background: transparent;
+    color: var(--morado) !important;
+    border-radius: 0;
+    padding: 1rem 0 !important;
+    font-weight: 600;
+    box-shadow: none;
+  }
+
+  /* --- Texto -------------------------------------------------------------
+     A ancho de teléfono, el titular y la entradilla venían calculados para
+     una columna más ancha: ocupaban casi toda la pantalla y el texto se leía
+     flotando. Se aprietan el cuerpo y el interlineado. */
+  .hero { padding-top: 2.5rem; }
+  .hero__titulo { font-size: clamp(2.1rem, 9vw, 2.9rem); line-height: 1.05; }
+  .hero__lead { font-size: 1.02rem; line-height: 1.55; margin-top: 1.25rem; }
+  .hero__eyebrow { margin-bottom: 0.9rem; }
+  .seccion__lead, .texto-grande { line-height: 1.55; }
+  /* La tipografía de display en párrafo largo se come la pantalla: a este
+     ancho el cuerpo se lee mejor en el tamaño del texto corrido. */
+  .texto-grande { font-size: 1.14rem; line-height: 1.5; max-width: none; }
+  .seccion__titulo { font-size: clamp(1.6rem, 6.5vw, 2.1rem); line-height: 1.15; }
+  .seccion__titulo + *:not(.seccion__lead), .seccion__lead + * { margin-top: 1.75rem; }
+  /* El aire entre secciones venía calculado para escritorio: en móvil dejaba
+     huecos que parecían errores de maquetación. */
+  .seccion { padding-block: 2.75rem; }
+  .acciones { margin-top: 1.5rem; gap: 0.6rem; }
+
   .banda img { height: 14rem; object-position: 62% 78%; }
   .hito { grid-template-columns: 1fr; gap: 0.35rem; }
   .fila { grid-template-columns: 1fr; gap: 0.35rem; }
   .fila__n { font-size: 0.8rem; letter-spacing: 0.12em; }
   .pie { grid-template-columns: 1fr; }
   .acciones .boton { flex: 1 1 100%; }
+
+  /* La barra fija se acomoda: sin ella encima, el último botón de cada
+     pantalla quedaba medio tapado. */
+  .barra-accion { padding: 0.5rem 0.75rem; }
+  .barra-accion a { padding: 0.75rem 0.9rem; font-size: 0.88rem; }
 }
 
 @media (min-width: 48.0625rem) {
