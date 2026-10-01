@@ -15,8 +15,13 @@ public/llms.txt
 public/llms-full.txt
 public/ai.txt
 public/og/eco1516.png
-public/img/
 src/styles/marca.css
+
+# public/img/ SI se versiona, aunque sea salida de un script. Las ilustraciones
+# las dibuja `npm run img` y las fotos de obra las prepara `npm run fotos`
+# desde los originales del arquitecto, que no viven en el repositorio. Si estas
+# imagenes no estan aqui, una construccion limpia —la de otra persona, o la de
+# un servidor de integracion— publica el sitio sin una sola imagen.
 
 # El paquete listo para subir es salida de build.
 eco1516-sitio.zip

@@ -1,0 +1,85 @@
+# Publica el sitio solo, en cada cambio.
+#
+# El sitio se construye desde content/: los .html no estan en el repositorio,
+# los escribe `npm run build`. Por eso no basta con copiar archivos — hay que
+# construir primero, y eso es justo lo que hace falta automatizar.
+#
+# Esto corre en los servidores de GitHub, no en el ordenador de nadie. Lo
+# importante de ese detalle: GitHub si puede hablar con Hostinger por FTP, y
+# por eso este es el camino que convierte «actualizar la web» en no hacer
+# nada.
+#
+# Antes de que funcione hay que crear tres secretos en el repositorio
+# (Settings -> Secrets and variables -> Actions -> New repository secret).
+# Los tres datos salen de hPanel -> Archivos -> Cuentas FTP:
+#
+#   FTP_SERVIDOR   el host, algo como ftp.eco1516.org
+#   FTP_USUARIO    el usuario FTP completo
+#   FTP_CLAVE      su contrasena
+#
+# Son secretos de GitHub: una vez guardados no se pueden volver a leer, ni
+# por quien los guardo, ni aparecen en los registros de ejecucion.
+
+name: Desplegar eco1516.org
+
+on:
+  push:
+    branches: [claude/fervent-dirac-fskqjj]
+    # Cambiar documentacion o notas no justifica republicar el sitio.
+    paths-ignore: ['**.md']
+  # Permite lanzarlo a mano desde la pestana Actions, sin tocar el codigo.
+  workflow_dispatch:
+
+# Si llegan dos cambios seguidos, se publica el ultimo y se cancela el
+# anterior: dos despliegues FTP a la vez sobre la misma carpeta se pisan.
+concurrency:
+  group: despliegue-eco1516
+  cancel-in-progress: true
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Instalar
+        run: npm ci
+
+      - name: Construir
+        run: npm run build
+
+      # El guardian: revisa titulos, descripciones, enlaces entre lenguas y
+      # datos estructurados de las 30 paginas. Si algo esta mal, el despliegue
+      # se detiene aqui y el sitio publicado se queda como estaba. Es mejor
+      # una web vieja que una web rota.
+      - name: Revisar SEO
+        run: npm run check
+
+      - name: Subir por FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVIDOR }}
+          username: ${{ secrets.FTP_USUARIO }}
+          password: ${{ secrets.FTP_CLAVE }}
+          # FTPS: la contrasena no viaja en claro. Si Hostinger lo rechaza,
+          # cambiar a `ftp` — pero probar FTPS primero.
+          protocol: ftps
+          # Se sube el CONTENIDO de dist/, no la carpeta. La barra final de
+          # local-dir es obligatoria para el action.
+          local-dir: ./dist/
+          # La raiz publica del dominio principal en Hostinger. Si el sitio
+          # queda dentro de una carpeta de mas, es esta linea la que hay que
+          # corregir.
+          server-dir: public_html/
+          # El action deja un .ftp-deploy-sync-state.json en el servidor y en
+          # los despliegues siguientes sube solo lo que cambio: unos pocos
+          # kilobytes en vez de tres megas.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**

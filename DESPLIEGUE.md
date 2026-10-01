@@ -45,6 +45,42 @@ páginas siguen siendo accesibles con `.html` al final.
 
 ## Despliegue automático (recomendado)
 
+### Opción A — Seguir en Hostinger, sin volver a tocar un zip
+
+El repositorio ya trae el flujo de trabajo (`.github/workflows/desplegar.yml`).
+Cada cambio que llegue a la rama se construye en los servidores de GitHub, se
+revisa y se sube solo por FTP. No hay que instalar nada ni dejar un ordenador
+encendido.
+
+**Lo único que hay que hacer, una vez.** En hPanel → *Archivos* → *Cuentas
+FTP*, apunta tres datos. Luego, en GitHub → el repositorio → *Settings* →
+*Secrets and variables* → *Actions* → *New repository secret*, crea tres
+secretos con estos nombres exactos:
+
+| Secreto | De dónde sale |
+| --- | --- |
+| `FTP_SERVIDOR` | El host de la cuenta FTP, del tipo `ftp.eco1516.org` |
+| `FTP_USUARIO` | El usuario FTP completo |
+| `FTP_CLAVE` | Su contraseña |
+
+Una vez guardados, GitHub no los vuelve a mostrar a nadie —ni a quien los
+guardó— y no aparecen en los registros de ejecución.
+
+**Para comprobarlo:** pestaña *Actions* → *Desplegar eco1516.org* → *Run
+workflow*. En dos minutos el sitio está publicado. A partir de ahí, cada
+cambio sale solo.
+
+Si el sitio aparece dentro de una carpeta de más, lo que hay que corregir es
+la línea `server-dir:` del flujo de trabajo. Si Hostinger rechaza la conexión
+cifrada, cambiar `protocol: ftps` por `ftp`.
+
+El paso de revisión es deliberado: si una página pierde el título, la
+descripción o el enlace a su versión en la otra lengua, el despliegue se
+detiene y lo publicado se queda como estaba. Es mejor una web vieja que una
+web rota.
+
+### Opción B — Mover el alojamiento
+
 Es el camino que convierte «actualizar la web» en algo que ya no hay que
 hacer: se conecta el repositorio una vez y cada cambio se publica solo en dos
 minutos. Sin zips, sin extraer, sin un `.htaccess` que se olvida porque
