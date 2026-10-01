@@ -14,13 +14,27 @@
 
 /* --- Hero ------------------------------------------------------------ */
 .hero { padding-top: clamp(3rem, 8vw, 6rem); }
+/* El rótulo de arriba era una línea de texto suelta. Ahora lleva delante un
+   punto con la aurora dentro: cuesta un pseudoelemento y le da al titular un
+   sitio desde donde empezar. */
 .hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--morado);
   margin-bottom: 1.4rem;
+}
+.hero__eyebrow::before {
+  content: '';
+  width: 1.9rem;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--aurora);
+  flex: none;
 }
 .hero__titulo {
   font-size: clamp(2.6rem, 7.5vw, 5.4rem);
@@ -86,11 +100,15 @@
    —una banda ancha y baja se lee como paisaje y no empuja el contenido
    fuera de la primera pantalla— y en móvil se hace más alta, porque un
    panorama de 1440 de ancho recortado a 400 no es nada. */
+/* La franja deja de ser un rectángulo a sangre con dos rayas: se redondea y
+   se despega del papel. Sigue ocupando todo el ancho, pero ahora se lee como
+   una pieza puesta encima y no como un corte en la página. */
 .banda {
-  margin: 0;
-  width: 100%;
+  margin: 0 var(--gutter);
+  width: auto;
   overflow: hidden;
-  border-block: 1px solid var(--linea-suave);
+  border-radius: calc(var(--radio) * 1.5);
+  box-shadow: var(--sombra);
 }
 .banda img {
   display: block;
@@ -177,13 +195,19 @@
   padding: 2.25rem 0;
   border-block: 1px solid var(--linea-suave);
 }
+/* Las cifras grandes llevan el degradado recortado al texto. Es el gesto que
+   más vida da por menos tinta: la página sigue siendo blanca, pero los
+   números —que es lo que la gente mira primero— son de color. */
 .dato__valor {
   font-family: var(--display);
   font-weight: 300;
   font-variation-settings: 'opsz' 144;
   font-size: clamp(2.4rem, 5vw, 3.6rem);
-  color: var(--morado);
   line-height: 1;
+  color: var(--morado);
+  background: var(--aurora-cifra);
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 .dato__label { margin: 0.65rem 0 0; font-size: 0.86rem; color: var(--tinta-suave); }
 
@@ -196,9 +220,12 @@
   margin: 0;
   padding: 0;
 }
-/* La tarjeta no lleva sombra ni relleno: se separa con una línea fina y con
-   el aire de alrededor, que es lo que hace que una rejilla se lea limpia. */
+/* La tarjeta ya no es una caja con raya: es papel levantado. La sombra está
+   teñida de morado, así que no ensucia el blanco, y al pasar por encima sube
+   dos píxeles y se enciende el filo de aurora de arriba. El filo vive en un
+   pseudoelemento con `opacity` para que la transición no repinte el borde. */
 .tarjeta {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
@@ -206,7 +233,25 @@
   background: var(--papel);
   border: 1px solid var(--linea-suave);
   border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
+.tarjeta::before {
+  content: '';
+  position: absolute;
+  inset: -1px -1px auto;
+  height: 3px;
+  border-radius: var(--radio) var(--radio) 0 0;
+  background: var(--aurora);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+.tarjeta:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sombra-alta);
+  border-color: transparent;
+}
+.tarjeta:hover::before { opacity: 1; }
 .tarjeta__titulo { font-size: 1.22rem; font-weight: 400; }
 .tarjeta p { color: var(--tinta-suave); }
 .tarjeta__cta { margin-top: auto; font-weight: 600; color: var(--morado); }
@@ -236,7 +281,17 @@
   margin: 0;
   padding: 0;
 }
-.paso { padding-top: 1.3rem; border-top: 2px solid var(--morado); }
+/* `border-image` deja poner el degradado en una raya de un lado sin añadir
+   un elemento: `fill` a 0 porque solo queremos el borde, no el fondo. */
+.paso {
+  padding-top: 1.3rem;
+  border-top: 3px solid transparent;
+  border-image: var(--aurora) 1;
+  border-image-slice: 1;
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
+}
 .paso__n {
   display: grid;
   place-items: center;
@@ -460,19 +515,56 @@
 
 /* --- CTA ------------------------------------------------------------------------ */
 .seccion--cta { max-width: none; }
-/* El cierre es el único bloque con fondo de color de toda la página: si
-   hubiera tres, dejaría de leerse como el final. */
+/* El cierre lleva la aurora de verdad, no un tinte: es la última cosa que se
+   lee antes del pie y la única donde el degradado ocupa todo el bloque. El
+   texto va en blanco encima, así que la mezcla tiene que mantenerse oscura
+   —de ahí que no se aclare ningún extremo. */
 .cta {
+  position: relative;
+  overflow: hidden;
   max-width: var(--ancho);
   margin-inline: auto;
-  padding: clamp(3rem, 7vw, 5rem) clamp(1.5rem, 5vw, 4rem);
-  background: var(--papel-alto);
-  border: 1px solid var(--linea-suave);
-  border-radius: calc(var(--radio) * 2);
+  padding: clamp(3.25rem, 7vw, 5.5rem) clamp(1.5rem, 5vw, 4rem);
+  background: var(--aurora);
+  border-radius: calc(var(--radio) * 1.8);
+  box-shadow: 0 30px 60px -28px rgba(74, 47, 107, 0.6);
+  color: #fff;
   text-align: center;
 }
-.cta__titulo { font-size: clamp(1.9rem, 1.2rem + 2.4vw, 3rem); font-weight: 300; margin-bottom: 1.1rem; }
-.cta p { max-width: 46ch; margin-inline: auto; color: var(--tinta-suave); }
+/* Una luz suave arriba a la izquierda para que el degradado no se lea como
+   una plancha plana de color. */
+.cta::before {
+  content: '';
+  position: absolute;
+  inset: -40% 30% auto -20%;
+  height: 120%;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.22), transparent 70%);
+  pointer-events: none;
+}
+.cta > * { position: relative; }
+.cta .boton {
+  background: var(--papel);
+  color: var(--morado-oscuro);
+  box-shadow: 0 10px 26px -12px rgba(0, 0, 0, 0.45);
+}
+.cta .boton:hover { background: #fff; color: var(--morado-oscuro); }
+.cta .boton--fantasma {
+  background: transparent;
+  color: #fff;
+  border-color: color-mix(in srgb, #fff 45%, transparent);
+}
+.cta .boton--fantasma:hover {
+  background: color-mix(in srgb, #fff 14%, transparent);
+  color: #fff;
+  border-color: #fff;
+}
+.cta__titulo {
+  font-size: clamp(1.9rem, 1.2rem + 2.4vw, 3rem);
+  font-weight: 300;
+  margin-bottom: 1.1rem;
+  color: #fff;
+}
+.cta p { max-width: 46ch; margin-inline: auto; color: color-mix(in srgb, #fff 82%, transparent); }
 .cta .acciones { justify-content: center; }
 
 /* --- Estado: bloque que se ora ahora (lo marca src/js) --------------------------- */
@@ -522,7 +614,7 @@
 .meta__cifras strong { font-weight: 400; color: var(--morado-oscuro); }
 .meta__cifras span { color: var(--tinta-suave); }
 
-/* --- Niveles de siembra -------------------------------------------------- */
+/* --- Escalera de aportes --------------------------------------------------- */
 .niveles {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
@@ -539,15 +631,27 @@
   border: 1px solid var(--linea-suave);
   border-radius: var(--radio);
   background: var(--papel);
+  box-shadow: var(--sombra);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
+.nivel:hover { transform: translateY(-3px); box-shadow: var(--sombra-alta); }
 /* Un solo nivel se destaca —el metro cuadrado—, porque una escalera donde
-   todos los peldaños gritan no guía a nadie. */
-.nivel--destacado { border-color: var(--celeste); background: var(--celeste-claro); }
+   todos los peldaños gritan no guía a nadie. Ahora el destacado no solo
+   cambia de color: se queda un punto por encima de los demás incluso en
+   reposo, que es como se lee «este». */
+.nivel--destacado {
+  border-color: transparent;
+  background: var(--velo-celeste);
+  box-shadow: 0 2px 6px rgba(36, 22, 51, 0.05), 0 20px 40px -18px rgba(27, 158, 196, 0.5);
+}
 .nivel__monto {
   font-family: var(--display);
-  font-size: 1.9rem;
+  font-size: 2.1rem;
   font-weight: 300;
   color: var(--morado-oscuro);
+  background: var(--aurora-cifra);
+  -webkit-background-clip: text;
+  background-clip: text;
   margin: 0;
 }
 .nivel__nombre { font-size: 1.02rem; font-weight: 400; margin: 0; }
@@ -568,10 +672,13 @@
 }
 .cifra__valor {
   font-family: var(--display);
-  font-size: clamp(2.6rem, 5vw, 3.8rem);
+  font-size: clamp(2.8rem, 5.4vw, 4.2rem);
   font-weight: 300;
   line-height: 1;
   color: var(--morado-oscuro);
+  background: var(--aurora-cifra);
+  -webkit-background-clip: text;
+  background-clip: text;
   margin: 0;
 }
 .cifra__label { margin: 0.7rem 0 0; color: var(--tinta-suave); }
@@ -601,6 +708,7 @@
   padding: 0;
 }
 .oficio {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
@@ -608,11 +716,32 @@
   border: 1px solid var(--linea-suave);
   border-radius: var(--radio);
   background: var(--papel);
+  box-shadow: var(--sombra);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.oficio:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sombra-alta);
+  border-color: transparent;
 }
 /* La fiscalización es el aporte que ordena a todos los demás: es el único
    que se marca, porque si se destacan varios no se destaca ninguno. */
-.oficio--clave { border-color: var(--celeste); background: var(--celeste-claro); }
-.oficio__icono { width: 2.1rem; height: 2.1rem; color: var(--morado); }
+.oficio--clave {
+  border-color: transparent;
+  background: var(--velo-celeste);
+  box-shadow: 0 2px 6px rgba(36, 22, 51, 0.05), 0 20px 40px -18px rgba(27, 158, 196, 0.5);
+}
+/* El icono sobre su propia pastilla de luz: separa el dibujo del texto sin
+   necesidad de una raya más. */
+.oficio__icono {
+  width: 2.1rem;
+  height: 2.1rem;
+  color: var(--morado);
+  box-sizing: content-box;
+  padding: 0.6rem;
+  border-radius: var(--radio-chico);
+  background: var(--aurora-suave);
+}
 .oficio__cuerpo { display: grid; gap: 0.4rem; }
 .oficio__modo {
   font-size: 0.66rem;
@@ -704,3 +833,70 @@
   border: 1px solid var(--linea-suave);
 }
 .galeria__pieza figcaption { font-size: 0.86rem; color: var(--tinta-suave); }
+
+/* --- El recorte del degradado sobre texto ---------------------------------
+   Las cifras de arriba llevan el degradado como fondo y el color de la marca
+   como reserva. Solo cuando el navegador sabe recortar el fondo a la forma
+   de las letras se vacía el color; si no, se queda el morado y no hay ningún
+   número invisible. */
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .dato__valor,
+  .cifra__valor,
+  .nivel__monto { color: transparent; }
+}
+
+/* --- Bandas teñidas --------------------------------------------------------
+   Catorce secciones seguidas sobre papel blanco se leen como un solo bloque
+   larguísimo. Cuatro de ellas —las cifras del país, la escalera de aportes,
+   el mercado de oficios y la parrilla de la semana— pasan a fondo teñido y a
+   ancho completo. No es decoración: son las cuatro donde hay que detenerse,
+   y el cambio de fondo es lo que le dice al ojo que ha llegado a otra cosa.
+
+   El ancho completo se consigue sin tocar el HTML: la sección deja de tener
+   `max-width` y el relleno lateral se calcula para que su contenido siga
+   cayendo sobre la misma columna de 68rem que el resto de la página. */
+.seccion--cifras,
+.seccion--niveles,
+.seccion--oficios,
+.seccion--calendario {
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: max(var(--gutter), calc(50vw - var(--ancho) / 2 + var(--gutter)));
+  background: var(--velo-morado);
+  border-block: 1px solid var(--linea-suave);
+}
+.seccion--niveles,
+.seccion--calendario { background: var(--velo-celeste); }
+
+/* `.seccion + .seccion` quita el relleno de arriba para que dos secciones
+   seguidas no sumen dos veces el aire. Una banda teñida sí lo necesita: sin
+   él, el color empezaría pegado al último párrafo de la anterior. */
+.seccion + .seccion--cifras,
+.seccion + .seccion--niveles,
+.seccion + .seccion--oficios,
+.seccion + .seccion--calendario { padding-block: var(--aire); }
+
+/* Sobre fondo teñido, una tarjeta blanca con sombra se levanta sola: sobra
+   la raya. */
+.seccion--niveles .nivel,
+.seccion--oficios .oficio { border-color: transparent; }
+
+/* --- La escritura ----------------------------------------------------------
+   El versículo estaba entre dos rayas grises. Pasa a una pieza con su propio
+   papel y un filo de aurora arriba: sigue siendo sobrio —centrado, sin
+   adornos— pero ya no parece una nota al pie. */
+.escritura {
+  position: relative;
+  overflow: hidden;
+  border-block: 0;
+  border-radius: calc(var(--radio) * 1.5);
+  background: var(--aurora-suave);
+  padding-inline: clamp(1.5rem, 5vw, 4rem);
+}
+.escritura::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--aurora);
+}

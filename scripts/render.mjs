@@ -194,7 +194,7 @@ const bloques = {
     )
   },
 
-  /* La escalera de siembra. Cada nivel dice qué compra en concreto, porque
+  /* La escalera de aportes. Cada nivel dice qué compra en concreto, porque
      «$25» no significa nada y «un saco de cemento» sí. */
   niveles(s, lang) {
     const items = nivelesCampana
@@ -204,7 +204,7 @@ const bloques = {
           <h3 class="nivel__nombre">${esc(T(n.nombre, lang))}</h3>
           <p class="nivel__texto">${esc(T(n.texto, lang))}</p>
           <p class="nivel__cta"><a href="${esc(site.giveUrl)}" target="_blank" rel="noopener">${esc(
-            T({ es: 'Sembrar', en: 'Give' }, lang)
+            T({ es: 'Dar', en: 'Give' }, lang)
           )}</a></p>
         </li>`
       )

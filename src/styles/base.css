@@ -1,10 +1,23 @@
-/* Fundamentos: retícula, tipografía y los tokens que no son de color.
+/* Fundamentos: retícula, tipografía y los tokens.
  *
- * El sitio es claro porque lo que anuncia es luz. El blanco no es un fondo
- * neutro por descarte: es el material principal, y la mayor parte de cada
- * página es papel vacío a propósito. El color entra en dos sitios y en
- * ninguno más: el morado sostiene la estructura y el celeste enciende una
- * acción.
+ * El sitio es claro porque lo que anuncia es luz. El blanco sigue siendo el
+ * material principal y la mayor parte de cada página sigue siendo papel
+ * vacío a propósito.
+ *
+ * Lo que cambia respecto a la primera versión es cómo entra el color. Antes
+ * el morado y el celeste vivían separados: uno sostenía la estructura, el
+ * otro encendía los botones, y nunca se tocaban. El resultado era correcto y
+ * un poco inerte. Ahora existe un tercer material —la aurora, el degradado
+ * que va del morado al celeste— y no es un adorno: es literalmente el
+ * logotipo, que son unas manos moradas sosteniendo una llama celeste. El
+ * degradado es la marca puesta en movimiento.
+ *
+ * La regla nueva, en tres líneas:
+ *   · aurora  → la marca y las cifras que cuentan la historia (y un botón
+ *               primario, que es la marca pidiendo algo).
+ *   · morado  → la estructura: rótulos, rayas, jerarquía.
+ *   · celeste → lo que está vivo ahora mismo (el latido, la hora que se ora).
+ * Fuera de ahí, papel.
  */
 
 :root {
@@ -12,11 +25,50 @@
   --ancho-texto: 38rem;
   --gutter: clamp(1.25rem, 5vw, 4.5rem);
   --aire: clamp(4rem, 10vw, 8.5rem);
-  --radio: 0.5rem;
+  /* Radios más generosos. Un borde de 8px sobre una tarjeta de 30rem se lee
+     como una caja de formulario; a 18px la misma tarjeta se lee como una
+     pieza. */
+  --radio: 1.1rem;
+  --radio-chico: 0.6rem;
 
   --linea: color-mix(in srgb, var(--morado) 28%, transparent);
   --linea-suave: color-mix(in srgb, var(--morado) 14%, transparent);
   --velo: color-mix(in srgb, var(--morado) 5%, var(--papel));
+  --velo-morado: color-mix(in srgb, var(--morado) 6%, var(--papel));
+  --velo-celeste: color-mix(in srgb, var(--celeste) 7%, var(--papel));
+
+  /* La aurora. El punto intermedio no es la mezcla matemática de los dos
+     extremos: un morado y un celeste interpolados en sRGB pasan por un gris
+     sucio hacia la mitad. Se fuerza el paso por un azul-violeta limpio. */
+  --aurora: linear-gradient(118deg, var(--morado) 0%, #6366C4 46%, var(--celeste) 100%);
+  /* La misma aurora, casi horizontal. Recortado sobre una cifra —una caja
+     ancha y baja— un degradado a 118° gasta casi todo su recorrido en la
+     altura y el número sale morado de punta a punta. A 96° el recorrido es
+     el ancho, que es justo lo que se ve. */
+  --aurora-cifra: linear-gradient(96deg, var(--morado) 0%, #5A6BCB 48%, var(--celeste) 100%);
+  --aurora-suave: linear-gradient(
+    118deg,
+    color-mix(in srgb, var(--morado) 12%, var(--papel)) 0%,
+    color-mix(in srgb, var(--celeste) 12%, var(--papel)) 100%
+  );
+
+  /* Sombras teñidas, no negras. Una sombra gris sobre papel blanco ensucia;
+     una sombra con el morado dentro parece luz que falta, no mugre. */
+  --sombra: 0 1px 2px rgba(36, 22, 51, 0.04), 0 14px 34px -14px rgba(36, 22, 51, 0.16);
+  --sombra-alta: 0 2px 6px rgba(36, 22, 51, 0.05), 0 26px 54px -18px rgba(123, 87, 166, 0.34);
+}
+
+/* Degradado sobre texto. Se repite en cada cifra grande del sitio, así que
+   vive aquí una sola vez. El `color` de reserva importa: si el navegador no
+   sabe recortar el fondo al texto, lo que queda es morado, no un hueco. */
+.aurora-texto {
+  color: var(--morado-oscuro);
+  background: var(--aurora);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .aurora-texto { color: transparent; }
 }
 
 *,
@@ -36,10 +88,18 @@ html {
 
 body {
   margin: 0;
+  /* `relative` y `clip` sostienen la aurora de cabecera: se dibuja con un
+     pseudoelemento que se sale por los lados a propósito, y sin el recorte
+     eso es una barra de scroll horizontal en móvil. `clip` en vez de
+     `hidden` para no romper los elementos `sticky` de dentro. */
+  position: relative;
+  overflow-x: clip;
+  /* Sin fondo propio a propósito. El papel lo pinta `html`, y si `body` lo
+     repitiera taparía la aurora: un pseudoelemento con `z-index` negativo se
+     pinta antes que el fondo de su propio elemento, no después. */
   /* La barra fija tapa el final de la página en móvil: se le devuelve el
      espacio aquí y no con un div vacío. */
   padding-bottom: calc(5.25rem + env(safe-area-inset-bottom, 0px));
-  background: var(--papel);
   color: var(--tinta);
   font-family: var(--texto);
   font-size: clamp(1rem, 0.95rem + 0.22vw, 1.09rem);
@@ -100,3 +160,36 @@ time, .dato__valor, .turnos th { font-variant-numeric: tabular-nums; }
   transition: top 0.15s ease;
 }
 .saltar:focus { top: 0.75rem; }
+
+/* --- La aurora de cabecera ---------------------------------------------
+   Dos manchas de luz muy abiertas detrás de la primera pantalla: una morada
+   por la izquierda, una celeste por la derecha. No es decoración gratuita:
+   es el degradado de la marca puesto donde empieza a leerse la página, y se
+   apaga antes de que empiece el texto corrido para no competir con él.
+   Va detrás de todo (`z-index: -1`) y no intercepta el cursor. */
+body::before {
+  content: '';
+  position: absolute;
+  top: -14rem;
+  left: -12vw;
+  right: -12vw;
+  height: 54rem;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      44rem 28rem at 16% 36%,
+      color-mix(in srgb, var(--morado) 26%, transparent),
+      transparent 66%
+    ),
+    radial-gradient(
+      40rem 26rem at 86% 26%,
+      color-mix(in srgb, var(--celeste) 24%, transparent),
+      transparent 68%
+    ),
+    radial-gradient(
+      26rem 18rem at 62% 8%,
+      color-mix(in srgb, var(--morado-claro) 20%, transparent),
+      transparent 70%
+    );
+}

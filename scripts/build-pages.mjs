@@ -106,15 +106,16 @@ const pie = (page, lang) => {
   const a = site.address
   return `<footer class="pie">
   <div class="pie__marca">
-    ${logo}
+    <span class="marca-chip">${logo}</span>
     <p class="pie__nombre">${esc(site.name)}</p>
     <p class="pie__lema">${esc(T(site.tagline, lang))}</p>
   </div>
   <div class="pie__bloque">
     <h2>${esc(T(ui.findUs, lang))}</h2>
-    <address>${esc(a.street)}<br />${esc(a.district)}, ${esc(a.city)}<br />${esc(a.region)}, ${esc(
-      T(a.countryName, lang)
-    )}</address>
+    <address>${[a.street, a.district, a.city, a.region, T(a.countryName, lang)]
+      .filter(Boolean)
+      .map(esc)
+      .join('<br />')}</address>
   </div>
   <div class="pie__bloque">
     <h2>${esc(T(ui.writeUs, lang))}</h2>

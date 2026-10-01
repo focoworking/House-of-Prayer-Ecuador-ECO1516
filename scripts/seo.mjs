@@ -379,7 +379,7 @@ export const llms = (lang = 'es') => {
 - Inicio: octubre de 2012, en Quito.
 - Formación: entrenamientos presenciales y en línea, y conferencias en diferentes países.
 - Donaciones: ${site.giveUrl} (plataforma de recaudación del Banco Pichincha). Acepta tarjeta, también desde el exterior.
-- Campaña abierta: primera fase del cuarto de oración, 85.000 USD (cimientos y paredes). Unidad de siembra: un metro cuadrado, 1.000 USD, con el nombre del donante en el registro de fundadores. Hay niveles desde 25 USD.
+- Campaña abierta: primera fase del cuarto de oración, 85.000 USD (cimientos y paredes). La unidad de referencia es un metro cuadrado, 1.000 USD. Hay aportes desde 25 USD. No se publican nombres de donantes ni se ponen placas.
 - Rendición de cuentas: informe de uso de fondos cada semestre con desglose por área, y avance de obra mensual. Cada fase se ejecuta solo cuando está cubierta y lo recaudado para una fase no se gasta en otra.
 - Se puede dirigir una donación a una fase concreta, a becas de entrenamiento o a los programas de Actos de Justicia.
 - Dar no otorga ningún beneficio de acceso: ni a la oración, ni al entrenamiento, ni a la ayuda.

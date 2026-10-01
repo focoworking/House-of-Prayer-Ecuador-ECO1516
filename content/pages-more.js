@@ -940,7 +940,7 @@ export const contacto = {
           text: t('Dinos si lo quieren presencial o en línea y para cuántas personas.', 'Tell us whether you want it in person or online, and for how many people.'),
         },
         {
-          title: t('Sembrar en el cuarto de oración', 'To give towards the prayer room'),
+          title: t('Dar al cuarto de oración', 'To give towards the prayer room'),
           text: t('Escríbenos y te indicamos la fase en la que más falta hace y cómo hacerlo.', 'Write to us and we will point you to the phase most in need and how to give.'),
         },
       ],

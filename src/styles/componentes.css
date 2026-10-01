@@ -9,8 +9,21 @@
   gap: 1.5rem;
   padding: 0.85rem var(--gutter);
   background: color-mix(in srgb, var(--papel) 88%, transparent);
-  backdrop-filter: saturate(140%) blur(12px);
+  backdrop-filter: saturate(140%) blur(14px);
   border-bottom: 1px solid var(--linea-suave);
+}
+/* Un hilo de aurora bajo la cabecera en vez de una raya gris: es lo primero
+   que ve el ojo al bajar y cuesta un pseudoelemento de dos píxeles. */
+.cabecera::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--aurora);
+  opacity: 0.55;
+  pointer-events: none;
 }
 
 .marca {
@@ -64,14 +77,21 @@
 /* La única pestaña que se enciende es la de ayuda: en un sitio cuya promesa
    es responder a cualquier hora, esa es la acción que no puede perderse. */
 .nav__destacado {
-  background: var(--celeste);
+  background: var(--aurora);
+  background-size: 180% 100%;
   color: #fff !important;
   border-radius: 999px;
-  padding: 0.38rem 0.95rem !important;
+  padding: 0.42rem 1.05rem !important;
   border-bottom: 0 !important;
   font-weight: 600;
+  box-shadow: 0 8px 18px -10px rgba(27, 158, 196, 0.8);
+  transition: background-position 0.45s ease, box-shadow 0.16s ease;
 }
-.nav__destacado:hover { background: #147f9e; border-color: transparent; }
+.nav__destacado:hover {
+  background-position: 100% 50%;
+  border-color: transparent;
+  box-shadow: 0 10px 22px -10px rgba(27, 158, 196, 0.9);
+}
 
 .idioma {
   border: 1px solid var(--linea-suave);
@@ -84,25 +104,55 @@
 }
 .idioma:hover { color: var(--tinta); border-color: var(--linea); }
 
+/* El botón primario lleva la aurora entera. Un degradado en un botón es
+   decoración en casi cualquier sitio; aquí es la única pieza de la página
+   que repite el logotipo completo —manos moradas, llama celeste— y por eso
+   es también la única que puede llevarlo.
+   El brillo de encima se mueve en el `hover` sin repintar el fondo: se anima
+   `background-position` sobre un degradado del doble de ancho, que el
+   navegador resuelve sin volver a componer la capa. */
 .boton {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.9rem 1.6rem;
-  border: 1px solid var(--celeste);
+  padding: 0.95rem 1.75rem;
+  border: 1px solid transparent;
   border-radius: 999px;
-  background: var(--celeste);
+  background: var(--aurora);
+  background-size: 180% 100%;
+  background-position: 0% 50%;
+  box-shadow: 0 1px 2px rgba(36, 22, 51, 0.12), 0 12px 26px -12px rgba(27, 158, 196, 0.6);
   color: #fff;
   font: inherit;
   font-weight: 600;
+  letter-spacing: 0.005em;
   text-decoration: none;
   cursor: pointer;
-  transition: transform 0.12s ease, background 0.12s ease;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, background-position 0.45s ease;
 }
-.boton:hover { background: #147f9e; border-color: #147f9e; color: #fff; transform: translateY(-1px); }
-.boton--fantasma { background: transparent; color: var(--tinta); border-color: var(--linea); }
-.boton--fantasma:hover { background: var(--velo); border-color: var(--morado); color: var(--tinta); }
+.boton:hover {
+  color: #fff;
+  background-position: 100% 50%;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(36, 22, 51, 0.12), 0 18px 34px -12px rgba(27, 158, 196, 0.72);
+}
+.boton:active { transform: translateY(0); }
+/* El secundario no compite: papel, raya fina y nada más. Al pasar por encima
+   se tiñe del velo morado, que es lo mismo que hacen las tarjetas. */
+.boton--fantasma {
+  background: var(--papel);
+  color: var(--tinta);
+  border-color: var(--linea);
+  box-shadow: none;
+}
+.boton--fantasma:hover {
+  background: var(--velo);
+  border-color: var(--morado);
+  color: var(--tinta);
+  box-shadow: var(--sombra);
+}
 
 .acciones { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 2rem 0 0; }
 
@@ -168,8 +218,14 @@
   /* En dos líneas el botón deja de parecer un botón. */
   white-space: nowrap;
 }
-.barra-accion__principal { background: var(--celeste); color: #fff; }
-.barra-accion__principal:hover { background: #147f9e; color: #fff; }
+.barra-accion__principal {
+  background: var(--aurora);
+  background-size: 180% 100%;
+  color: #fff;
+  box-shadow: 0 8px 20px -10px rgba(27, 158, 196, 0.85);
+  transition: background-position 0.45s ease;
+}
+.barra-accion__principal:hover { background-position: 100% 50%; color: #fff; }
 .barra-accion__secundario {
   background: var(--papel);
   color: var(--tinta);
@@ -178,14 +234,34 @@
 }
 .barra-accion__secundario:hover { background: var(--velo); color: var(--tinta); }
 
+/* El pie es lo único oscuro del sitio, y es a propósito. Una página que es
+   papel de arriba abajo no termina: se acaba el scroll y ya. Un cierre en
+   morado profundo le pone suelo, y como es la última pantalla no discute con
+   la idea de claridad: la enmarca. */
 .pie {
+  position: relative;
   display: grid;
   grid-template-columns: 1.5fr repeat(3, 1fr);
   gap: 2.5rem var(--gutter);
   padding: var(--aire) var(--gutter) 3rem;
-  border-top: 1px solid var(--linea-suave);
-  background: var(--papel-alto);
-  color: var(--tinta-suave);
+  background: var(--morado-oscuro);
+  color: color-mix(in srgb, #fff 72%, transparent);
+}
+.pie::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--aurora);
+}
+/* El isotipo es morado sobre transparente: sobre morado profundo se borra.
+   En vez de inventar una versión en blanco —que perdería la llama celeste y
+   dejaría de ser el logotipo— se le pone debajo su propio papel. */
+.pie .marca-chip {
+  display: inline-flex;
+  padding: 0.75rem 1rem;
+  background: var(--papel);
+  border-radius: var(--radio-chico);
 }
 .pie .logo { width: auto; height: 3rem; }
 .pie h2 {
@@ -194,14 +270,14 @@
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--morado);
+  color: var(--morado-claro);
   margin-bottom: 1rem;
 }
-.pie a { color: var(--tinta); }
-.pie a:hover { color: var(--morado); }
+.pie a { color: #fff; }
+.pie a:hover { color: var(--celeste-claro); }
 .pie address { font-style: normal; }
-.pie__nombre { font-family: var(--display); font-size: 1.3rem; color: var(--tinta); margin: 0.9rem 0 0.25rem; }
-.pie__lema { color: var(--tinta-suave); }
+.pie__nombre { font-family: var(--display); font-size: 1.35rem; color: #fff; margin: 0.9rem 0 0.25rem; }
+.pie__lema { color: color-mix(in srgb, #fff 62%, transparent); }
 .pie__enlaces { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.55rem; }
 .pie__enlaces a { text-decoration: none; }
 .pie__enlaces a:hover { text-decoration: underline; }
@@ -209,9 +285,9 @@
   grid-column: 1 / -1;
   margin: 0;
   padding-top: 2.25rem;
-  border-top: 1px solid var(--linea-suave);
+  border-top: 1px solid color-mix(in srgb, #fff 16%, transparent);
   font-size: 0.8rem;
-  color: var(--tinta-suave);
+  color: color-mix(in srgb, #fff 55%, transparent);
 }
 
 .redes { display: flex; gap: 0.55rem; list-style: none; margin: 1.1rem 0 0; padding: 0; }
@@ -220,9 +296,10 @@
   place-items: center;
   width: 2.3rem;
   height: 2.3rem;
-  border: 1px solid var(--linea-suave);
+  border: 1px solid color-mix(in srgb, #fff 22%, transparent);
   border-radius: 50%;
-  color: var(--tinta);
+  color: #fff;
+  transition: background 0.16s ease, border-color 0.16s ease;
 }
-.redes a:hover { background: var(--morado); border-color: var(--morado); color: #fff; }
+.redes a:hover { background: var(--celeste); border-color: var(--celeste); color: #fff; }
 .redes svg { width: 1.05rem; height: 1.05rem; }
